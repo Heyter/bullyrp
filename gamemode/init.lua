@@ -65,7 +65,7 @@ end
 function GM:PlayerInitialSpawn(player)
 	player:SetModel("models/player/Group01/male_02.mdl")
 	player:AllowFlashlight(true)
-	player:SetCollisionGroup(COLLISION_GROUP_WORLD)
+	player:SetCollisionGroup(COLLISION_GROUP_PASSABLE_DOOR)
 	
 	local p = POINTS[DORM_POINTS[1][math.random(#DORM_POINTS[1])]]
 	player:SetPos(p[1])
@@ -88,7 +88,7 @@ function GM:PlayerDisconnected(player)
 end
 
 function GM:PlayerSpawn(player)
-	player:SetCollisionGroup(COLLISION_GROUP_WORLD)
+	player:SetCollisionGroup(COLLISION_GROUP_PASSABLE_DOOR)
 	local p = POINTS[DORM_POINTS[1][math.random(#DORM_POINTS[1])]]
 	player:SetPos(p[1])
 	player:SetAngles(p[2])
@@ -104,6 +104,7 @@ if #player.GetAll() > 0 then
 	for k,v in pairs(player.GetAll()) do
 		v:dbCheck()
 		v.inDetention = false
+		v.HasQuest = false
 	end
 end
 

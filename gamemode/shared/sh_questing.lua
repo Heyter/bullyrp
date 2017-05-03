@@ -203,8 +203,15 @@ QUEST_TYPES = {
 		}
 	end,
 	QuestAccepted = function(ply, meta)
-		SpawnQuestItem(ply, meta.ItemID)
-	end},
+		return SpawnQuestItem(ply, meta.ItemID)
+	end,
+	QuestFailedCleanup = function(meta)
+		meta.qents:Remove()
+	end,
+	QuestCompleted = function(ply, meta)
+		ply:dbChangeValue("xp", 10)
+	end,
+	},
 }
 
 -- Quest type indexed

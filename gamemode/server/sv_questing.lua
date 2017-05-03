@@ -1,18 +1,69 @@
 
-PendingQuests = {}
-CurrentQuests = {}
+local PendingQuests = {}
+local CurrentQuests = {}
 
-function SpawnQuestItem(ply, itemID)
-	
+function ProcessQuestComplete(ply)
+	if ply.HasQuest and CurrentQuests[ply:SteamID64()] then
+		local q = CurrentQuests[ply:SteamID64()]
+
+		QUEST_TYPES[q.Type].QuestCompleted(ply, q.Meta)
+
+		q.ent:QuestFinished()
+		ply.HasQuest = false
+		CurrentQuests[ply:SteamID64()] = nil
+		PendingQuests[q.qid] = nil
+	end
 end
 
-local function ProcessQuestAccept(ply, qid)
-	if PendingQuests[qid] and not caller.HasQuest then
-		local q = PendingQuests[qid]
+function SpawnQuestItem(ply, itemID)
+	print("Spawning...........................")
+	print (itemID)
+	local item = QUEST_ITEMS[itemID]
+	print (item)
+	local entTable = nil
 
+	local SpawnableEntities = list.Get( "SpawnableEntities" )
+	entTable = SpawnableEntities["srp_quest_item"]
+	local entClass = entTable.ClassName
+
+	local ent = ents.Create(entClass)
+
+	print (ent)
+
+	if entTable then
+		if (entTable.KeyValues) then
+			for k, v in pairs(entTable.KeyValues) do
+				ent:SetKeyValue(k, v)
+			end
+		end
+
+		local p = POINTS[ROAMING_POINTS[math.random(#ROAMING_POINTS)]]
+		ent:SetPos(p[1] + Vector(math.random(-50, 50), math.random(-50, 50), 20))
+		ent:SetAngles(p[2])
+		ent:Spawn()
+		ent:Activate()
+		ent:SetNWItem(itemID)
+		ent:SetPlayer(ply)
+		ent:AltModel(item.Model)
+
+		print ("spawning quest item")
+		print (ent:GetPos())
+
+		return ent
+	end
+
+	print ("Not spawning")
+end
+
+function ProcessQuestAccept(ply, qid)
+	if PendingQuests[qid] and not ply.HasQuest then
+		local q = PendingQuests[qid]
+		q.qid = qid
+
+		ply.HasQuest = true
 		CurrentQuests[ply:SteamID64()] = q
 		q.ent:QuestAccepted()
-		QUEST_TYPES[t].QuestAccepted(ply, q)
+		q.Meta.qents = QUEST_TYPES[q.Type].QuestAccepted(ply, q.Meta)
 	else
 		net.Start("notification")
 			net.WriteTable({

@@ -134,11 +134,12 @@ local function DrawQuest(ent, questType, l1, l2, l3, l4, l5, meta)
 	dButton2:SetSize(130, 45)
 	dButton2:SetFont("quests_button")
 	dButton2:SetText("Accept")
-	dButton1.DoClick = function()
+	dButton2.DoClick = function()
 		net.Start("quest_accept")
 			net.WriteUInt(LastQID, 32)
 		net.SendToServer()
 		IsDoingQuest = true
+		dQuest:Remove()
 	end
 	dButton2.Paint = function(s,w,h)
 		draw.RoundedBox(

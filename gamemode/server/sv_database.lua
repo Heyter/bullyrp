@@ -69,7 +69,7 @@ function player:dbSend(name)
 	net.Start("database")
 		net.WriteTable({
 			["database"] = {
-				name = self:dbGetValue(name),
+				[name] = self:dbGetValue(name),
 			}
 		})
 	net.Send(self)
@@ -87,12 +87,13 @@ function player:dbSetValue(name, v)
 		self:dbNW(name, v)
 	end
 
+	self:dbSend(name)
+
 	util.SetPData(self:SteamID(), 'srp_' .. name, v)
 end
 
-function player:databaseChangeValue(name, v)
+function player:dbChangeValue(name, v)
 	if not v or v == 0 then return end
-
 
 	self:dbSetValue(name, self:dbGetValue(name) + v)
 end
