@@ -19,6 +19,13 @@ function ProcessQuestComplete(ply)
 			})
 		net.Send(ply)
 	end
+
+	local quest = GenerateQuest()
+	quest.ent = QuestTester.ent
+
+	local qid = table.insert(PendingQuests, quest)
+
+	QuestTester.ent:SetQuest(qid, quest)
 end
 
 function ProcessQuestAbort(ply)
@@ -40,6 +47,13 @@ function ProcessQuestAbort(ply)
 			})
 		net.Send(ply)
 	end
+
+	local quest = GenerateQuest()
+	quest.ent = QuestTester.ent
+
+	local qid = table.insert(PendingQuests, quest)
+
+	QuestTester.ent:SetQuest(qid, quest)
 end
 
 function SpawnQuestItem(ply, itemID)
@@ -123,6 +137,8 @@ function GenerateQuest()
 	}
 end
 
+QuestTester = nil
+
 -- Clean up all quests
 for k,v in pairs(ents.GetAll()) do
 	if v:GetClass() == "srp_quest_item" then
@@ -133,24 +149,24 @@ end
 timer.Simple(
 	2,
 	function()
-		local questTester = {
+		QuestTester = {
 			["Name"] = "Mr. " .. TEACHER_NAMES[math.random(#TEACHER_NAMES)],
 			["Title"] = "Detention Teacher",
 			["Model"] = TEACHER_MODELS[1][math.random(#TEACHER_MODELS[1])]
 		}
 
-		PrintTable(questTester)
+		PrintTable(QuestTester)
 
-		questTester.ent = SpawnTeacher(questTester)
-		questTester.ent:SetPos(Vector(16.68, -3140.97, 8.031))
-		questTester.ent:SetDestinationByPos({Vector(690.305, -2381.635, 8.031), Angle(13.125, -156.706, 0.0)})
+		QuestTester.ent = SpawnTeacher(QuestTester)
+		QuestTester.ent:SetPos(Vector(16.68, -3140.97, 8.031))
+		QuestTester.ent:SetDestinationByPos({Vector(690.305, -2381.635, 8.031), Angle(13.125, -156.706, 0.0)})
 		
 		local quest = GenerateQuest()
-		quest.ent = questTester.ent
+		quest.ent = QuestTester.ent
 
 		local qid = table.insert(PendingQuests, quest)
 
-		questTester.ent:SetQuest(qid, quest)
+		QuestTester.ent:SetQuest(qid, quest)
 	end
 )
 

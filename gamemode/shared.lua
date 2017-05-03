@@ -4,8 +4,6 @@ GM.Author = "Fifteen"
 GM.Email = "NA"
 GM.Website = "NA"
 
-DeriveGamemode( "sandbox" )
-
 
 -- In seconds
 LengthOfDay = 2160.0 --2160.0
