@@ -23,10 +23,11 @@ end
 function ENT:Initialize()
 	self.Posted = false
 	self:SetModel( "models/monk.mdl" )
-	self:SetCollisionGroup(COLLISION_GROUP_IN_VEHICLE)
+	self:SetCollisionGroup(COLLISION_GROUP_WORLD)
 	self.stuckCount = 0
 	self.Cancel = false
 	self:SetCustomCollisionCheck( true )
+	self:SetUseType( SIMPLE_USE )
 end
 
 function ENT:SetNWName(name)
@@ -120,7 +121,11 @@ function ENT:RunBehaviour()
 		local point = nil
 
 		if self.Posted then
-			point = POINTS[self.distination]
+			if self.destination then
+				point = POINTS[self.destination]
+			elseif self.destinationByPos then
+				point = self.destinationByPos
+			end
 			self.loco:SetDesiredSpeed( 200 )		-- Walk speed
 		else
 			local d = self:GetRandom()
@@ -138,6 +143,7 @@ function ENT:RunBehaviour()
 			repath = 3
 		})
 
+		point[2].pitch = 0
 		self:SetAngles(point[2])
 		self:StartActivity( ACT_IDLE )			-- Idle animation
 
@@ -155,7 +161,6 @@ function ENT:RunBehaviour()
 				dir = -dir
 			end
 
-			a.roll = 0
 			a.yaw = a.yaw + dir
 			pos = pos + dir
 
@@ -168,7 +173,15 @@ function ENT:RunBehaviour()
 end
 
 function ENT:SetDestination(point)
-	self.distination = point
+	self.destination = point
+	self.destinationByPos = nil
+	self.Posted = true
+	self.Cancel = true
+end
+
+function ENT:SetDestinationByPos(pos)
+	self.destinationByPos = pos
+	self.destination = nil
 	self.Posted = true
 	self.Cancel = true
 end
@@ -180,8 +193,53 @@ function ENT:Roam(points)
 end
 
 function ENT:Use( activator, caller, type, value )
-	print("Someone tried to use you!")
+	print ("Got use!")
+	print (caller:GetName())
+	print (self.qid)
+	print (self.quest)
+	if self.qid and self.quest and self.QuestOpen and caller and IsValid(caller) and caller:IsPlayer() and not caller.HasQuest then
+		print("starting net send")
+		net.Start("quest_request")
+			net.WriteUInt(self.qid, 32)
+			net.WriteEntity(self)
+			net.WriteUInt(self.quest.Type, 16)
+			net.WriteUInt(self.quest.questLine1, 16)
+			net.WriteUInt(self.quest.questLine2, 16)
+			net.WriteUInt(self.quest.questLine3, 16)
+			net.WriteUInt(self.quest.questLine4, 16)
+			net.WriteUInt(self.quest.questLine5, 16)
+			net.WriteTable(self.quest.Meta)
+		net.Send(caller)
+	end
 end
 
 function ENT:Touch( activator, caller, type, value )
+end
+
+function ENT:SetQuest(qid, quest)
+	self.qid = qid
+	self.quest = quest
+	self.QuestOpen = true
+
+	self:SetNWBool("QuestOpen", self.QuestOpen)
+end
+
+function ENT:QuestAccepted()
+	self.QuestOpen = false
+
+	self:SetNWBool("QuestOpen", self.QuestOpen)
+end
+
+function ENT:QuestFailed()
+	self.QuestOpen = true
+
+	self:SetNWBool("QuestOpen", self.QuestOpen)
+end
+
+function ENT:QuestFinished()
+	self.qid = nil
+	self.quest = nil
+	self.QuestOpen = false
+
+	self:SetNWBool("QuestOpen", self.QuestOpen)
 end

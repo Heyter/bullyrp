@@ -15,6 +15,12 @@ surface.CreateFont( "npcs_teacher_title", {
 	weight 		= 700,
 })
 
+surface.CreateFont( "npcs_teacher_mission", {
+	font 		= "Arial",
+	size 		= 50,
+	weight 		= 700,
+})
+
 function draw.Circle( x, y, radius, seg )
 	local cir = {}
 
@@ -50,6 +56,17 @@ function ENT:Post()
 	local SpinAng = Angle( 0, eyeang, 90 )
 
 	cam.Start3D2D(position + aboveoffset, SpinAng, 0.2);
+		if self:GetNWBool("QuestOpen") then
+			draw.SimpleText(
+				"Mission Available",
+				"npcs_teacher_mission",
+				-0,
+				-470,
+				Color(155, 89, 182, 255 * alphaStrength),
+				1,
+				1
+			)
+		end
 		draw.SimpleText(
 			self:GetNWString("Name"),
 			"npcs_teacher_name",

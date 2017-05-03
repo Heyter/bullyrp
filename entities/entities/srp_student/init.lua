@@ -134,6 +134,7 @@ function ENT:RunBehaviour()
 			repath = 3
 		})
 
+		point[2].pitch = 0
 		self:SetAngles(point[2])
 		self:StartActivity( ACT_IDLE )			-- Idle animation
 

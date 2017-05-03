@@ -136,7 +136,7 @@ function StartPeriod(period)
 	
 end
 
-local function SpawnTeacher(meta)
+function SpawnTeacher(meta)
 	local entTable = nil
 
 	local SpawnableEntities = list.Get( "SpawnableEntities" )
@@ -169,7 +169,7 @@ local function SpawnTeacher(meta)
 	print ("Not spawning")
 end
 
-local function SpawnStudent(meta)
+function SpawnStudent(meta)
 	local entTable = nil
 
 	local SpawnableEntities = list.Get( "SpawnableEntities" )

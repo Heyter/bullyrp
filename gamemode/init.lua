@@ -1,5 +1,7 @@
 
 util.AddNetworkString("notification")
+util.AddNetworkString("quest_request")
+util.AddNetworkString("quest_accept")
 
 AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua")
@@ -8,6 +10,7 @@ AddCSLuaFile("shared/util.lua")
 AddCSLuaFile("shared/sh_points.lua")
 AddCSLuaFile("shared/sh_atmos.lua")
 AddCSLuaFile("shared/sh_classes.lua")
+AddCSLuaFile("shared/sh_questing.lua")
 
 AddCSLuaFile("client/cl_database.lua")
 AddCSLuaFile("client/cl_fonts.lua")
@@ -18,6 +21,7 @@ AddCSLuaFile("client/cl_schedule.lua")
 AddCSLuaFile("client/cl_character_creation.lua")
 AddCSLuaFile("client/cl_notifications.lua")
 AddCSLuaFile("client/cl_minimap.lua")
+AddCSLuaFile("client/cl_quests.lua")
 
 -- Resources
 resource.AddFile("materials/assets/vgui/scoreboard/chalkboard.png")
@@ -29,9 +33,11 @@ include("shared/util.lua")
 include("shared/sh_points.lua")
 include("shared/sh_atmos.lua")
 include("shared/sh_classes.lua")
+include("shared/sh_questing.lua")
 
 include("server/sv_database.lua")
 include("server/sv_player.lua")
+include("server/sv_questing.lua")
 include("server/sv_classes.lua")
 include("server/sv_atmos.lua")
 include("server/sv_console_commands.lua")
@@ -59,7 +65,7 @@ end
 function GM:PlayerInitialSpawn(player)
 	player:SetModel("models/player/Group01/male_02.mdl")
 	player:AllowFlashlight(true)
-	player:SetCollisionGroup(COLLISION_GROUP_PASSABLE_DOOR)
+	player:SetCollisionGroup(COLLISION_GROUP_WORLD)
 	
 	local p = POINTS[DORM_POINTS[1][math.random(#DORM_POINTS[1])]]
 	player:SetPos(p[1])
@@ -82,7 +88,7 @@ function GM:PlayerDisconnected(player)
 end
 
 function GM:PlayerSpawn(player)
-	player:SetCollisionGroup(COLLISION_GROUP_PASSABLE_DOOR)
+	player:SetCollisionGroup(COLLISION_GROUP_WORLD)
 	local p = POINTS[DORM_POINTS[1][math.random(#DORM_POINTS[1])]]
 	player:SetPos(p[1])
 	player:SetAngles(p[2])
