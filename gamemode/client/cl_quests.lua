@@ -5,6 +5,7 @@ LastQuestType = nil
 
 local LastQID = -1
 local dQuest = nil
+local dQuestInfo = nil
 
 local quests_username = surface.CreateFont("quests_username", {
 	font = "Arial",
@@ -20,6 +21,109 @@ local quests_button = surface.CreateFont("quests_button", {
 	font = "Arial",
 	size = 20
 })
+
+function RemoveQuestInfo()
+	if dQuestInfo and IsValid(dQuestInfo) then
+		dQuestInfo:Remove()
+	end
+	dQuestInfo = nil
+end
+
+local function DrawQuestInfo(questType, l4, meta)
+	RemoveQuestInfo()
+
+	IsDoingQuest = true
+
+	local W,H = ScrW(), ScrH()
+	local w,h = 200, 350
+	local x,y = W - w - 30, H / 2 - h / 2
+	local pd = 5 -- padding
+
+	dQuestInfo = vgui.Create("DPanel")
+	dQuestInfo:SetSize(w,h)
+	dQuestInfo:SetPos(x,y)
+	dQuestInfo.Paint = function(s,w,h)
+		draw.RoundedBox(
+			5,
+			0,0,
+			w,h,
+			Color(33,33,33,200)
+		)
+		draw.RoundedBox(
+			5,
+			pd,pd,
+			w-pd*2,h-pd*2,
+			Color(44, 62, 80, 150)
+		)
+		draw.RoundedBox(
+			5,
+			pd, 150 + pd,
+			w-pd*2,150,
+			Color(44, 62, 80, 150)
+		)
+	end
+
+	local richtext = vgui.Create("RichText", dQuestInfo)
+	richtext:SetPos(pd, pd)
+	richtext:SetSize(w - pd*2, 150)
+	richtext.Paint = function(s,w,h)
+		draw.RoundedBox(
+			0,
+			0,0,
+			w,h,
+			Color(33,33,33, 150)
+		)
+	end
+
+	function richtext:PerformLayout()
+		self:SetFontInternal( "quests_text" )
+	end
+
+	richtext:InsertColorChange(255,255,255,255)
+
+	local questChoice = QUEST_CHOICES_DIALOGUE[questType][l4]
+
+	for k,v in pairs(QUEST_TYPES[questType].Lines(questChoice, meta)) do
+		if type(v) == "string" then
+			richtext:AppendText(v .. " ")
+		else
+			richtext:InsertColorChange(v.r,v.g,v.b,255)
+		end
+	end
+
+	richtext:AppendText(QUEST_TYPES[questType].Description)
+
+	richtext:GotoTextStart()
+
+	local icon = vgui.Create("DModelPanel", dQuestInfo)
+	icon:SetPos(pd, 150 + pd)
+	icon:SetSize(w-pd*2,150)
+	icon:SetModel(QUEST_ITEMS[meta.ItemID].Model)
+	function icon:LayoutEntity( mod ) return
+	end
+	icon:SetLookAt(Vector(0,0,0))
+
+	local dButton1 = vgui.Create("DButton", dQuestInfo)
+	dButton1:SetPos(pd, 300+pd)
+	dButton1:SetSize(w-pd*2, 50-pd*2)
+	dButton1:SetText("Abort")
+	dButton1:SetFont("quests_button")
+	dButton1.DoClick = function()
+		net.Start("quest_abort")
+			net.WriteBool(true)
+		net.SendToServer()
+		dQuestInfo:Remove()
+	end
+	dButton1.Paint = function(s,w,h)
+		draw.RoundedBox(
+			4,
+			0,0,
+			w,h,
+			Color(192, 57, 43, 200)
+		)
+	end
+	dButton1:SetTextColor(Color(255,255,255))
+end
 
 local function DrawQuest(ent, questType, l1, l2, l3, l4, l5, meta)
 	if dQuest and IsValid(dQuest) then
@@ -139,6 +243,7 @@ local function DrawQuest(ent, questType, l1, l2, l3, l4, l5, meta)
 			net.WriteUInt(LastQID, 32)
 		net.SendToServer()
 		IsDoingQuest = true
+		DrawQuestInfo(questType, l4, meta)
 		dQuest:Remove()
 	end
 	dButton2.Paint = function(s,w,h)

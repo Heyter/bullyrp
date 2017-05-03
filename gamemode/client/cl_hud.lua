@@ -310,6 +310,16 @@ local function hud()
 	ClassTimeHud()
 	ClassRoom2D3D()
 	DrawInDetention()
+
+	local xp = 0
+	if databaseGetValue("xp") then
+		xp = databaseGetValue("xp")
+	end
+	draw.SimpleText(
+		"Experience: " .. xp,
+		"player_overhead_title",
+		30, ScrH() - 50
+	)
 end
 
 hook.Add("HUDPaint", "MyHudName", hud) -- I'll explain hooks and functions in a second

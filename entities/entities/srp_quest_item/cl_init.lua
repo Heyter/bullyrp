@@ -3,21 +3,9 @@ include('shared.lua')
 
 ENT.RenderGroup = RENDERGROUP_BOTH
 
-surface.CreateFont( "npcs_teacher_name", {
+surface.CreateFont( "quest_item_name", {
 	font 		= "Arial",
-	size 		= 36,
-	weight 		= 700,
-})
-
-surface.CreateFont( "npcs_teacher_title", {
-	font 		= "Arial",
-	size 		= 22,
-	weight 		= 700,
-})
-
-surface.CreateFont( "npcs_teacher_mission", {
-	font 		= "Arial",
-	size 		= 50,
+	size 		= 40,
 	weight 		= 700,
 })
 
@@ -39,13 +27,28 @@ end
 function ENT:Post()
 	local dist = self:GetPos():Distance(LocalPlayer():GetPos())
 
-	if dist > 400 then return end
+	if dist > 250 then return end
+
+	local ply = self:GetNWEntity("Player")
+
+	if not ply or not IsValid(ply) then return end
+
+	local firstName = "Barack"
+	local lastName = "Obama"
+
+	if ply:GetNWString("firstName") ~= "" then
+		firstName = ply:GetNWString("firstName")
+	end
+
+	if ply:GetNWString("lastName") ~= "" then
+		lastName = ply:GetNWString("lastName")
+	end
 
 	local angles = self:GetAngles();
 	local position = self:GetPos();
 	local aboveoffset = angles:Up() * -0 + angles:Forward() * 0 + angles:Right() * 0;
 
-	local alphaStrength = 1 - (dist) / 400
+	local alphaStrength = 1 - (dist) / 250
 	if alphaStrength < 0 then
 		alphaStrength = 0
 	end
@@ -56,51 +59,34 @@ function ENT:Post()
 	local SpinAng = Angle( 0, eyeang, 90 )
 
 	cam.Start3D2D(position + aboveoffset, SpinAng, 0.2);
-		if self:GetNWBool("QuestOpen") then
-			draw.SimpleText(
-				"Mission Available",
-				"npcs_teacher_mission",
-				-0,
-				-470,
-				Color(155, 89, 182, 255 * alphaStrength),
-				1,
-				1
-			)
-		end
 		draw.SimpleText(
-			self:GetNWString("Name"),
-			"npcs_teacher_name",
+			firstName .. " " .. lastName,
+			"quest_item_name",
 			-0,
-			-410,
+			-200 + self.delta * 10,
 			Color(255, 255, 255, 255 * alphaStrength),
-			1,
-			1
-		)
-
-		draw.SimpleText(
-			self:GetNWString("Title"),
-			"npcs_teacher_title",
-			-0,
-			-375,
-			Color(192, 57, 43, 255 * alphaStrength),
 			1,
 			1
 		)
 	cam.End3D2D();
 
-	if IsCurfew() then
-		cam.Start3D2D(position + Vector(0,0,2), Angle(0,0,0), 1);
-			surface.SetDrawColor(231, 76, 60, 50 * alphaStrength )
-			draw.NoTexture()
-			draw.Circle(0, 0, 200, 10)
-		cam.End3D2D()
-	end
+	cam.Start3D2D(self.spos + Vector(0,0,-15), Angle(0,0,0), 1);
+		surface.SetDrawColor(41, 128, 185, 75 * alphaStrength )
+		draw.NoTexture()
+		draw.Circle(0, 0, 20, 10)
+	cam.End3D2D()
 end
 
 function ENT:Draw()
+	self.delta = math.sin(CurTime() * 2)
+	self:SetPos(self.spos + Vector(0, 0, self.delta * 10))
     self:DrawModel()
 end
 
 function ENT:DrawTranslucent()
     self:Post()
+end
+
+function ENT:Initialize()
+	self.spos = self:GetPos()
 end

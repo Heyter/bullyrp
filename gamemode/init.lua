@@ -2,6 +2,7 @@
 util.AddNetworkString("notification")
 util.AddNetworkString("quest_request")
 util.AddNetworkString("quest_accept")
+util.AddNetworkString("quest_abort")
 
 AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua")
@@ -85,6 +86,7 @@ function GM:PlayerInitialSpawn(player)
 end
 
 function GM:PlayerDisconnected(player)
+	ProcessQuestAbort(player)
 end
 
 function GM:PlayerSpawn(player)
@@ -105,6 +107,7 @@ if #player.GetAll() > 0 then
 		v:dbCheck()
 		v.inDetention = false
 		v.HasQuest = false
+		v.IsTeacher = false
 	end
 end
 

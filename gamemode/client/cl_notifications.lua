@@ -13,6 +13,9 @@ local function notificationReceive(tab)
 			OpenCharacterCreation()
 		elseif k == "specialchatmsg" then
 			chat.AddText(unpack(v))
+		elseif k == "QuestAbort" or k == "QuestSuccess" or k == "QuestAcceptFailed" then
+			RemoveQuestInfo()
+			IsDoingQuest = false
 		end
 	end
 end
