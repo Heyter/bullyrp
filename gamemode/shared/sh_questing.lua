@@ -191,7 +191,7 @@ QUEST_GREETINGS3 = {
 
 QUEST_TYPES = {
 	{Name = "FindItem", ID = 1,
-	Description = "Please find the item!",
+	Description = "Please find it!",
 	Lines = function(strs, meta) 
 		strs[2] = Color(39, 174, 96)
 		strs[3] = QUEST_ITEMS[meta.ItemID].Name

@@ -23,3 +23,14 @@ concommand.Add("pos", function(ply)
 
 	print ("{Vector(" .. math.Round(p.x, 3) .. ", " .. math.Round(p.y, 3) .. ", " .. math.Round(p.z, 3) .. "), Angle(" .. math.Round(a.pitch, 3) .. ", " .. math.Round(a.yaw, 3) .. ", 0.0)},")
 end)
+
+local IsMouseOn = false
+
+local function EnableMouse( ply, bind, pressed )
+    if ( bind == "gm_showspare1" ) then 
+    	IsMouseOn = !IsMouseOn
+		gui.EnableScreenClicker(IsMouseOn)
+	end
+end
+
+hook.Add("PlayerBindPress", "EnableMouse", EnableMouse)
