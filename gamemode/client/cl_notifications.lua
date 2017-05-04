@@ -93,6 +93,12 @@ local function notificationReceive(tab)
 			RemoveQuestInfo()
 			IsDoingQuest = false
 			AddNote(3, "You failed the mission!")
+		elseif k == "GenericSuccess" then
+			AddNote(2, v)
+		elseif k == "GenericFailure" then
+			AddNote(3, v)
+		elseif k == "GenericNotice" then
+			AddNote(1, v)
 		end
 	end
 end

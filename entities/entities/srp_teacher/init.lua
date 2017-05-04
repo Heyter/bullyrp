@@ -211,9 +211,19 @@ function ENT:Use( activator, caller, type, value )
 			function()
 				caller.IsTeacher = false
 				caller:SetNWString("teacher", "")
+				net.Start("notification")
+					net.WriteTable({
+						["GenericNotice"] = "You are no longer the teacher!"
+					})
+				net.Send(caller)
 			end
 		)
 		self:Roam(SCHOOL_POINTS)
+		net.Start("notification")
+			net.WriteTable({
+				["GenericSuccess"] = "You are now the " .. self.Title .. "!"
+			})
+		net.Send(caller)
 	elseif self.qid and self.quest and self.QuestOpen and caller and IsValid(caller) and caller:IsPlayer() and not caller.HasQuest then
 		net.Start("quest_request")
 			net.WriteUInt(self.qid, 32)
