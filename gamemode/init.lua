@@ -27,6 +27,7 @@ AddCSLuaFile("client/cl_quests.lua")
 -- Resources
 resource.AddFile("materials/assets/vgui/scoreboard/chalkboard.png")
 resource.AddFile("materials/assets/vgui/schedule/notepad.png")
+resource.AddFile("materials/assets/vgui/hud/clock.png")
 
 include("shared.lua")
 
