@@ -80,6 +80,7 @@ end
 function ENT:Draw()
 	self.delta = math.sin(CurTime() * 2)
 	self:SetPos(self.spos + Vector(0, 0, self.delta * 10))
+	self:SetAngles(Angle(0,CurTime() * 10, 0))
     self:DrawModel()
 end
 
