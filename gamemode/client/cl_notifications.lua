@@ -36,6 +36,15 @@ local function AddNote(mtype, message, delay)
 			c
 		)
 	end
+	DLabel:SetAlpha(0)
+	DLabel:AlphaTo(
+		0,
+		1,
+		0,
+		function()
+			DLabel:Remove()
+		end
+	)
 	DLabel:AlphaTo(
 		0,
 		3,
