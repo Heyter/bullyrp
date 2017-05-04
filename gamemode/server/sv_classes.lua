@@ -213,6 +213,22 @@ timer.Simple(
 		principal.ent = SpawnTeacher(principal)
 		principal.ent:Roam(SCHOOL_POINTS)
 
+		local securityGuard1 = {
+			["Name"] = "Officer " .. TEACHER_NAMES[math.random(#TEACHER_NAMES)],
+			["Title"] = "Security Guard",
+			["Model"] = "models/odessa.mdl"
+		}
+		securityGuard1.ent = SpawnTeacher(securityGuard1)
+		securityGuard1.ent:Roam(ROAMING_POINTS)
+
+		local securityGuard2 = {
+			["Name"] = "Officer " .. TEACHER_NAMES[math.random(#TEACHER_NAMES)],
+			["Title"] = "Security Guard",
+			["Model"] = "models/odessa.mdl"
+		}
+		securityGuard2.ent = SpawnTeacher(securityGuard2)
+		securityGuard2.ent:Roam(ROAMING_POINTS)
+
 		local detentionTeacher = {
 			["Name"] = "Mr. " .. TEACHER_NAMES[math.random(#TEACHER_NAMES)],
 			["Title"] = "Detention Teacher",
