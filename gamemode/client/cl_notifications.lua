@@ -14,12 +14,12 @@ local function AddNote(mtype, message, delay)
 		delay = 6
 	end
 
-	local c = Color(33, 33, 33, 200)
+	local c = Color(33, 33, 33, 150)
 
 	if mtype == 2 then
-		c = Color(39, 174, 96, 200)
+		c = Color(39, 174, 96, 150)
 	elseif mtype == 3 then
-		c = Color(192, 57, 43, 200)
+		c = Color(192, 57, 43, 150)
 	end
 
 	local DLabel = vgui.Create("DLabel")

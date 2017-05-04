@@ -222,7 +222,7 @@ QUEST_CHOICES_DIALOGUE = {
 		{"Someone stole my", nil, nil, nil, "and I can't seem to find it anywhere!"},
 		{"On my way to school, I dropped my", nil, nil, nil, "on the ground!"},
 		{"I need a", nil, nil, nil, "to, ah, finish an assignment for school."},
-		{"There is an ingredient I'm missing for my love potion. It calls for a", nil, nil, nil, " but I can't find any anywhere."},
+		{"There is an ingredient I'm missing for my love potion. It calls for a", nil, nil, nil, "but I can't find any anywhere."},
 	}
 }
 
