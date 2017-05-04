@@ -28,6 +28,7 @@ function ENT:Initialize()
 	self.Cancel = false
 	self:SetCustomCollisionCheck( true )
 	self:SetUseType( SIMPLE_USE )
+	self.followingCurfew = false
 end
 
 function ENT:SetNWName(name)
@@ -56,7 +57,11 @@ function ENT:MoveToPos( pos, options )
 
 	if ( !path:IsValid() ) then return "failed" end
 
-	while ( not self.Cancel and not IsCurfew() and path:IsValid() ) do
+	while ( not self.Cancel and path:IsValid() ) do
+		if IsCurfew() and not self.followingCurfew then
+			return "ok"
+		end
+
 		path:Update( self )
 
 		-- Draw the path (only visible on listen servers or single player)
@@ -96,8 +101,11 @@ end
 
 function ENT:GetRandom()
 	if IsCurfew() then
+		self.followingCurfew = true
 		return DORM_POINTS[self.gender][math.random(#DORM_POINTS[self.gender])]
 	else
+		self.followingCurfew = false
+
 		points = ROAMING_POINTS
 
 		if self.RoamPoints then

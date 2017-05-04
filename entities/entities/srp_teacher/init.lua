@@ -28,7 +28,7 @@ function ENT:Initialize()
 	self.Cancel = false
 	self:SetCustomCollisionCheck( true )
 	self:SetUseType( SIMPLE_USE )
-	self.Monitor = true
+	self.IsNotMonitoring = true
 end
 
 function ENT:SetNWName(name)
@@ -48,7 +48,7 @@ function ENT:SetGender(gender)
 end
 
 function ENT:Think()
-	if self.Monitor and IsCurfew() then
+	if self.IsNotMonitoring and IsCurfew() then
 		for k,v in pairs(ents.FindInSphere(self:GetPos(), 200)) do
 			if v:IsPlayer() then
 				v:GiveDetention(60)
@@ -249,5 +249,6 @@ function ENT:QuestFinished()
 end
 
 function ENT:SetMonitor(bool)
-	self.Monitor = bool
+	self.IsNotMonitoring = bool
+	self:SetNWBool("IsNotMonitoring", bool)
 end

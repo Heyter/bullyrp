@@ -233,7 +233,7 @@ timer.Simple(
 		detentionTeacher.ent = SpawnTeacher(detentionTeacher)
 		detentionTeacher.ent:SetPos(POINTS['t_StudyingRoom1'][1])
 		detentionTeacher.ent:SetDestination('t_StudyingRoom1')
-		detentionTeacher.ent:SetMonitor(false)
+		detentionTeacher.ent:SetMonitor(true)
 
 		local schs = {
 			[9] = {

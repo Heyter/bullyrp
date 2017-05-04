@@ -1,142 +1,142 @@
 
 QUEST_ITEMS = {
-	{
+	[1] = {
 		["Name"] = "Green Sofa",
 		["Model"] = "models/props_c17/FurnitureCouch002a.mdl",
 	},
-	{
+	[2] = {
 		["Name"] = "Wooden Chair",
 		["Model"] = "models/props_c17/FurnitureChair001a.mdl",
 	},
-	{
+	[3] = {
 		["Name"] = "Canister",
 		["Model"] = "models/props_c17/canister01a.mdl",
 	},
-	{
+	[4] = {
 		["Name"] = "Blue Chair",
 		["Model"] = "models/props_c17/chair02a.mdl",
 	},
-	{
+	[5] = {
 		["Name"] = "Bath Tub",
 		["Model"] = "models/props_c17/FurnitureBathtub001a.mdl",
 	},
-	{
+	[6] = {
 		["Name"] = "Small Chair",
 		["Model"] = "models/props_interiors/Furniture_chair01a.mdl",
 	},
-	{
+	[7] = {
 		["Name"] = "Metal Chair",
 		["Model"] = "models/props_interiors/Furniture_chair03a.mdl",
 	},
-	{
+	[8] = {
 		["Name"] = "Yellow Chair",
 		["Model"] = "models/props_interiors/Furniture_Couch02a.mdl",
 	},
-	{
+	[9] = {
 		["Name"] = "Clock",
 		["Model"] = "models/props_trainstation/trainstation_clock001.mdl",
 	},
-	{
+	[10] = {
 		["Name"] = "Package",
 		["Model"] = "models/props_junk/cardboard_box001a.mdl",
 	},
-	{
+	[11] = {
 		["Name"] = "Brown Package",
 		["Model"] = "models/props_junk/cardboard_box002a.mdl",
 	},
-	{
+	[12] = {
 		["Name"] = "Big Package",
 		["Model"] = "models/props_junk/cardboard_box003a.mdl",
 	},
-	{
+	[13] = {
 		["Name"] = "Small Package",
 		["Model"] = "models/props_junk/cardboard_box004a.mdl",
 	},
-	{
+	[14] = {
 		["Name"] = "Metal Bucket",
 		["Model"] = "models/props_junk/MetalBucket02a.mdl",
 	},
-	{
+	[15] = {
 		["Name"] = "Gas Can",
 		["Model"] = "models/props_junk/metalgascan.mdl",
 	},
-	{
+	[16] = {
 		["Name"] = "Kennel",
 		["Model"] = "models/props_lab/kennel_physics.mdl",
 	},
-	{
+	[17] = {
 		["Name"] = "Folding Chair",
 		["Model"] = "models/props_wasteland/controlroom_chair001a.mdl",
 	},
-	{
+	[18] = {
 		["Name"] = "Traffic Cone",
 		["Model"] = "models/props_junk/TrafficCone001a.mdl",
 	},
-	{
+	[19] = {
 		["Name"] = "Wheel",
 		["Model"] = "models/props_wasteland/wheel01.mdl",
 	},
-	{
+	[20] = {
 		["Name"] = "Saw Blade",
 		["Model"] = "models/props_junk/sawblade001a.mdl",
 	},
-	{
+	[21] = {
 		["Name"] = "Lamp",
 		["Model"] = "models/props_lab/desklamp01.mdl",
 	},
-	{
+	[22] = {
 		["Name"] = "Gray Crate",
 		["Model"] = "models/props_junk/PlasticCrate01a.mdl",
 	},
-	{
+	[23] = {
 		["Name"] = "Pot",
 		["Model"] = "models/props_interiors/pot02a.mdl",
 	},
-	{
+	[24] = {
 		["Name"] = "Hook",
 		["Model"] = "models/props_junk/meathook001a.mdl",
 	},
-	{
+	[25] = {
 		["Name"] = "Crate",
 		["Model"] = "models/props_junk/wood_crate001a.mdl",
 	},
-	{
+	[26] = {
 		["Name"] = "Barricade",
 		["Model"] = "models/props_wasteland/barricade001a.mdl",
 	},
-	{
+	[27] = {
 		["Name"] = "Trash Bin",
 		["Model"] = "models/props_junk/TrashBin01a.mdl",
 	},
-	{
+	[28] = {
 		["Name"] = "Doll",
 		["Model"] = "models/props_c17/doll01.mdl",
 	},
-	{
+	[29] = {
 		["Name"] = "Monitor",
 		["Model"] = "models/props_lab/monitor01a.mdl",
 	},
-	{
+	[30] = {
 		["Name"] = "Door",
 		["Model"] = "models/props_vehicles/carparts_door01a.mdl",
 	},
-	{
+	[31] = {
 		["Name"] = "Breen Clock",
 		["Model"] = "models/props_combine/breenclock.mdl",
 	},
-	{
+	[32] = {
 		["Name"] = "Jar",
 		["Model"] = "models/props_lab/jar01a.mdl",
 	},
-	{
+	[33] = {
 		["Name"] = "Hula Girl",
 		["Model"] = "models/props_lab/huladoll.mdl",
 	},
-	{
+	[34] = {
 		["Name"] = "Skull",
 		["Model"] = "models/Gibs/HGIBS.mdl",
 	},
-	{
+	[35] = {
 		["Name"] = "Pay Phone",
 		["Model"] = "models/props_trainstation/payphone001a.mdl",
 	},

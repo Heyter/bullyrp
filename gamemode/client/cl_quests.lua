@@ -99,8 +99,6 @@ local function DrawQuestInfo(questType, l4, meta)
 	icon:SetPos(pd, 150 + pd)
 	icon:SetSize(w-pd*2,150)
 	icon:SetModel(QUEST_ITEMS[meta.ItemID].Model)
-	function icon:LayoutEntity( mod ) return
-	end
 	icon:SetLookAt(Vector(0,0,0))
 
 	local dButton1 = vgui.Create("DButton", dQuestInfo)
