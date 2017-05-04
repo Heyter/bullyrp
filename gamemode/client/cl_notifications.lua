@@ -11,7 +11,7 @@ local DNotesFont = surface.CreateFont("DNotesFont", {
 
 local function AddNote(mtype, message, delay)
 	if not delay then
-		delay = 5
+		delay = 6
 	end
 
 	local c = Color(33, 33, 33, 200)
@@ -38,12 +38,8 @@ local function AddNote(mtype, message, delay)
 	end
 	DLabel:SetAlpha(0)
 	DLabel:AlphaTo(
-		0,
-		1,
-		0,
-		function()
-			DLabel:Remove()
-		end
+		255,
+		1
 	)
 	DLabel:AlphaTo(
 		0,

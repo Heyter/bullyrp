@@ -32,7 +32,6 @@ function ProcessQuestAbort(ply)
 		q.ent:QuestFailed()
 		ply.HasQuest = false
 		CurrentQuests[ply:SteamID64()] = nil
-		PendingQuests[q.qid] = nil
 
 		net.Start("notification")
 			net.WriteTable({
