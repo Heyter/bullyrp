@@ -67,6 +67,7 @@ function ENT:Post()
 				1
 			)
 		end
+		
 		draw.SimpleText(
 			self:GetNWString("Name"),
 			"npcs_teacher_name",

@@ -2,7 +2,7 @@
 DayTime = 0
 CurPeriod = -1
 
-local Students = {}
+Students = {}
 
 local function PutEveryoneRoam()
 	for k,v in pairs(TEACHERS) do
@@ -233,6 +233,7 @@ timer.Simple(
 		detentionTeacher.ent = SpawnTeacher(detentionTeacher)
 		detentionTeacher.ent:SetPos(POINTS['t_StudyingRoom1'][1])
 		detentionTeacher.ent:SetDestination('t_StudyingRoom1')
+		detentionTeacher.ent:SetMonitor(false)
 
 		local schs = {
 			[9] = {

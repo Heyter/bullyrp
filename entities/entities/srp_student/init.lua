@@ -23,10 +23,11 @@ end
 function ENT:Initialize()
 	self.Posted = false
 	self:SetModel( "models/monk.mdl" )
-	self:SetCollisionGroup(COLLISION_GROUP_IN_VEHICLE)
+	self:SetCollisionGroup(COLLISION_GROUP_WORLD)
 	self.stuckCount = 0
 	self.Cancel = false
 	self:SetCustomCollisionCheck( true )
+	self:SetUseType( SIMPLE_USE )
 end
 
 function ENT:SetNWName(name)
@@ -177,7 +178,58 @@ function ENT:Roam(points)
 end
 
 function ENT:Use( activator, caller, type, value )
+	if self.qid and self.quest and self.QuestOpen and caller and IsValid(caller) and caller:IsPlayer() and not caller.HasQuest then
+		net.Start("quest_request")
+			net.WriteUInt(self.qid, 32)
+			net.WriteEntity(self)
+			net.WriteUInt(self.quest.Type, 16)
+			net.WriteUInt(self.quest.questLine1, 16)
+			net.WriteUInt(self.quest.questLine2, 16)
+			net.WriteUInt(self.quest.questLine3, 16)
+			net.WriteUInt(self.quest.questLine4, 16)
+			net.WriteUInt(self.quest.questLine5, 16)
+			net.WriteTable(self.quest.Meta)
+		net.Send(caller)
+	end
 end
+
 
 function ENT:Touch( activator, caller, type, value )
 end
+
+function ENT:HasQuest()
+	return self.qid ~= nil
+end
+
+function ENT:IsQuestOpen()
+	return self.QuestOpen
+end
+
+function ENT:SetQuest(qid, quest)
+	self.qid = qid
+	self.quest = quest
+	self.QuestOpen = true
+
+	self:SetNWBool("QuestOpen", self.QuestOpen)
+end
+
+function ENT:QuestAccepted()
+	self.QuestOpen = false
+
+	self:SetNWBool("QuestOpen", self.QuestOpen)
+end
+
+function ENT:QuestFailed()
+	self.QuestOpen = true
+
+	self:SetNWBool("QuestOpen", self.QuestOpen)
+end
+
+function ENT:QuestFinished()
+	self.qid = nil
+	self.quest = nil
+	self.QuestOpen = false
+
+	self:SetNWBool("QuestOpen", self.QuestOpen)
+end
+

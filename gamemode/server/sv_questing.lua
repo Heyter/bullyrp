@@ -19,13 +19,6 @@ function ProcessQuestComplete(ply)
 			})
 		net.Send(ply)
 	end
-
-	local quest = GenerateQuest()
-	quest.ent = QuestTester.ent
-
-	local qid = table.insert(PendingQuests, quest)
-
-	QuestTester.ent:SetQuest(qid, quest)
 end
 
 function ProcessQuestAbort(ply)
@@ -47,13 +40,6 @@ function ProcessQuestAbort(ply)
 			})
 		net.Send(ply)
 	end
-
-	local quest = GenerateQuest()
-	quest.ent = QuestTester.ent
-
-	local qid = table.insert(PendingQuests, quest)
-
-	QuestTester.ent:SetQuest(qid, quest)
 end
 
 function SpawnQuestItem(ply, itemID)
@@ -74,7 +60,7 @@ function SpawnQuestItem(ply, itemID)
 		end
 
 		local p = POINTS[ROAMING_POINTS[math.random(#ROAMING_POINTS)]]
-		ent:SetPos(p[1] + Vector(math.random(-50, 50), math.random(-50, 50), 20))
+		ent:SetPos(p[1] + Vector(math.random(-25, 25), math.random(-25, 25), 30))
 		ent:SetAngles(p[2])
 		ent:Spawn()
 		ent:Activate()
@@ -137,6 +123,27 @@ function GenerateQuest()
 	}
 end
 
+local function PickNewStudentForQuest()
+	local s = Students[math.random(#Students)]
+
+	while s.ent:HasQuest() do
+		s = Students[math.random(#Students)]
+	end
+
+	return s
+end
+
+local function GenerateNewQuest()
+	local s = PickNewStudentForQuest()
+
+	local quest = GenerateQuest()
+	quest.ent = s.ent
+
+	local qid = table.insert(PendingQuests, quest)
+
+	s.ent:SetQuest(qid, quest)
+end
+
 QuestTester = nil
 
 -- Clean up all quests
@@ -146,28 +153,21 @@ for k,v in pairs(ents.GetAll()) do
 	end
 end
 
-timer.Simple(
-	2,
+timer.Remove("quest_generation")
+
+timer.Create(
+	"quest_generation",
+	CalcHour,
+	0,
 	function()
-		QuestTester = {
-			["Name"] = "Mr. " .. TEACHER_NAMES[math.random(#TEACHER_NAMES)],
-			["Title"] = "Detention Teacher",
-			["Model"] = TEACHER_MODELS[1][math.random(#TEACHER_MODELS[1])]
-		}
+		for k,v in pairs(PendingQuests) do
+			if v.ent:HasQuest() and v.ent:IsQuestOpen() then
+				v.ent:QuestFinished()
+				PendingQuests[k] = nil
+			end
+		end
 
-		PrintTable(QuestTester)
-
-		QuestTester.ent = SpawnTeacher(QuestTester)
-		QuestTester.ent:SetPos(Vector(16.68, -3140.97, 8.031))
-		QuestTester.ent:SetDestinationByPos({Vector(690.305, -2381.635, 8.031), Angle(13.125, -156.706, 0.0)})
-		
-		local quest = GenerateQuest()
-		quest.ent = QuestTester.ent
-
-		local qid = table.insert(PendingQuests, quest)
-
-		QuestTester.ent:SetQuest(qid, quest)
+		GenerateNewQuest()
+		GenerateNewQuest()
 	end
 )
-
-

@@ -28,6 +28,7 @@ function ENT:Initialize()
 	self.Cancel = false
 	self:SetCustomCollisionCheck( true )
 	self:SetUseType( SIMPLE_USE )
+	self.Monitor = true
 end
 
 function ENT:SetNWName(name)
@@ -47,7 +48,7 @@ function ENT:SetGender(gender)
 end
 
 function ENT:Think()
-	if IsCurfew() then
+	if self.Monitor and IsCurfew() then
 		for k,v in pairs(ents.FindInSphere(self:GetPos(), 200)) do
 			if v:IsPlayer() then
 				v:GiveDetention(60)
@@ -193,12 +194,7 @@ function ENT:Roam(points)
 end
 
 function ENT:Use( activator, caller, type, value )
-	print ("Got use!")
-	print (caller:GetName())
-	print (self.qid)
-	print (self.quest)
 	if self.qid and self.quest and self.QuestOpen and caller and IsValid(caller) and caller:IsPlayer() and not caller.HasQuest then
-		print("starting net send")
 		net.Start("quest_request")
 			net.WriteUInt(self.qid, 32)
 			net.WriteEntity(self)
@@ -214,6 +210,14 @@ function ENT:Use( activator, caller, type, value )
 end
 
 function ENT:Touch( activator, caller, type, value )
+end
+
+function ENT:HasQuest()
+	return self.qid ~= nil
+end
+
+function ENT:IsQuestOpen()
+	return self.QuestOpen
 end
 
 function ENT:SetQuest(qid, quest)
@@ -242,4 +246,8 @@ function ENT:QuestFinished()
 	self.QuestOpen = false
 
 	self:SetNWBool("QuestOpen", self.QuestOpen)
+end
+
+function ENT:SetMonitor(bool)
+	self.Monitor = bool
 end
