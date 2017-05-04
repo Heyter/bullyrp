@@ -24,7 +24,6 @@ function StartNewDay(timeStart)
 	end
 
 	CurPeriod = 0
-	print ("Creating a new day!")
 	-- Clean up if refreshing
 	timer.Remove("DayTimeTimer")
 	timer.Remove("StartClasses")
@@ -61,7 +60,6 @@ end
 
 function CreatePeriods()
 	CurPeriod = 0
-	print("Creating new periods!")
 
 	-- Start the initial period.
 	CurPeriod = CurPeriod + 1
@@ -132,8 +130,6 @@ function StartPeriod(period)
 			end
 		end
 	end
-	print ("Starting new Period " .. period)
-	
 end
 
 function SpawnTeacher(meta)
@@ -161,12 +157,8 @@ function SpawnTeacher(meta)
 		ent:AltModel(meta.Model)
 		ent:SetTitle(meta.Title)
 
-		print ("spawning " .. meta.Name)
-
 		return ent
 	end
-
-	print ("Not spawning")
 end
 
 function SpawnStudent(meta)
@@ -194,12 +186,8 @@ function SpawnStudent(meta)
 		ent:AltModel(meta.Model)
 		ent:SetTitle(meta.Title)
 
-		print ("spawning " .. meta.Name)
-
 		return ent
 	end
-
-	print ("Not spawning")
 end
 
 -- Clean up all teachers
