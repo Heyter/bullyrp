@@ -143,10 +143,14 @@ ChatCommands = {
 		return ""
 	end,
 	["/pvp"] = function(ply, msg, isTeam)
+		timer.Remove("pvpenabled_" .. ply:SteamID64())
+
 		if ply.pvpenabled then
 			print("PvP Disabled...")
-			timer.Simple(
+			timer.Create(
+				"pvpenabled_" .. ply:SteamID64(),
 				10,
+				1,
 				function()
 					ply.pvpenabled = false
 					net.Start("notification")
