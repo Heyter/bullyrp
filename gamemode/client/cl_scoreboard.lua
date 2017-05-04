@@ -226,7 +226,7 @@ function CreateScoreboard()
 				end
 
 				draw.SimpleText(
-					firstName .. " " .. lastName,
+					v:GetName() .. " (" .. firstName .. " " .. lastName .. ")",
 					"ScoreBoardPlayerNames",
 					90,
 					h / 2,
