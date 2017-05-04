@@ -199,7 +199,7 @@ local function ClassTimeHud()
 			time = 0
 		end
 
-		local eclipsed = curtime / (LengthOfPeriod + PeriodIntermissionInGame)
+		local eclipsed = curtime / (LengthOfPeriod + PeriodIntermission)
 
 		if eclipsed > 0.02 then
 			draw.RoundedBox(
