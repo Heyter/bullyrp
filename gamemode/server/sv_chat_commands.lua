@@ -142,6 +142,66 @@ ChatCommands = {
 		})
 		return ""
 	end,
+	["/pvp"] = function(ply, msg, isTeam)
+		if ply.pvpenabled then
+			print("PvP Disabled...")
+			timer.Simple(
+				10,
+				function()
+					ply.pvpenabled = false
+					net.Start("notification")
+						net.WriteTable({
+							["pvpenabled"] = false
+						})
+					net.Send(ply)
+				end
+			)
+			net.Start("notification")
+				net.WriteTable({
+					["GenericNotice"] = "PvP will be disabled in 10 seconds..."
+				})
+			net.Send(ply)
+		else
+			print("PvP Enabled...")
+			ply.pvpenabled = true
+			net.Start("notification")
+				net.WriteTable({
+					["pvpenabled"] = true
+				})
+			net.Send(ply)
+		end
+		return ""
+	end,
+	["!pvp"] = function(ply, msg, isTeam)
+		if ply.pvpenabled then
+			print("PvP Disabled...")
+			timer.Simple(
+				10,
+				function()
+					ply.pvpenabled = false
+					net.Start("notification")
+						net.WriteTable({
+							["pvpenabled"] = false
+						})
+					net.Send(ply)
+				end
+			)
+			net.Start("notification")
+				net.WriteTable({
+					["GenericNotice"] = "PvP will be disabled in 10 seconds..."
+				})
+			net.Send(ply)
+		else
+			print("PvP Enabled...")
+			ply.pvpenabled = true
+			net.Start("notification")
+				net.WriteTable({
+					["pvpenabled"] = true
+				})
+			net.Send(ply)
+		end
+		return ""
+	end,
 }
 
 -- Custom Chat commands

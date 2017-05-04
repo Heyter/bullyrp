@@ -76,10 +76,11 @@ function GM:PlayerInitialSpawn(player)
 
 	if player:dbGetValue("firstName") == "" or player:dbGetValue("lastName") == "" then
 		print ("-------->> YOu need to make character :)")
-		-- The *really* lazy way of telling client to open menu.
-		umsg.Start("CreateCharacter", player)
-	        umsg.Short( "1" ) 
-	    umsg.End()
+		net.Start("notification")
+			net.WriteTable({
+				["opencharactercreation"] = true
+			})
+		net.Send(player)
 	else
 		print ("-------->> character made! :)")
 	end
@@ -119,6 +120,13 @@ function GM:ShouldCollide(ent1, ent2)
 
 	-- We must call this because anything else should return true.
 	return true
+end
+
+function GM:PlayerShouldTakeDamage(ply, attacker)
+	if attacker and IsValid(attacker) and attacker:IsPlayer() then
+		return ply.pvpenabled and attacker.pvpenabled
+	end
+	return false
 end
 
 function GM:Think()

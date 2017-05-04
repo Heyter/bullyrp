@@ -4,7 +4,9 @@ CurrentDayHour = -1
 
 local IsBellRinging = false
 local ClassChangeLast = false
-local PvPEnabled = false
+
+PvPEnabled = false
+
 local chalkboard = Material("materials/assets/vgui/scoreboard/chalkboard.png")
 local clock = Material("materials/assets/vgui/hud/clock.png")
 

@@ -99,6 +99,13 @@ local function notificationReceive(tab)
 			AddNote(3, v)
 		elseif k == "GenericNotice" then
 			AddNote(1, v)
+		elseif k == "pvpenabled" then
+			if v then
+				AddNote(2, "PvP has been enabled!")
+			else
+				AddNote(2, "PvP has been disabled!")
+			end
+			PvPEnabled = v
 		end
 	end
 end
