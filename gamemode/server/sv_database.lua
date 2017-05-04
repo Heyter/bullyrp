@@ -65,11 +65,11 @@ function player:dbSendAll()
 	print("Sent All database")
 end
 
-function player:dbSend(name)
+function player:dbSend(name, v)
 	net.Start("database")
 		net.WriteTable({
 			["database"] = {
-				[name] = self:dbGetValue(name),
+				[name] = v,
 			}
 		})
 	net.Send(self)
@@ -87,7 +87,7 @@ function player:dbSetValue(name, v)
 		self:dbNW(name, v)
 	end
 
-	self:dbSend(name)
+	self:dbSend(name, v)
 
 	util.SetPData(self:SteamID(), 'srp_' .. name, v)
 end
