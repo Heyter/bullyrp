@@ -101,7 +101,7 @@ function CreateScoreboard()
 			Color(33,33,33,250)
 		)
 
-		surface.SetDrawColor(255,255,255,255)
+		surface.SetDrawColor(255,255,255,200)
 		surface.SetMaterial(chalkboard)
 		surface.DrawTexturedRect(5, 5, w-10, h-10)
 

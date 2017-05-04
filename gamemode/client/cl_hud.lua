@@ -4,6 +4,7 @@ CurrentDayHour = -1
 
 local IsBellRinging = false
 local ClassChangeLast = false
+local chalkboard = Material("materials/assets/vgui/scoreboard/chalkboard.png")
 
 sound.Add( {
 	name = "RingBell",
@@ -259,8 +260,92 @@ local function ClassRoom2D3D()
 	end
 end
 
+local dAvatar = nil
+
 local function DrawHud()
 
+	local W, H = ScrW(), ScrH()
+	local w,h = 375, 110
+	local x,y = 30 + 10, H - h - 30
+
+	draw.RoundedBox(
+		0,
+		x - 7, y,
+		7, h,
+		Color(39, 174, 96, 230)
+	)
+
+	surface.SetDrawColor(240, 240, 240, 230)
+	surface.SetMaterial(chalkboard)
+	surface.DrawTexturedRect(x, y, w, h)
+
+	draw.RoundedBox(
+		5,
+		x+15,y+10,
+		h-10*2-10,h-10*2-10,
+		Color(33,33,33)
+	)
+
+	dAvatar = vgui.Create("AvatarImage")
+	dAvatar:SetPos(x + 18, y + 13)
+	dAvatar:SetSize(h-13*2-10, h-13*2-10)
+	dAvatar:SetPlayer(LocalPlayer(), 84)
+
+	local firstName = "Barack"
+	local lastName = "Obama"
+
+	if LocalPlayer():GetNWString("firstName") ~= "" then
+		firstName = LocalPlayer():GetNWString("firstName")
+	end
+
+	if LocalPlayer():GetNWString("lastName") ~= "" then
+		lastName = LocalPlayer():GetNWString("lastName")
+	end
+
+	draw.SimpleText(
+		firstName .. " " .. lastName,
+		"CustomFontA",
+		x + h + 5 - 10, y + 10
+	)
+
+	local title = "13th Grader"
+
+	if LocalPlayer():GetNWString("teacher") and LocalPlayer():GetNWString("teacher") ~= "" then
+		title = LocalPlayer():GetNWString("Teacher")
+	elseif LocalPlayer():GetNWInt("grade") then
+		title = LocalPlayer():GetNWInt("grade") .. "th Grader"
+	end
+
+	draw.SimpleText(
+		title,
+		"CustomFontD",
+		x + h + 5 - 10, y + 35
+	)
+
+	local health = LocalPlayer():Health()
+	local healthLength = (health / 100.0) 
+	if healthLength > 1 then
+		healthLength = 1
+	elseif healthLength < 0 then
+		healthLength = 0
+	end
+
+	if health > 0 then
+		draw.RoundedBox(
+			2,
+			x,y+h-10,
+			w * healthLength,10,
+			Color(192, 57, 43, 80)
+		)
+	end
+
+	if health < 95 and health > 0 then
+		draw.SimpleText(
+			health .. "%",
+			"CustomFontE",
+			x + w * healthLength + 5, y+h-10 
+		)
+	end
 end
 
 local function CalcDayTime()
@@ -346,16 +431,6 @@ local function hud()
 	DrawInDetention()
 
 	HUDFade()
-
-	local xp = 0
-	if databaseGetValue("xp") then
-		xp = databaseGetValue("xp")
-	end
-	draw.SimpleText(
-		"Experience: " .. xp,
-		"player_overhead_title",
-		30, ScrH() - 50
-	)
 end
 
 hook.Add("HUDPaint", "MyHudName", hud) -- I'll explain hooks and functions in a second

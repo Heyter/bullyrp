@@ -80,3 +80,34 @@ function player:GiveDetention(time)
 		)
 	end
 end
+
+function player:AddHands()
+	-- I didn't write this code. Joke did.
+	local oldhands = self:GetHands()
+	
+	if ( IsValid( oldhands ) ) then oldhands:Remove() end
+
+	local hands = ents.Create( "gmod_hands" )
+	if ( IsValid( hands ) ) then
+		self:SetHands( hands )
+		hands:SetOwner( self )
+
+		-- Which hands should we use?
+		local cl_playermodel = self:GetInfo( "cl_playermodel" )
+		local info = player_manager.TranslatePlayerHands( cl_playermodel )
+		if ( info ) then
+			hands:SetModel( "models/weapons/c_arms_citizen.mdl" )
+			hands:SetSkin( info.skin )
+			hands:SetBodyGroups( info.body )
+		end
+
+		-- Attach them to the viewmodel
+		local vm = self:GetViewModel( 0 )
+		hands:AttachToViewmodel( vm )
+
+		vm:DeleteOnRemove( hands )
+		self:DeleteOnRemove( hands )
+
+		hands:Spawn()
+	end
+end

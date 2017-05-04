@@ -66,7 +66,8 @@ end
 function GM:PlayerInitialSpawn(player)
 	player:SetModel("models/player/Group01/male_02.mdl")
 	player:AllowFlashlight(true)
-	player:SetCollisionGroup(COLLISION_GROUP_PASSABLE_DOOR)
+	player:SetCollisionGroup(COLLISION_GROUP_PLAYER)
+	player:SetCustomCollisionCheck( true )
 
 	local p = POINTS[DORM_POINTS[1][math.random(#DORM_POINTS[1])]]
 	player:SetPos(p[1])
@@ -90,10 +91,33 @@ function GM:PlayerDisconnected(player)
 end
 
 function GM:PlayerSpawn(player)
-	player:SetCollisionGroup(COLLISION_GROUP_PASSABLE_DOOR)
+	player:SetCollisionGroup(COLLISION_GROUP_PLAYER)
+	player:SetCustomCollisionCheck( true )
 	local p = POINTS[DORM_POINTS[1][math.random(#DORM_POINTS[1])]]
 	player:SetPos(p[1])
 	player:SetAngles(p[2])
+
+	player:AddHands()
+end
+
+-- Choose the model for hands according to their player model.
+function GM:PlayerSetHandsModel( ply, ent )
+
+	local simplemodel = player_manager.TranslateToPlayerModelName( ply:GetModel() )
+	local info = player_manager.TranslatePlayerHands( simplemodel )
+	if ( info ) then
+		ent:SetModel( info.model )
+		ent:SetSkin( info.skin )
+		ent:SetBodyGroups( info.body )
+	end
+
+end
+
+function GM:ShouldCollide(ent1, ent2)
+	if ( IsValid( ent1 ) and IsValid( ent2 ) and ent1:IsPlayer() and ent2:IsPlayer() ) then return false end
+
+	-- We must call this because anything else should return true.
+	return true
 end
 
 function GM:Think()

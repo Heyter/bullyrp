@@ -26,7 +26,6 @@ function ENT:Initialize()
 	self:SetCollisionGroup(COLLISION_GROUP_WORLD)
 	self.stuckCount = 0
 	self.Cancel = false
-	self:SetCustomCollisionCheck( true )
 	self:SetUseType( SIMPLE_USE )
 	self.IsNotMonitoring = true
 	self.IsTeaching = false

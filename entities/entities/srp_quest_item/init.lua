@@ -6,7 +6,7 @@ include('shared.lua')
 
 function ENT:Initialize()
 	self:SetModel( "models/monk.mdl" )
-	self:SetCollisionGroup(COLLISION_GROUP_WEAPON)
+	-- self:SetCollisionGroup(COLLISION_GROUP_PASSABLE_DOOR)
 	self:SetTrigger(true)
 	self:PhysicsInit( SOLID_VPHYSICS )
 	self:SetMoveType( MOVETYPE_VPHYSICS )

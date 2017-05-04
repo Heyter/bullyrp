@@ -64,7 +64,9 @@ local function DrawDNotes()
 	end
 end
 
-DrawDNotes()
+-- I'm going to forget to uncomment this lol
+
+-- DrawDNotes()
 
 local function notificationReceive(tab)
 	for k,v in pairs(tab) do
