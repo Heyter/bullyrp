@@ -226,6 +226,14 @@ QUEST_CHOICES_DIALOGUE = {
 	}
 }
 
+QUEST_CHOICES_DIALOGUE_SUCCESS = {
+	[1] = {
+		"Thank you for your help! I'll never forget it!",
+		"You're a life-saver man!",
+		"I owe you big time for doing this for me!",
+	}
+}
+
 QUEST_GREETINGS4 = {
 	"What do you say, could you pleeeeease give me a hand?",
 	"I could really use your help!",

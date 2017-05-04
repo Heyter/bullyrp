@@ -18,6 +18,11 @@ function ProcessQuestComplete(ply)
 				["QuestSuccess"] = true
 			})
 		net.Send(ply)
+
+		net.Start("quest_feedback")
+			net.WriteEntity(q.ent)
+			net.WriteUInt(q.Type, 16)
+		net.Send(ply)
 	end
 end
 

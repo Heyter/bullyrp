@@ -208,7 +208,7 @@ local function ClassTimeHud()
 				3,
 				x,y,
 				w * eclipsed,h,
-				Color(33,33,33,200)
+				Color(44, 62, 80,100)
 			)
 		end
 

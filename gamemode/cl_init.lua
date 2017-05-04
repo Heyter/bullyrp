@@ -41,3 +41,12 @@ function GM:PostDrawViewModel( vm, ply, weapon )
 		if ( IsValid( hands ) ) then hands:DrawModel() end
 	end
 end
+
+function GM:ShouldCollide(ent1, ent2)
+	if ( IsValid( ent1 ) and IsValid( ent2 ) and ent1:IsPlayer() and ent2:IsPlayer() ) then return false end
+
+	if ( IsValid( ent1 ) and IsValid( ent2 ) and (ent1:GetClass() == "srp_quest_item" or ent2:GetClass() == "srp_quest_item")) then return false end
+
+	-- We must call this because anything else should return true.
+	return true
+end

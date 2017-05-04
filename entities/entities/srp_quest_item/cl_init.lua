@@ -91,3 +91,7 @@ end
 function ENT:Initialize()
 	self.spos = self:GetPos()
 end
+
+function ENT:GetPlayer()
+	return self:GetNWEntity("Player")
+end

@@ -6,6 +6,7 @@ LastQuestType = nil
 local LastQID = -1
 local dQuest = nil
 local dQuestInfo = nil
+local dQuestFeedback = nil
 
 local quests_username = surface.CreateFont("quests_username", {
 	font = "Arial",
@@ -27,6 +28,100 @@ function RemoveQuestInfo()
 		dQuestInfo:Remove()
 	end
 	dQuestInfo = nil
+end
+
+local function DrawQuestFeedback(ent, questType)
+	if dQuestFeedback and IsValid(dQuestFeedback) then
+		dQuestFeedback:Remove()
+	end
+
+	local W,H = ScrW(), ScrH()
+	local w,h = W * 0.50, 150
+	local x,y = W * 0.50 / 2, H - h - 30
+	local pd = 5 -- padding
+
+	dQuestFeedback = vgui.Create("DPanel")
+	dQuestFeedback:SetSize(w,h)
+	dQuestFeedback:SetPos(x,y)
+
+	dQuestFeedback.Paint = function(s,w,h)
+		draw.RoundedBox(
+			5,
+			0,0,
+			w,h,
+			Color(33,33,33,200)
+		)
+		draw.RoundedBox(
+			5,
+			pd,pd,
+			w-pd*2,h-pd*2,
+			Color(44, 62, 80, 150)
+		)
+		draw.RoundedBox(
+			5,
+			pd,pd,
+			175 - pd*2, h - pd*2,
+			Color(33, 33, 33, 150)
+		)
+
+		draw.SimpleText(
+			ent:GetNWString("Name"),
+			"quests_username",
+			175 + pd, pd * 2
+		)
+	end
+
+	local icon = vgui.Create("DModelPanel", dQuestFeedback)
+	icon:SetPos(pd, pd)
+	icon:SetSize(175 - pd*2, h - pd*2)
+	icon:SetModel(ent:GetModel())
+	function icon:LayoutEntity( mod ) return
+	end
+	local eyepos = icon.Entity:GetBonePosition( icon.Entity:LookupBone( "ValveBiped.Bip01_Head1" ) )
+	eyepos:Add( Vector( 0, 0, -5 ) )	-- Move up slightly
+	icon:SetLookAt( eyepos )
+	icon:SetCamPos( eyepos-Vector( -30, 0, 0 ) )	-- Move cam in front of eyes
+	icon.Entity:SetEyeTarget( eyepos-Vector( -12, 0, 0 ) )
+
+	dQuestFeedback:AlphaTo(
+		0,
+		5,
+		10,
+		function()
+			dQuestFeedback:Remove()
+		end
+	)
+	-- Because Model Panels don't auto fade with rest
+	icon:AlphaTo(
+		0,
+		5,
+		10
+	)
+
+	local richtext = vgui.Create("RichText", dQuestFeedback)
+	richtext:SetPos(175 + pd, pd * 2 + 40)
+	richtext:SetSize(w - 175 - pd * 2, h - pd * 3 - 40)
+	richtext.Paint = function(s,w,h)
+		draw.RoundedBox(
+			0,
+			0,0,
+			w,h,
+			Color(33,33,33, 150)
+		)
+	end
+
+	function richtext:PerformLayout()
+		self:SetFontInternal( "quests_text" )
+	end
+
+	richtext:InsertColorChange(255,255,255,255)
+
+	local diaOptions = QUEST_CHOICES_DIALOGUE_SUCCESS[questType]
+	local feedback = diaOptions[math.random(#diaOptions)]
+
+	richtext:AppendText(feedback)
+
+	richtext:GotoTextStart()
 end
 
 local function DrawQuestInfo(questType, l4, meta)
@@ -287,3 +382,10 @@ net.Receive("quest_request", function(len)
 		meta)
 end)
 
+net.Receive("quest_feedback", function(len)
+	print("Got quest feedback!")
+	local qent = net.ReadEntity()
+	local questType = net.ReadUInt(16)
+
+	DrawQuestFeedback(qent, questType)
+end)

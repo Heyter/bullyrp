@@ -7,7 +7,7 @@ include('shared.lua')
 function ENT:Initialize()
 	self:SetModel( "models/monk.mdl" )
 	self:SetTrigger(true)
-	player:SetCustomCollisionCheck( true )
+	-- self:SetCollisionGroup(COLLISION_GROUP_WEAPON)
 	self:PhysicsInit( SOLID_VPHYSICS )
 	self:SetMoveType( MOVETYPE_VPHYSICS )
 	self:SetSolid( SOLID_VPHYSICS )
@@ -27,6 +27,10 @@ end
 function ENT:SetPlayer(ply)
 	self.playerToWatch = ply
 	self:SetNWEntity("Player", ply)
+end
+
+function ENT:GetPlayer()
+	return self.playerToWatch
 end
 
 function ENT:AltModel(model)

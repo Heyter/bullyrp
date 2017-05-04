@@ -181,10 +181,14 @@ ChatCommands = {
 		return ""
 	end,
 	["!pvp"] = function(ply, msg, isTeam)
+		timer.Remove("pvpenabled_" .. ply:SteamID64())
+
 		if ply.pvpenabled then
 			print("PvP Disabled...")
-			timer.Simple(
+			timer.Create(
+				"pvpenabled_" .. ply:SteamID64(),
 				10,
+				1,
 				function()
 					ply.pvpenabled = false
 					net.Start("notification")
@@ -192,6 +196,7 @@ ChatCommands = {
 							["pvpenabled"] = false
 						})
 					net.Send(ply)
+					ply:SetNWBool("pvpenabled", false)
 				end
 			)
 			net.Start("notification")
@@ -208,6 +213,8 @@ ChatCommands = {
 					["pvpenabled"] = true
 				})
 			net.Send(ply)
+			ply:SetNWBool("pvpenabled", true)
+			ply:Give("weapon_fists")
 		end
 		return ""
 	end,
