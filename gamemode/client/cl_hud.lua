@@ -301,6 +301,40 @@ local function DrawInDetention()
 	end
 end
 
+local HUDTriggeredFade = false
+
+function HUDTriggerFade()
+	HUDTriggeredFade = true
+end
+
+local dHudFade = nil
+
+local function HUDFade()
+	if not dHudFade and HUDTriggeredFade then
+		dHudFade = vgui.Create("DPanel")
+		dHudFade:SetPos(0, 0)
+		dHudFade:SetSize(ScrW(), ScrH())
+		dHudFade.Paint = function(s,w,h)
+			draw.RoundedBox(
+				0,
+				0,0,
+				w,h,
+				Color(0,0,0)
+			)
+		end
+		dHudFade:AlphaTo(
+			0,
+			5,
+			0,
+			function()
+				dHudFade:Remove()
+				dHudFade = nil
+				HUDTriggeredFade = false
+			end
+		)
+	end
+end
+
 local function hud()
 	CalcDayTime()
 
@@ -310,6 +344,8 @@ local function hud()
 	ClassTimeHud()
 	ClassRoom2D3D()
 	DrawInDetention()
+
+	HUDFade()
 
 	local xp = 0
 	if databaseGetValue("xp") then
