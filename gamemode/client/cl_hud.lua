@@ -4,7 +4,9 @@ CurrentDayHour = -1
 
 local IsBellRinging = false
 local ClassChangeLast = false
+local PvPEnabled = false
 local chalkboard = Material("materials/assets/vgui/scoreboard/chalkboard.png")
+local clock = Material("materials/assets/vgui/hud/clock.png")
 
 sound.Add( {
 	name = "RingBell",
@@ -37,14 +39,18 @@ local function TimeHud()
 	draw.RoundedBox(
 		3,
 		x,y,
-		w,h,
+		w + h,h,
 		Color(33,33,33,200)
 	)
+
+	surface.SetDrawColor(240, 240, 240, 230)
+	surface.SetMaterial(clock)
+	surface.DrawTexturedRect(x+10, y+10, h-20, h-20)
 
 	draw.SimpleText(
 		"Time of Day",
 		"CustomFontB",
-		x + (w/2),
+		x + (w/2) + h - 5,
 		y + 5,
 		Color(255, 255, 255),
 		TEXT_ALIGN_CENTER
@@ -73,12 +79,18 @@ local function TimeHud()
 		end
 	end
 
+	local c = Color(255, 255, 255)
+
+	if IsCurfew() then
+		c = Color(192, 57, 43)
+	end
+
 	draw.SimpleText(
 		hour .. ":" .. min .. " " .. side,
 		"CustomFontA",
-		x + (w/2),
+		x + (w/2) + h - 5,
 		y + (h/2),
-		Color(255, 255, 255),
+		c,
 		TEXT_ALIGN_CENTER
 	)
 end
@@ -129,7 +141,7 @@ local function ClassHud()
 			periodName = "Invalid"
 		end
 	elseif IsCurfew() then
-		periodName = "Lights Out"
+		periodName = "Bedtime"
 	end
 
 	draw.SimpleText(
@@ -167,24 +179,17 @@ local function ClassTimeHud()
 			Color(33,33,33,200)
 		)
 
-		draw.SimpleText(
-			"Time Remaining",
-			"CustomFontB",
-			x + (w/2),
-			y + 5,
-			Color(255, 255, 255),
-			TEXT_ALIGN_CENTER
-		)
-
 		local curtime = GetGlobalInt("ClassPeriodEnds") - CurTime() 
 		local realtimec = curtime / LengthOfDay
 		local realtime =  realtimec * SecondsInDay / 60
 
+		local finaltime = curtime
+
 		if realtime > LengthOfPeriodInGame then
-			curtime = curtime - (LengthOfPeriodInGame * CalcMinute)
+			finaltime = curtime - (LengthOfPeriodInGame * CalcMinute)
 		end
 
-		local time = math.ceil(curtime)
+		local time = math.ceil(finaltime)
 
 		local min = "seconds"
 
@@ -193,6 +198,26 @@ local function ClassTimeHud()
 		elseif time < 0 then
 			time = 0
 		end
+
+		local eclipsed = curtime / (LengthOfPeriod + PeriodIntermissionInGame)
+
+		if eclipsed > 0.02 then
+			draw.RoundedBox(
+				3,
+				x,y,
+				w * eclipsed,h,
+				Color(33,33,33,200)
+			)
+		end
+
+		draw.SimpleText(
+			"Time Remaining",
+			"CustomFontB",
+			x + (w/2),
+			y + 5,
+			Color(255, 255, 255),
+			TEXT_ALIGN_CENTER
+		)
 
 		draw.SimpleText(
 			time .. " " .. min,
@@ -203,14 +228,16 @@ local function ClassTimeHud()
 			TEXT_ALIGN_CENTER
 		)
 	else
-		draw.SimpleText(
-			"F1 to view schedule",
-			"CustomFontB",
-			x + w / 2 + 5, y + 50,
-			Color(255,255,255),
-			TEXT_ALIGN_CENTER,
-			TEXT_ALIGN_CENTER
-		)
+		if not IsCurfew() then
+			draw.SimpleText(
+				"F1 to view schedule",
+				"CustomFontB",
+				x + w / 2 + 5, y + 50,
+				Color(255,255,255),
+				TEXT_ALIGN_CENTER,
+				TEXT_ALIGN_CENTER
+			)
+		end
 	end
 end
 
@@ -290,12 +317,21 @@ local function DrawHud()
 	local w,h = 375, 110
 	local x,y = 30 + 10, H - h - 30
 
-	draw.RoundedBox(
-		0,
-		x - 7, y,
-		7, h,
-		Color(39, 174, 96, 230)
-	)
+	if not PvPEnabled then
+		draw.RoundedBox(
+			0,
+			x - 7, y,
+			7, h,
+			Color(39, 174, 96, 230)
+		)
+	else
+		draw.RoundedBox(
+			0,
+			x - 7, y,
+			7, h,
+			Color(192, 57, 43, 230)
+		)
+	end
 
 	surface.SetDrawColor(240, 240, 240, 230)
 	surface.SetMaterial(chalkboard)
