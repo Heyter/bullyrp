@@ -141,6 +141,8 @@ if #player.GetAll() > 0 then
 		v.inDetention = false
 		v.HasQuest = false
 		v.IsTeacher = false
+		v.pvpenabled = false
+		v:SetNWBool("pvpenabled", false)
 	end
 end
 

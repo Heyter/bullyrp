@@ -560,6 +560,7 @@ local function OverheadNames()
 
 			local pos = Vector(x, y, z + zOffset)
 			local pos2d = pos:ToScreen()
+			pos2d.y = pos2d.y - (dist / 50.0)
 
 			local firstName = "Barack"
 			local lastName = "Obama"
@@ -587,11 +588,17 @@ local function OverheadNames()
 				TEXT_ALIGN_CENTER
 			)
 
+			local c = Color(39, 174, 96, 255 * alphaStrength)
+
+			if v:GetNWBool("pvpenabled") then
+				c = Color(192, 57, 43, 255 * alphaStrength)
+			end
+
 			draw.DrawText(
 				title,
 				"player_overhead_title",
 				pos2d.x, pos2d.y + 32,
-				Color(39, 174, 96, 255 * alphaStrength),
+				c,
 				TEXT_ALIGN_CENTER
 			)
 		end

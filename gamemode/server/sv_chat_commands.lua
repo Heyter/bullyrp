@@ -158,6 +158,7 @@ ChatCommands = {
 							["pvpenabled"] = false
 						})
 					net.Send(ply)
+					ply:SetNWBool("pvpenabled", false)
 				end
 			)
 			net.Start("notification")
@@ -165,6 +166,7 @@ ChatCommands = {
 					["GenericNotice"] = "PvP will be disabled in 10 seconds..."
 				})
 			net.Send(ply)
+			ply:StripWeapons()
 		else
 			print("PvP Enabled...")
 			ply.pvpenabled = true
@@ -173,6 +175,8 @@ ChatCommands = {
 					["pvpenabled"] = true
 				})
 			net.Send(ply)
+			ply:SetNWBool("pvpenabled", true)
+			ply:Give("weapon_fists")
 		end
 		return ""
 	end,
@@ -195,6 +199,7 @@ ChatCommands = {
 					["GenericNotice"] = "PvP will be disabled in 10 seconds..."
 				})
 			net.Send(ply)
+			ply:StripWeapons()
 		else
 			print("PvP Enabled...")
 			ply.pvpenabled = true
