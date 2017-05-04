@@ -126,8 +126,16 @@ end
 local function PickNewStudentForQuest()
 	local s = Students[math.random(#Students)]
 
-	while s.ent:HasQuest() do
+	local tries = 0
+
+	while s.ent:HasQuest() and tries < 20 do
 		s = Students[math.random(#Students)]
+		tries = tries + 1
+	end
+
+	-- Failed to find a student.
+	if tries >= 20 then
+		s = nil
 	end
 
 	return s
@@ -136,12 +144,14 @@ end
 local function GenerateNewQuest()
 	local s = PickNewStudentForQuest()
 
-	local quest = GenerateQuest()
-	quest.ent = s.ent
+	if s then
+		local quest = GenerateQuest()
+		quest.ent = s.ent
 
-	local qid = table.insert(PendingQuests, quest)
+		local qid = table.insert(PendingQuests, quest)
 
-	s.ent:SetQuest(qid, quest)
+		s.ent:SetQuest(qid, quest)
+	end
 end
 
 QuestTester = nil
