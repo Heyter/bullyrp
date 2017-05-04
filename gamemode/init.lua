@@ -67,7 +67,7 @@ function GM:PlayerInitialSpawn(player)
 	player:SetModel("models/player/Group01/male_02.mdl")
 	player:AllowFlashlight(true)
 	player:SetCollisionGroup(COLLISION_GROUP_PASSABLE_DOOR)
-	
+
 	local p = POINTS[DORM_POINTS[1][math.random(#DORM_POINTS[1])]]
 	player:SetPos(p[1])
 	player:SetAngles(p[2])

@@ -92,6 +92,7 @@ function StartPeriod(period)
 						local d = 't_Cafe' .. math.random(1, 6)
 
 						v.ent:SetDestination(d)
+						v.ent:SetIsTeaching(false)
 					end
 				end
 
@@ -111,6 +112,7 @@ function StartPeriod(period)
 							local d = 't_' .. r
 
 							v.ent:SetDestination(d)
+							v.ent:SetIsTeaching(true)
 						else
 							v.ent:Roam(SCHOOL_POINTS)
 						end

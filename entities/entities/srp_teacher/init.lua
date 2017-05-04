@@ -29,6 +29,7 @@ function ENT:Initialize()
 	self:SetCustomCollisionCheck( true )
 	self:SetUseType( SIMPLE_USE )
 	self.IsNotMonitoring = true
+	self.IsTeaching = false
 end
 
 function ENT:SetNWName(name)
@@ -36,6 +37,7 @@ function ENT:SetNWName(name)
 end
 
 function ENT:SetTitle(title)
+	self.Title = title
 	self:SetNWString("Title", title)
 end
 
@@ -173,6 +175,10 @@ function ENT:RunBehaviour()
 	end
 end
 
+function ENT:SetIsTeaching(bool)
+	self.IsTeaching = bool
+end
+
 function ENT:SetDestination(point)
 	self.destination = point
 	self.destinationByPos = nil
@@ -191,10 +197,24 @@ function ENT:Roam(points)
 	self.Posted = false
 	self.Cancel = true
 	self.RoamPoints = points
+	self.IsTeaching = false
 end
 
 function ENT:Use( activator, caller, type, value )
-	if self.qid and self.quest and self.QuestOpen and caller and IsValid(caller) and caller:IsPlayer() and not caller.HasQuest then
+	if self.IsTeaching and not caller.IsTeacher then
+		GetGlobalInt("ClassPeriodEnds")
+		caller.IsTeacher = true
+		caller:SetNWString("teacher", self.Title)
+
+		timer.Simple(
+			GetGlobalInt("ClassPeriodEnds") - CurTime(),
+			function()
+				caller.IsTeacher = false
+				caller:SetNWString("teacher", "")
+			end
+		)
+		self:Roam(SCHOOL_POINTS)
+	elseif self.qid and self.quest and self.QuestOpen and caller and IsValid(caller) and caller:IsPlayer() and not caller.HasQuest then
 		net.Start("quest_request")
 			net.WriteUInt(self.qid, 32)
 			net.WriteEntity(self)

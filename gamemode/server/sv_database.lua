@@ -24,6 +24,10 @@ local nws = {
 }
 
 function player:dbNW(name, v)
+	if not v then
+		v = self:dbGetValue(name)
+	end
+
 	if type(v) == "string" then
 		self:SetNWString(name, v)
 	elseif type(v) == "integer" then

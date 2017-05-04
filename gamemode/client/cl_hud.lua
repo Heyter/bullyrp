@@ -418,7 +418,9 @@ local function OverheadNames()
 				lastName = v:GetNWString("lastName")
 			end
 
-			if v:GetNWInt("grade") and v:GetNWInt("grade") ~= "" then
+			if v:GetNWString("teacher") and v:GetNWString("teacher") ~= "" then
+				title = v:GetNWString("Teacher")
+			elseif v:GetNWInt("grade") then
 				title = v:GetNWInt("grade") .. "th Grader"
 			end
 
