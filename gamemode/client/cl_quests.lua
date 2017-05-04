@@ -30,7 +30,7 @@ function RemoveQuestInfo()
 	dQuestInfo = nil
 end
 
-local function DrawQuestFeedback(ent, questType)
+local function DrawQuestFeedback(ent, feedbackType, questType)
 	if dQuestFeedback and IsValid(dQuestFeedback) then
 		dQuestFeedback:Remove()
 	end
@@ -116,12 +116,23 @@ local function DrawQuestFeedback(ent, questType)
 
 	richtext:InsertColorChange(255,255,255,255)
 
-	local diaOptions = QUEST_CHOICES_DIALOGUE_SUCCESS[questType]
-	local feedback = diaOptions[math.random(#diaOptions)]
+	local diaOptions = nil
 
-	richtext:AppendText(feedback)
+	if feedbackType == 1 then
+		diaOptions = QUEST_CHOICES_DIALOGUE_SUCCESS[questType]
+	elseif feedbackType == 2 then
+		diaOptions = QUEST_CHOICES_DIALOGUE_FAILURE[questType]
+	else
+		print ("Failed to find anything for option: " .. feedbackType)
+	end
 
-	richtext:GotoTextStart()
+	if diaOptions then
+		local feedback = diaOptions[math.random(#diaOptions)]
+
+		richtext:AppendText(feedback)
+
+		richtext:GotoTextStart()
+	end
 end
 
 local function DrawQuestInfo(questType, l4, meta)
@@ -385,7 +396,8 @@ end)
 net.Receive("quest_feedback", function(len)
 	print("Got quest feedback!")
 	local qent = net.ReadEntity()
+	local feedbackType = net.ReadUInt(16)
 	local questType = net.ReadUInt(16)
 
-	DrawQuestFeedback(qent, questType)
+	DrawQuestFeedback(qent, feedbackType, questType)
 end)

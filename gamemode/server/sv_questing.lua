@@ -21,6 +21,7 @@ function ProcessQuestComplete(ply)
 
 		net.Start("quest_feedback")
 			net.WriteEntity(q.ent)
+			net.WriteUInt(1, 16)
 			net.WriteUInt(q.Type, 16)
 		net.Send(ply)
 	end
@@ -42,6 +43,12 @@ function ProcessQuestAbort(ply)
 			net.WriteTable({
 				["QuestAbort"] = true
 			})
+		net.Send(ply)
+
+		net.Start("quest_feedback")
+			net.WriteEntity(q.ent)
+			net.WriteUInt(2, 16)
+			net.WriteUInt(q.Type, 16)
 		net.Send(ply)
 	end
 end

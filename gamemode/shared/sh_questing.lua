@@ -226,17 +226,24 @@ QUEST_CHOICES_DIALOGUE = {
 	}
 }
 
+QUEST_GREETINGS4 = {
+	"What do you say, could you pleeeeease give me a hand?",
+	"I could really use your help!",
+	"Will you help me out?",
+	"Time is short, please?",
+}
+
+QUEST_CHOICES_DIALOGUE_FAILURE = {
+	[1] = {
+		"I can't believe you would let me down like that!",
+		"I'll remember not to ask you again next time!",
+	}
+}
+
 QUEST_CHOICES_DIALOGUE_SUCCESS = {
 	[1] = {
 		"Thank you for your help! I'll never forget it!",
 		"You're a life-saver man!",
 		"I owe you big time for doing this for me!",
 	}
-}
-
-QUEST_GREETINGS4 = {
-	"What do you say, could you pleeeeease give me a hand?",
-	"I could really use your help!",
-	"Will you help me out?",
-	"Time is short, please?",
 }
