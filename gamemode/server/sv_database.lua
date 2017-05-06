@@ -66,7 +66,6 @@ function player:dbSendAll()
 			["database"] = endtab
 		})
 	net.Send(self)
-	print("Sent All database")
 end
 
 function player:dbSend(name, v)
@@ -77,7 +76,6 @@ function player:dbSend(name, v)
 			}
 		})
 	net.Send(self)
-	print("Sent database")
 end
 
 function player:dbSetValue(name, v)

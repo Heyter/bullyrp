@@ -1,4 +1,10 @@
 
+LANGUAGES = {
+	[1] = "English"	
+}
+
+LANGUAGE = 1
+
 local WHITE = Color(255,255,255)
 local GREY1 = Color(50,50,50, 150)
 local GREY2 = Color(33,33,33, 150)

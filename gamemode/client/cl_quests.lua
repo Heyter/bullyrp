@@ -30,9 +30,13 @@ function RemoveQuestInfo()
 	dQuestInfo = nil
 end
 
-local function DrawQuestFeedback(ent, feedbackType, questType)
+function DrawQuestFeedback(ent, feedbackType, questType, subDelay, outsideText)
 	if dQuestFeedback and IsValid(dQuestFeedback) then
 		dQuestFeedback:Remove()
+	end
+
+	if not subDelay then
+		subDelay = 11
 	end
 
 	local W,H = ScrW(), ScrH()
@@ -43,6 +47,11 @@ local function DrawQuestFeedback(ent, feedbackType, questType)
 	dQuestFeedback = vgui.Create("DPanel")
 	dQuestFeedback:SetSize(w,h)
 	dQuestFeedback:SetPos(x,y)
+	dQuestFeedback:MoveToFront()
+
+	function dQuestFeedback:Think()
+		self:MoveToFront()
+	end
 
 	dQuestFeedback.Paint = function(s,w,h)
 		draw.RoundedBox(
@@ -64,29 +73,66 @@ local function DrawQuestFeedback(ent, feedbackType, questType)
 			Color(33, 33, 33, 150)
 		)
 
-		draw.SimpleText(
-			ent:GetNWString("Name"),
-			"quests_username",
-			175 + pd, pd * 2
-		)
+		if not outsideText and ent:GetNWString("Name") then
+			draw.SimpleText(
+				ent:GetNWString("Name"),
+				"quests_username",
+				175 + pd, pd * 2
+			)
+		else
+			draw.SimpleText(
+				"Narrator",
+				"quests_username",
+				175 + pd, pd * 2
+			)
+		end
 	end
 
 	local icon = vgui.Create("DModelPanel", dQuestFeedback)
 	icon:SetPos(pd, pd)
 	icon:SetSize(175 - pd*2, h - pd*2)
-	icon:SetModel(ent:GetModel())
 	function icon:LayoutEntity( mod ) return
 	end
-	local eyepos = icon.Entity:GetBonePosition( icon.Entity:LookupBone( "ValveBiped.Bip01_Head1" ) )
-	eyepos:Add( Vector( 0, 0, -5 ) )	-- Move up slightly
-	icon:SetLookAt( eyepos )
-	icon:SetCamPos( eyepos-Vector( -30, 0, 0 ) )	-- Move cam in front of eyes
-	icon.Entity:SetEyeTarget( eyepos-Vector( -12, 0, 0 ) )
+	if not outsideText then
+		icon:SetModel(ent:GetModel())
+		
+		local eyepos = icon.Entity:GetBonePosition( icon.Entity:LookupBone( "ValveBiped.Bip01_Head1" ) )
+		eyepos:Add( Vector( 0, 0, -5 ) )	-- Move up slightly
+		icon:SetLookAt( eyepos )
+		icon:SetCamPos( eyepos-Vector( -30, 0, 0 ) )	-- Move cam in front of eyes
+		icon.Entity:SetEyeTarget( eyepos-Vector( -12, 0, 0 ) )
+	else
+		icon:SetModel(ent)
+		icon:SetCamPos( Vector( 40, 0, 0 ) )	-- Move cam in front of eyes
+		icon:SetLookAt( Vector(0, 0, 0) )
+	end
+
+	dQuestFeedback:SetAlpha(0)
+	icon:SetAlpha(0)
+	dQuestFeedback:AlphaTo(
+		255,
+		1,
+		0
+	)
+	icon:AlphaTo(
+		255,
+		1,
+		0
+	)
 
 	dQuestFeedback:AlphaTo(
 		0,
 		5,
-		10,
+		subDelay,
+		function()
+			dQuestFeedback:Remove()
+		end
+	)
+
+	dQuestFeedback:AlphaTo(
+		0,
+		5,
+		subDelay,
 		function()
 			dQuestFeedback:Remove()
 		end
@@ -95,7 +141,7 @@ local function DrawQuestFeedback(ent, feedbackType, questType)
 	icon:AlphaTo(
 		0,
 		5,
-		10
+		subDelay
 	)
 
 	local richtext = vgui.Create("RichText", dQuestFeedback)
@@ -116,23 +162,26 @@ local function DrawQuestFeedback(ent, feedbackType, questType)
 
 	richtext:InsertColorChange(255,255,255,255)
 
-	local diaOptions = nil
-
-	if feedbackType == 1 then
-		diaOptions = QUEST_CHOICES_DIALOGUE_SUCCESS[questType]
-	elseif feedbackType == 2 then
-		diaOptions = QUEST_CHOICES_DIALOGUE_FAILURE[questType]
+	if outsideText then
+		richtext:AppendText(outsideText)
 	else
-		print ("Failed to find anything for option: " .. feedbackType)
+		local diaOptions = nil
+
+		if feedbackType == 1 then
+			diaOptions = QUEST_CHOICES_DIALOGUE_SUCCESS[questType]
+		elseif feedbackType == 2 then
+			diaOptions = QUEST_CHOICES_DIALOGUE_FAILURE[questType]
+		else
+			print ("Failed to find anything for option: " .. feedbackType)
+		end
+
+		if diaOptions then
+			local feedback = diaOptions[math.random(#diaOptions)]
+
+			richtext:AppendText(feedback)
+		end
 	end
-
-	if diaOptions then
-		local feedback = diaOptions[math.random(#diaOptions)]
-
-		richtext:AppendText(feedback)
-
-		richtext:GotoTextStart()
-	end
+	richtext:GotoTextStart()
 end
 
 local function DrawQuestInfo(questType, l4, meta)

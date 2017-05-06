@@ -53,3 +53,10 @@ function GM:ShouldCollide(ent1, ent2)
 	-- We must call this because anything else should return true.
 	return true
 end
+
+function NoSuicide( ply )
+	ply:PrintMessage( HUD_PRINTTALK, "Suicide has been disabled, contact an online admin for support if needed.")
+	return false
+end
+
+hook.Add( "CanPlayerSuicide", "Suicide", NoSuicide )

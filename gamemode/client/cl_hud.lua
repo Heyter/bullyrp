@@ -11,6 +11,8 @@ local chalkboard = Material("materials/assets/vgui/scoreboard/chalkboard.png")
 local clock = Material("materials/assets/vgui/hud/clock.png")
 local cog = Material("materials/assets/vgui/hud/cog.png")
 
+local hudenabled = true
+
 sound.Add( {
 	name = "RingBell",
 	channel = CHAN_STATIC,
@@ -451,11 +453,9 @@ local HUDTriggeredFadeDown = false
 
 function HUDTriggerFade()
 	HUDTriggeredFade = true
-	print("Fade triggered")
 end
 
 function HUDTriggerFadeDown()
-	print ("fade down triggered")
 	HUDTriggeredFade = true
 	HUDTriggeredFadeDown = true
 end
@@ -513,15 +513,31 @@ local function HUDFade()
 	end
 end
 
-local function hud()
-	-- CalcDayTime()
+function EnableHud()
+	hudenabled = true
+	if dAvatar then
+		dAvatar:SetVisible(true)
+	end
+end
 
-	-- DrawHud()
-	-- TimeHud()
-	-- ClassHud()
-	-- ClassTimeHud()
-	-- ClassRoom2D3D()
-	-- DrawInDetention()
+function DisableHud()
+	hudenabled = false
+	if dAvatar then
+		dAvatar:SetVisible(true)
+	end
+end
+
+local function hud()
+	if hudenabled then
+		CalcDayTime()
+
+		DrawHud()
+		TimeHud()
+		ClassHud()
+		ClassTimeHud()
+		ClassRoom2D3D()
+		DrawInDetention()
+	end
 
 	HUDFade()
 end
