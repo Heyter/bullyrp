@@ -90,6 +90,9 @@ end
 
 function ENT:Initialize()
 	self.spos = self:GetPos()
+	if LocalPlayer() ~= self:GetNWEntity("Player") then
+		self:SetMaterial("models/wireframe", true)
+	end
 end
 
 function ENT:GetPlayer()
