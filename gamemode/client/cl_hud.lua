@@ -447,15 +447,27 @@ local function DrawInDetention()
 end
 
 local HUDTriggeredFade = false
+local HUDTriggeredFadeDown = false
 
 function HUDTriggerFade()
 	HUDTriggeredFade = true
+	print("Fade triggered")
+end
+
+function HUDTriggerFadeDown()
+	print ("fade down triggered")
+	HUDTriggeredFade = true
+	HUDTriggeredFadeDown = true
 end
 
 local dHudFade = nil
 
 local function HUDFade()
-	if not dHudFade and HUDTriggeredFade then
+	if HUDTriggeredFade then
+		if dHudFade then
+			dHudFade:Remove()
+		end
+
 		dHudFade = vgui.Create("DPanel")
 		dHudFade:SetPos(0, 0)
 		dHudFade:SetSize(ScrW(), ScrH())
@@ -467,28 +479,49 @@ local function HUDFade()
 				Color(0,0,0)
 			)
 		end
-		dHudFade:AlphaTo(
-			0,
-			5,
-			0,
-			function()
-				dHudFade:Remove()
-				dHudFade = nil
-				HUDTriggeredFade = false
-			end
-		)
+		if HUDTriggeredFadeDown then
+			dHudFade:SetAlpha(0)
+			dHudFade:AlphaTo(
+				255,
+				4,
+				0,
+				function()
+					print("removing")
+					dHudFade:Remove()
+					dHudFade = nil
+					HUDTriggeredFade = false
+					HUDTriggeredFadeDown = false
+				end
+			)
+		else
+			dHudFade:SetAlpha(255)
+			dHudFade:AlphaTo(
+				0,
+				4,
+				0,
+				function()
+					dHudFade:Remove()
+					dHudFade = nil
+					HUDTriggeredFade = false
+					HUDTriggeredFadeDown = false
+				end
+			)
+		end
+
+		HUDTriggeredFadeDown = false
+		HUDTriggeredFade = false
 	end
 end
 
 local function hud()
-	CalcDayTime()
+	-- CalcDayTime()
 
-	DrawHud()
-	TimeHud()
-	ClassHud()
-	ClassTimeHud()
-	ClassRoom2D3D()
-	DrawInDetention()
+	-- DrawHud()
+	-- TimeHud()
+	-- ClassHud()
+	-- ClassTimeHud()
+	-- ClassRoom2D3D()
+	-- DrawInDetention()
 
 	HUDFade()
 end
