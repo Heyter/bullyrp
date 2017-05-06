@@ -468,7 +468,9 @@ function GM:CalcView( ply, pos, angles, fov )
 			-- We're done
 			print ("stopping rolling")
 			rolling = false
-			backgroundChannel:Stop()
+			if backgroundChannel then
+				backgroundChannel:Stop()
+			end
 			backgroundChannel = nil
 			if dProgressBar and IsValid(dProgressBar) then
 				dProgressBar:Remove()
