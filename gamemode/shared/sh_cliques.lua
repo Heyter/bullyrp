@@ -17,8 +17,8 @@ CLIQUES = {
 		Name = "Preppy",
 	},
 	[5] = {
-		GroupName = "Greasers",
-		Name = "Greaser",
+		GroupName = "Burnouts",
+		Name = "Burnout",
 	},
 	[6] = {
 		GroupName = "Jocks",

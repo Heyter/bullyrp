@@ -12,7 +12,7 @@ local CliqueColorMap = {
 	Nerd = GREEN1,
 	Bully = RED1,
 	Preppy = YELLOW1,
-	Greaser = BLUE1,
+	Burnout = BLUE1,
 	Jock = SEA1
 }
 

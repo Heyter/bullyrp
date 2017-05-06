@@ -26,11 +26,13 @@ AddCSLuaFile("client/cl_character_creation.lua")
 AddCSLuaFile("client/cl_notifications.lua")
 AddCSLuaFile("client/cl_minimap.lua")
 AddCSLuaFile("client/cl_quests.lua")
+AddCSLuaFile("client/cl_intro.lua")
 
 -- Resources
 resource.AddFile("materials/assets/vgui/scoreboard/chalkboard.png")
 resource.AddFile("materials/assets/vgui/schedule/notepad.png")
 resource.AddFile("materials/assets/vgui/hud/clock.png")
+resource.AddFile("materials/assets/vgui/hud/cog.png")
 
 include("shared.lua")
 
