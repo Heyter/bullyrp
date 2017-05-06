@@ -108,8 +108,6 @@ function GM:PlayerSpawn(player)
 	if player.pvpenabled then
 		player:Give("weapon_fists")
 	end
-
-	player:SetNWInt("grade", math.random(9, 12))
 end
 
 -- Choose the model for hands according to their player model.
