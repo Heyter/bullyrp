@@ -336,12 +336,12 @@ function RollCutscene()
 
 	dProgressBar = vgui.Create("DPanel")
 	dProgressBar:SetPos(0,ScrH()-45)
-	dProgressBar:SetSize(ScrW(), dProgressBar:GetTall())
+	dProgressBar:SetSize(ScrW(), 45)
 	dProgressBar:MakePopup()
 	dProgressBar.Paint = function(s,w,h)
 		draw.RoundedBox(
 			0,
-			0,45-10,
+			0,35,
 			w * ((CurTime() - started) / totalLength), 10,
 			Color(192, 57, 43, 100)
 		)
@@ -368,7 +368,7 @@ function RollCutscene()
 			dSkipButton:SetAlpha(0)
 			dSkipButton:AlphaTo(
 				255,
-				5
+				10
 			)
 
 			dSkipButton.Paint = function(s,w,h)
