@@ -32,7 +32,6 @@ function ENT:AltModel(model)
 end
 
 function ENT:StartTouch(ent)
-	print ("Starting touch!!!")
 	if self.shouldShow and ent and IsValid(ent) and ent:IsPlayer() and ent.HasQuest and ent == self.playerToWatch then
 		ProcessQuestComplete(ent)
 		self.shouldShow = false

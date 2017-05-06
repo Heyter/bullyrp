@@ -5,6 +5,7 @@ local CurrentQuests = {}
 function ProcessQuestComplete(ply)
 	if ply.HasQuest and CurrentQuests[ply:SteamID64()] then
 		local q = CurrentQuests[ply:SteamID64()]
+		print("Completing mission for " .. ply:GetName())
 
 		QUEST_TYPES[q.Type].QuestCompleted(ply, q.Meta)
 
@@ -28,10 +29,10 @@ function ProcessQuestComplete(ply)
 end
 
 function ProcessQuestAbort(ply)
-	print("Aborting!")
 	if ply.HasQuest and CurrentQuests[ply:SteamID64()] then
-		print("Here we go! aborting")
 		local q = CurrentQuests[ply:SteamID64()]
+
+		print("Aborting mission for " .. ply:GetName())
 
 		QUEST_TYPES[q.Type].QuestFailedCleanup(q.Meta)
 
@@ -79,7 +80,7 @@ function SpawnQuestItem(ply, itemID)
 		ent:SetPlayer(ply)
 		ent:AltModel(item.Model)
 
-		print ("spawning quest item")
+		print ("spawning quest item for " .. ply:GetName())
 		print (ent:GetPos())
 
 		return ent
@@ -107,13 +108,11 @@ function ProcessQuestAccept(ply, qid)
 end
 
 net.Receive("quest_accept", function(len, ply)
-	print("Got new quest accept")
 	local qid = net.ReadUInt(32)
 	ProcessQuestAccept(ply, qid)
 end)
 
 net.Receive("quest_abort", function(len, ply)
-	print("Got new quest abort")
 	local abort = net.ReadBool()
 	if abort then
 		ProcessQuestAbort(ply, qid)
