@@ -175,7 +175,7 @@ function CreateScoreboard()
 	ScoreBoardMain:SetTitle("")
 	ScoreBoardMain:SetDraggable(false)
 	ScoreBoardMain:MakePopup()
-	ScoreBoardMain:ShowCloseButton(true)
+	ScoreBoardMain:ShowCloseButton(false)
 	ScoreBoardMain:SetKeyboardInputEnabled(false)
 
 	ScoreBoardMain.Paint = function(s,w,h)
@@ -230,7 +230,7 @@ function CreateScoreboard()
 			else
 				playersingrades[g] = {v}
 			end
-			
+
 			if g > top then
 				top = g
 			end
