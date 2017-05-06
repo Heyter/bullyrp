@@ -223,14 +223,14 @@ function CreateScoreboard()
 		local bottom = 9999
 
 		for k,v in pairs(player.GetAll()) do
-			local g = v:GetNWInt("Grade")
+			local g = tonumber(v:GetNWInt("Grade"))
 
 			if playersingrades[g] then
 				table.insert(playersingrades[g], v)
 			else
 				playersingrades[g] = {v}
 			end
-
+			
 			if g > top then
 				top = g
 			end
