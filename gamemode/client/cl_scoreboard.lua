@@ -1,18 +1,4 @@
 
-local developerMat = Material("icon16/application_osx_terminal.png")
-local superadminMat = Material("icon16/color_wheel.png")
-local adminMat = Material("icon16/shield.png")
-local vipMat = Material("materials/assets/won.png")
-local regularMat = Material("icon16/user.png")
-
-local chalkboard = Material("materials/assets/vgui/scoreboard/chalkboard.png")
-
-function GM:ScoreboardShow()
-end
-
-function GM:ScoreboardHide()
-end
-
 local scoreboard = nil
 
 local movingOut = false
@@ -20,7 +6,7 @@ local movingIn = false
 local movedIn = true
 local movedOut = false
 
-hook.Add("ScoreboardShow", "sScoreBoardShow", function()
+function GM:ScoreboardShow()
 	if IsValid(ScoreBoardMain) then
 		if not movingOut and not movingIn then
 			if movedIn then
@@ -47,9 +33,9 @@ hook.Add("ScoreboardShow", "sScoreBoardShow", function()
 	else
 		CreateScoreboard()
 	end 
-end)
+end
 
-hook.Add("ScoreboardHide", "sScoreBoardHide", function()
+function GM:ScoreboardHide()
 	if (ScoreBoardMain) then
 		if not movingOut and not movingIn and movedOut then
 			movingIn = true
@@ -61,22 +47,121 @@ hook.Add("ScoreboardHide", "sScoreBoardHide", function()
 			end)
 		end
 	end
-end)
+end
 
-surface.CreateFont( "ScoreBoardTitle", {
-	font = "Arial",
-	size = 32
-})
+local function AddPanelToBoard(scrollpanel, index, v)
+	local w,h = scrollpanel:GetWide() - 16, 75
+	local padding = 2
 
-surface.CreateFont( "ScoreBoardPlayerNames", {
-	font = "Arial",
-	size = 24
-})
+	local panel = scrollpanel:Add("DPanel")
+	panel:SetSize(w, h)
+	panel:SetPos(0, index * (h + padding) - (h + padding) + padding*2)
 
-surface.CreateFont( "ScoreBoardPlayerSub", {
-	font = "Arial",
-	size = 18
-})
+	local avatar = panel:Add("AvatarImage")
+	avatar:SetSize(54, 54)
+	avatar:SetPos(5, 5)
+	avatar:SetPlayer(v)
+	
+	local SteamProfile = vgui.Create( "DButton",avatar )
+	SteamProfile:SetSize( avatar:GetWide(), avatar:GetTall() ) 
+	SteamProfile:SetText(" ")
+
+	function SteamProfile:Paint(w,h)
+	end
+
+	if v:SteamID64() then
+		function SteamProfile:DoClick()
+			gui.OpenURL( "https://steamcommunity.com/profiles/"..v:SteamID64() )
+		end
+	end
+	
+	if v != LocalPlayer() then
+		local MuteButton = panel:Add( "DImageButton" )
+		MuteButton:SetSize(32,32)
+		MuteButton:SetPos(w - 50, h / 2 / 2) 
+		MuteButton:SetText(" ")
+		function MuteButton:Paint(w,h)
+		end
+		if v:IsMuted() then
+			MuteButton:SetImage("icon32/muted.png")
+		else
+			MuteButton:SetImage("icon32/unmuted.png")
+		end
+		function MuteButton:DoClick()
+			v:SetMuted(!v:IsMuted())
+			
+			if v:IsMuted() then
+				MuteButton:SetImage("icon32/muted.png")
+			else
+				MuteButton:SetImage("icon32/unmuted.png")
+			end
+		end
+	end
+
+	panel.Paint = function(self, w, h)
+		if not v:IsValid() then
+			ScoreBoardMain:Update()
+			return
+		end
+
+		draw.SimpleText(
+			ClientConfig.SteamName(v),
+			"ScoreBoardPlayerNames",
+			90,
+			10,
+			ClientConfig.ScoreboardSteamNameColor(v),
+			TEXT_ALIGN_LEFT,
+			TEXT_ALIGN_TOP
+		)
+		draw.SimpleText(
+			ClientConfig.RPName(v),
+			"ScoreBoardPlayerSub",
+			90,
+			h-15,
+			ClientConfig.ScoreboardRPNameColor(v),
+			TEXT_ALIGN_LEFT,
+			TEXT_ALIGN_BOTTOM
+		)
+
+		draw.SimpleText(
+			ClientConfig.Grade(v),
+			"ScoreBoardPlayerSub",
+			w - 275,
+			h / 2,
+			ClientConfig.ScoreboardGradeColor(v),
+			TEXT_ALIGN_RIGHT,
+			TEXT_ALIGN_CENTER
+		)
+
+		draw.SimpleText(
+			ClientConfig.Rank(v),
+			"ScoreBoardPlayerSub",
+			w - 205,
+			h / 2,
+			ClientConfig.ScoreboardRankColor(v),
+			TEXT_ALIGN_CENTER,
+			TEXT_ALIGN_CENTER
+		)
+
+		surface.SetDrawColor(ClientConfig.ScoreboardRankMatColor(v))
+		surface.SetMaterial(ClientConfig.RankMat(v))
+		surface.DrawTexturedRect(
+			w - 130,
+			h / 2 - 8, 16, 16
+		)
+
+		draw.SimpleText(
+			v:Ping(),
+			"ScoreBoardPlayerSub",
+			w - 80,
+			h / 2,
+			ClientConfig.ScoreboardPingColor(v),
+			TEXT_ALIGN_CENTER,
+			TEXT_ALIGN_CENTER
+		)
+
+	end
+end
 
 function CreateScoreboard()
 	local W,H = ScrW(), ScrH()
@@ -90,7 +175,7 @@ function CreateScoreboard()
 	ScoreBoardMain:SetTitle("")
 	ScoreBoardMain:SetDraggable(false)
 	ScoreBoardMain:MakePopup()
-	ScoreBoardMain:ShowCloseButton(false)
+	ScoreBoardMain:ShowCloseButton(true)
 	ScoreBoardMain:SetKeyboardInputEnabled(false)
 
 	ScoreBoardMain.Paint = function(s,w,h)
@@ -102,7 +187,7 @@ function CreateScoreboard()
 		)
 
 		surface.SetDrawColor(255,255,255,200)
-		surface.SetMaterial(chalkboard)
+		surface.SetMaterial(ClientConfig.ScoreboardBackground)
 		surface.DrawTexturedRect(5, 5, w-10, h-10)
 
 		draw.SimpleText(
@@ -132,140 +217,121 @@ function CreateScoreboard()
 	ScoreBoardMain.Update = function()
 		scrollpanel:Clear()
 
-		local sortedPlayers = player.GetAll()
+		local playersingrades = {}
 
-		table.sort(sortedPlayers, function (a, b) 
-			return a:Frags() > b:Frags()
-		end)
+		local top = -1
+		local bottom = 9999
 
-		local index = 1
-		local w,h = scrollpanel:GetWide() - 16, 64
-		local padding = 2
+		for k,v in pairs(player.GetAll()) do
+			local g = v:GetNWInt("Grade")
 
-		for k,v in pairs(sortedPlayers) do
-			local panel = scrollpanel:Add("DPanel")
-			panel:SetSize(w, h)
-			panel:SetPos(0, index * (h + padding) - (h + padding) + padding)
-
-			index = index + 1
-			
-			local avatar = panel:Add("AvatarImage")
-			avatar:SetSize(54, 54)
-			avatar:SetPos(5, 5)
-			avatar:SetPlayer(v)
-			
-			local SteamProfile = vgui.Create( "DButton",avatar )
-			SteamProfile:SetSize( avatar:GetWide(), avatar:GetTall() ) 
-			SteamProfile:SetText(" ")
-
-			function SteamProfile:Paint(w,h)
+			if playersingrades[g] then
+				table.insert(playersingrades[g], v)
+			else
+				playersingrades[g] = {v}
 			end
 
-			if v:SteamID64() then
-				function SteamProfile:DoClick()
-					gui.OpenURL( "https://steamcommunity.com/profiles/"..v:SteamID64() )
-				end
+			if g > top then
+				top = g
 			end
-			
-			if v != LocalPlayer() then
-				local MuteButton = panel:Add( "DImageButton" )
-				MuteButton:SetSize(32,32)
-				MuteButton:SetPos(w - 50, h / 2 / 2) 
-				MuteButton:SetText(" ")
-				function MuteButton:Paint(w,h)
-				end
-				if v:IsMuted() then
-					MuteButton:SetImage("icon32/muted.png")
-				else
-					MuteButton:SetImage("icon32/unmuted.png")
-				end
-				function MuteButton:DoClick()
-					v:SetMuted(!v:IsMuted())
-					
-					if v:IsMuted() then
-						MuteButton:SetImage("icon32/muted.png")
-					else
-						MuteButton:SetImage("icon32/unmuted.png")
-					end
-				end
-			end
-	
-			local firstName = "Barack"
-			local lastName = "Obama"
-
-			if v:GetNWString("firstName") ~= "" then
-				firstName = v:GetNWString("firstName")
-			end
-
-			if v:GetNWString("lastName") ~= "" then
-				lastName = v:GetNWString("lastName")
-			end
-
-			local icon = regularMat
-			local title = "9th Grader"
-			local status = "Player"
-
-			if v.SteamID64 and v:SteamID64() == "76561198079126590" then
-				icon = developerMat
-				status = "Developer"
-			elseif v:IsSuperAdmin() then
-				icon = superadminMat
-				status = "Owner"
-			elseif v:IsAdmin() then
-				icon = adminMat
-				status = "Admin"
-			elseif v.VIP then
-				icon = vipMat
-				status = "VIP"
-			end
-
-			panel.Paint = function(self, w, h)
-				if not v:IsValid() then
-					ScoreBoardMain:Update()
-					return
-				end
-
-				draw.SimpleText(
-					v:GetName() .. " (" .. firstName .. " " .. lastName .. ")",
-					"ScoreBoardPlayerNames",
-					90,
-					h / 2,
-					Color(255,255,255),
-					TEXT_ALIGN_LEFT,
-					TEXT_ALIGN_CENTER
-				)
-
-				draw.SimpleText(
-					title,
-					"ScoreBoardPlayerSub",
-					w - 290,
-					h / 2,
-					Color(255,255,255),
-					TEXT_ALIGN_CENTER,
-					TEXT_ALIGN_CENTER
-				)
-
-				if status then
-					draw.SimpleText(
-						status,
-						"ScoreBoardPlayerSub",
-						w - 170,
-						h / 2,
-						Color(255,255,255),
-						TEXT_ALIGN_CENTER,
-						TEXT_ALIGN_CENTER
-					)
-				end
-
-				surface.SetDrawColor(Color(255,255,255))
-				surface.SetMaterial(icon)
-				surface.DrawTexturedRect(
-					w - 100,
-					h / 2 - 8, 16, 16
-				)
-
+			if g < bottom then
+				bottom = g
 			end
 		end
+
+		local sortedPlayers = player.GetAll()
+
+		table.sort(sortedPlayers, function(a, b) return a:GetName() < b:GetName() end)
+
+		local index = 1
+
+		for i=top,bottom,-1 do
+			local players = playersingrades[i]
+
+			if players then
+				local w,h = scrollpanel:GetWide(), 75
+				local padding = 2
+
+				local panel = scrollpanel:Add("DPanel")
+				panel:SetSize(w, h)
+				panel:SetPos(0, index * (h + padding) - (h + padding))
+				panel.Paint = function(s,w,h)
+					draw.RoundedBox(
+						4,
+						0,0,
+						w,41,
+						ClientConfig.ScoreboardHeaderTopBackground
+					)
+					draw.RoundedBox(
+						4,
+						0,h-35,
+						w,35,
+						ClientConfig.ScoreboardHeaderBottomBackground
+					)
+					draw.SimpleText(
+						i .. "th Graders",
+						"ScoreBoardPlayerNames",
+						w/2,
+						10,
+						ClientConfig.ScoreboardHeaderTopColor(i),
+						TEXT_ALIGN_CENTER,
+						TEXT_ALIGN_TOP
+					)
+					draw.SimpleText(
+						"Name",
+						"ScoreBoardPlayerSub",
+						90,
+						h-10,
+						ClientConfig.ScoreboardHeaderTopColor(i),
+						TEXT_ALIGN_LEFT,
+						TEXT_ALIGN_BOTTOM
+					)
+					draw.SimpleText(
+						"Grade",
+						"ScoreBoardPlayerSub",
+						w - 275 - 16,
+						h-10,
+						ClientConfig.ScoreboardHeaderGradeColor(i),
+						TEXT_ALIGN_RIGHT,
+						TEXT_ALIGN_BOTTOM
+					)
+					draw.SimpleText(
+						"Rank",
+						"ScoreBoardPlayerSub",
+						w - 205 - 16,
+						h-10,
+						ClientConfig.ScoreboardHeaderRankColor(i),
+						TEXT_ALIGN_CENTER,
+						TEXT_ALIGN_BOTTOM
+					)
+
+					draw.SimpleText(
+						"Ping",
+						"ScoreBoardPlayerSub",
+						w - 80 - 16,
+						h-10,
+						ClientConfig.ScoreboardHeaderPingColor(i),
+						TEXT_ALIGN_CENTER,
+						TEXT_ALIGN_BOTTOM
+					)
+					draw.SimpleText(
+						"Mute",
+						"ScoreBoardPlayerSub",
+						w - 32 - 16,
+						h-10,
+						ClientConfig.ScoreboardHeaderMuteColor(i),
+						TEXT_ALIGN_CENTER,
+						TEXT_ALIGN_BOTTOM
+					)
+				end
+				index = index + 1
+
+				for k,v in pairs(players) do
+					AddPanelToBoard(scrollpanel, index, v)
+					index = index + 1
+				end
+			end
+		end	
 	end
 	
 	ScoreBoardMain:Update()
