@@ -91,9 +91,12 @@ function ENT:Post()
 
 	if not self:GetNWBool("IsNotMonitoring") and IsCurfew() then
 		cam.Start3D2D(position + Vector(0,0,2), Angle(0,0,0), 1);
-			surface.SetDrawColor(231, 76, 60, 50 * alphaStrength )
+			surface.SetDrawColor(231, 76, 60, 20 * alphaStrength )
 			draw.NoTexture()
-			draw.Circle(0, 0, 200, 10)
+			draw.Circle(0, 0, 200, 8)
+			draw.NoTexture()
+			surface.SetDrawColor(231, 76, 60, 40 * alphaStrength )
+			draw.Circle(0, 0, math.sin(CurTime() * 2.5) * 100 + 100, 8)
 		cam.End3D2D()
 	end
 end
