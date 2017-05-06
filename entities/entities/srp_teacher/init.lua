@@ -208,13 +208,15 @@ function ENT:Use( activator, caller, type, value )
 		timer.Simple(
 			GetGlobalInt("ClassPeriodEnds") - CurTime(),
 			function()
-				caller.IsTeacher = false
-				caller:SetNWString("teacher", "")
-				net.Start("notification")
-					net.WriteTable({
-						["GenericNotice"] = "You are no longer the teacher!"
-					})
-				net.Send(caller)
+				if caller and IsValid(caller) then
+					caller.IsTeacher = false
+					caller:SetNWString("teacher", "")
+					net.Start("notification")
+						net.WriteTable({
+							["GenericNotice"] = "You are no longer the teacher!"
+						})
+					net.Send(caller)
+				end
 			end
 		)
 		self:Roam(SCHOOL_POINTS)
