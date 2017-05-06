@@ -292,7 +292,7 @@ local function ClassRoom2D3D()
 	end
 end
 
-local dAvatar = nil
+dAvatar = nil
 
 local function DrawHud()
 
@@ -523,7 +523,9 @@ end
 function DisableHud()
 	hudenabled = false
 	if dAvatar then
-		dAvatar:SetVisible(true)
+		dAvatar:SetVisible(false)
+	else
+		print ("Davatar not there??")
 	end
 end
 

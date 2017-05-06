@@ -106,6 +106,8 @@ local function notificationReceive(tab)
 				AddNote(2, "PvP has been disabled!")
 			end
 			PvPEnabled = v
+		elseif k == "playcutscene" then
+			RollCutscene()
 		end
 	end
 end

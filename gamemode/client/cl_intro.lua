@@ -284,17 +284,23 @@ local scrolls = {
 	},
 }
 
-local totalLength = 0
+totalLength = 0
 
 for k,v in pairs(scrolls) do
 	totalLength = totalLength + v.EndTime
 end
+
+local backgroundChannel = nil
 
 function PlaySound(track, level)
     sound.PlayFile(track, "", function(channel, error, errorName)
         if (IsValid(channel)) then
             channel:Play()
             channel:SetVolume(level)
+
+            if not backgroundChannel then
+            	backgroundChannel = channel
+            end
         end
     end)
 end
@@ -307,26 +313,7 @@ local audiotriggered = false
 local started = -1
 local sstart = -1
 
-local rolling = true
-
-HUDTriggerFade()
-
--- PlaySound("sound/voice/intro/background.mp3", 0.15)
-
--- timer.Simple(
--- 	228,
--- 	function()
--- 		print("playing timerd")
--- 		PlaySound("sound/voice/intro/background.mp3", 0.025)
--- 	end
--- )
-
--- timer.Simple(
--- 	228 * 2,
--- 	function()
--- 		PlaySound("sound/voice/intro/background.mp3", 0.025)
--- 	end
--- )
+local rolling = false
 
 local dProgressBar = nil
 
@@ -341,23 +328,65 @@ function RollCutscene()
 	started = CurTime()
 
 	DisableHud()
+	HUDTriggerFade()
 
 	if dProgressBar and IsValid(dProgressBar) then
 		dProgressBar:Remove()
 	end
 
 	dProgressBar = vgui.Create("DPanel")
-	dProgressBar:SetPos(0,ScrH()-10)
-	dProgressBar:SetSize(ScrW(), 10)
+	dProgressBar:SetPos(0,ScrH()-45)
+	dProgressBar:SetSize(ScrW(), dProgressBar:GetTall())
 	dProgressBar:MakePopup()
 	dProgressBar.Paint = function(s,w,h)
 		draw.RoundedBox(
 			0,
-			0,0,
-			w * ((CurTime() - started) / totalLength), h,
+			0,45-10,
+			w * ((CurTime() - started) / totalLength), 10,
 			Color(192, 57, 43, 100)
 		)
 	end
+
+	timer.Simple(
+		10,
+		function()
+			dSkipButton = vgui.Create("DButton", dProgressBar)
+			dSkipButton:SetPos(dProgressBar:GetWide() - 100, 0)
+			dSkipButton:SetSize(100-30, 25)
+			dSkipButton:SetText("Skip")
+
+			dSkipButton.DoClick = function()
+				start = #scrolls+1
+				dProgressBar:Remove()
+
+				if backgroundChannel then
+					backgroundChannel:Stop()
+					backgroundChannel = nil
+				end
+			end
+
+			dSkipButton:SetAlpha(0)
+			dSkipButton:AlphaTo(
+				255,
+				5
+			)
+
+			dSkipButton.Paint = function(s,w,h)
+				draw.RoundedBox(
+					3,
+					0,0,
+					w,h,
+					Color(33,33,33,100)
+				)
+				draw.RoundedBox(
+					3,
+					3,3,
+					w-6,h-6,
+					Color(33,33,33,200)
+				)
+			end
+		end
+	)
 
 	timer.Simple(
 		totalLength,
@@ -367,21 +396,28 @@ function RollCutscene()
 			end
 		end
 	)
-end
 
-RollCutscene()
+	rolling = true
+
+	PlaySound("sound/voice/intro/background.mp3", 0.15)
+end
 
 function GM:CalcView( ply, pos, angles, fov )
 	if rolling then
 		draw.RoundedBox(
 			0,
 			0,0,
-			ScrW() , 15,
+			ScrW(), 15,
 			Color(44, 62, 80, 150)
 		)
 
 		if start <= #scrolls then
 			local s = scrolls[math.ceil(start)]
+
+			if not s then
+				print("No cutscene frame found.")
+				start = start + 1
+			end
 
 			local cal = (sstart - estart) / send
 
@@ -432,6 +468,8 @@ function GM:CalcView( ply, pos, angles, fov )
 			-- We're done
 			print ("stopping rolling")
 			rolling = false
+			backgroundChannel:Stop()
+			backgroundChannel = nil
 			if dProgressBar and IsValid(dProgressBar) then
 				dProgressBar:Remove()
 			end
