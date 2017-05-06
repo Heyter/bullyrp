@@ -246,12 +246,19 @@ HUDTriggerFade()
 
 PlaySound("sound/voice/intro/background.mp3", 0.025)
 
--- timer.Simple(
--- 	228,
--- 	function()
--- 		PlaySound("sound/voice/intro/background.mp3", 0.2)
--- 	end
--- )
+timer.Simple(
+	228,
+	function()
+		PlaySound("sound/voice/intro/background.mp3", 0.025)
+	end
+)
+
+timer.Simple(
+	228 * 2,
+	function()
+		PlaySound("sound/voice/intro/background.mp3", 0.025)
+	end
+)
 
 function GM:CalcView( ply, pos, angles, fov )
 	-- return false
