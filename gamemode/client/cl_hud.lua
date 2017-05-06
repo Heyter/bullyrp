@@ -9,6 +9,7 @@ PvPEnabled = false
 
 local chalkboard = Material("materials/assets/vgui/scoreboard/chalkboard.png")
 local clock = Material("materials/assets/vgui/hud/clock.png")
+local cog = Material("materials/assets/vgui/hud/cog.png")
 
 sound.Add( {
 	name = "RingBell",
@@ -290,28 +291,6 @@ local function ClassRoom2D3D()
 end
 
 local dAvatar = nil
-local exps = {
-	[1] = {
-		name = "A",
-		color = Color(142, 68, 173, 200),
-	},
-	[2] = {
-		name = "B",
-		color = Color(44, 62, 80, 200),
-	},
-	[3] = {
-		name = "A",
-		color = Color(142, 68, 173, 200),
-	},
-	[4] = {
-		name = "B",
-		color = Color(44, 62, 80, 200),
-	},
-	[5] = {
-		name = "A",
-		color = Color(142, 68, 173, 200),
-	},
-}
 
 local function DrawHud()
 
@@ -351,6 +330,25 @@ local function DrawHud()
 		dAvatar:SetPos(x + 18, y + 13)
 		dAvatar:SetSize(h-13*2-10, h-13*2-10)
 		dAvatar:SetPlayer(LocalPlayer(), 84)
+
+		local dEdit = vgui.Create("DButton", dAvatar)
+		dEdit:SetPos(dAvatar:GetWide() - 30, dAvatar:GetTall() - 30)
+		dEdit:SetSize(24, 24)
+		dEdit:SetText("")
+		dEdit.Paint = function(s,w,h)
+			draw.RoundedBox(
+				3,
+				0,0,
+				w,h,
+				Color(33,33,33,230)
+			)
+			surface.SetDrawColor(255, 255, 255)
+			surface.SetMaterial(cog)
+			surface.DrawTexturedRect(0, 0, w, h)
+		end
+		dEdit.DoClick = function()
+			OpenCharacterCreation()
+		end
 	end
 
 	local firstName = "Barack"
@@ -408,24 +406,6 @@ local function DrawHud()
 			x + w * healthLength + 5, y+h-10 
 		)
 	end
-
-	-- local width = (w - h - 50) / #exps
-	-- for i=1,#exps do
-	-- 	draw.RoundedBox(
-	-- 		0,
-	-- 		x + h + 5 - 10 + ((i - 1) * width), y + 60,
-	-- 		width, h - 60 - 25,
-	-- 		exps[i].color
-	-- 	)
-	-- 	draw.SimpleText(
-	-- 		exps[i].name .. i,
-	-- 		"CustomFontB",
-	-- 		x + h + 5 - 10 + ((i - 1) * width) + width / 2, y + 60 + 13,
-	-- 		Color(255,255,255),
-	-- 		TEXT_ALIGN_CENTER,
-	-- 		TEXT_ALIGN_CENTER
-	-- 	)
-	-- end
 end
 
 local function CalcDayTime()
