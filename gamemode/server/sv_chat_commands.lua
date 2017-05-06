@@ -47,13 +47,13 @@ end
 
 ChatCommands = {
 	["/me"] = function(ply, msg, isTeam)
-		print (ply:GetName() .. ": " msg)
+		print (ply:GetName() .. ": " .. join(msg))
 		msg[1] = ply:GetRPName()
 		MessageAll({Color(142, 68, 173), join(msg)})
 		return ""
 	end,
 	["/ooc"] = function(ply, msg, isTeam)
-		print (ply:GetName() .. ": " msg)
+		print (ply:GetName() .. ": " .. join(msg))
 		msg[1] = nil
 		MessageAll({
 			Color(56, 163, 234), "(OOC) " .. ply:GetRPName() .. ": ",
@@ -62,7 +62,7 @@ ChatCommands = {
 		return ""
 	end,
 	["//"] = function(ply, msg, isTeam)
-		print (ply:GetName() .. ": " msg)
+		print (ply:GetName() .. ": " .. join(msg))
 		msg[1] = nil
 		MessageAll({
 			Color(56, 163, 234), "(OOC) " .. ply:GetRPName() .. ": ",
@@ -71,7 +71,7 @@ ChatCommands = {
 		return ""
 	end,
 	["/looc"] = function(ply, msg, isTeam)
-		print (ply:GetName() .. ": " msg)
+		print (ply:GetName() .. ": " .. join(msg))
 		msg[1] = nil
 
 		local plys = {}
@@ -89,7 +89,7 @@ ChatCommands = {
 		return ""
 	end,
 	[".//"] = function(ply, msg, isTeam)
-		print (ply:GetName() .. ": " msg)
+		print (ply:GetName() .. ": " .. join(msg))
 		msg[1] = nil
 
 		local plys = {}
@@ -107,7 +107,7 @@ ChatCommands = {
 		return ""
 	end,
 	["/w"] = function(ply, msg, isTeam)
-		print (ply:GetName() .. ": " msg)
+		print (ply:GetName() .. ": " .. join(msg))
 		msg[1] = nil
 
 		local plys = {}
@@ -125,7 +125,7 @@ ChatCommands = {
 		return ""
 	end,
 	["/whisper"] = function(ply, msg, isTeam)
-		print (ply:GetName() .. ": " msg)
+		print (ply:GetName() .. ": " .. join(msg))
 		msg[1] = nil
 
 		local plys = {}
@@ -143,7 +143,7 @@ ChatCommands = {
 		return ""
 	end,
 	["/roll"] = function(ply, msg, isTeam)
-		print (ply:GetName() .. ": " msg)
+		print (ply:GetName() .. ": " .. join(msg))
 		local die = msg[2] or 10
 		MessageAll({
 			Color(39, 174, 96), ply:GetRPName() .. " rolled a " .. math.random(1,die)
@@ -151,7 +151,7 @@ ChatCommands = {
 		return ""
 	end,
 	["/pvp"] = function(ply, msg, isTeam)
-		print (ply:GetName() .. ": " msg)
+		print (ply:GetName() .. ": " .. join(msg))
 		timer.Remove("pvpenabled_" .. ply:SteamID64())
 
 		if ply.pvpenabled then
@@ -188,7 +188,7 @@ ChatCommands = {
 		return ""
 	end,
 	["!pvp"] = function(ply, msg, isTeam)
-		print (ply:GetName() .. ": " msg)
+		print (ply:GetName() .. ": " .. join(msg))
 		timer.Remove("pvpenabled_" .. ply:SteamID64())
 
 		if ply.pvpenabled then
@@ -225,7 +225,7 @@ ChatCommands = {
 		return ""
 	end,
 	["!intro"] = function(ply, msg, isTeam)
-		print (ply:GetName() .. ": " msg)
+		print (ply:GetName() .. ": " .. join(msg))
 		if not ply.inDetention then
 			ply:SetPos(Vector(-10.647, -982.497, 100.031))
 			ply:SetAngles(Angle(-10.198, 90.044, 0.0))
