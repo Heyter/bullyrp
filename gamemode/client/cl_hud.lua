@@ -542,43 +542,21 @@ local function OverheadNames()
 			local pos2d = pos:ToScreen()
 			pos2d.y = pos2d.y - (dist / 10.0)
 
-			local firstName = "Barack"
-			local lastName = "Obama"
-			local title = "13th Grader"
-
-			if v:GetNWString("firstName") ~= "" then
-				firstName = v:GetNWString("firstName")
-			end
-
-			if v:GetNWString("lastName") ~= "" then
-				lastName = v:GetNWString("lastName")
-			end
-
-			if v:GetNWString("teacher") and v:GetNWString("teacher") ~= "" then
-				title = v:GetNWString("Teacher")
-			elseif v:GetNWInt("grade") then
-				title = v:GetNWInt("grade") .. "th Grader"
-			end
-
 			draw.DrawText(
-				firstName .. " " .. lastName,
+				ClientConfig.RPName(v),
 				"player_overhead_name",
 				pos2d.x, pos2d.y,
-				Color(255, 255, 255, 255 * alphaStrength),
+				ClientConfig.OverheadNameColor(v, alphaStrength),
 				TEXT_ALIGN_CENTER
 			)
 
 			local c = Color(39, 174, 96, 255 * alphaStrength)
-
-			if v:GetNWBool("pvpenabled") then
-				c = Color(192, 57, 43, 255 * alphaStrength)
-			end
-
+			
 			draw.DrawText(
-				title,
+				ClientConfig.Grade(v),
 				"player_overhead_title",
 				pos2d.x, pos2d.y + 32,
-				c,
+				ClientConfig.OverheadGradeColor(v, alphaStrength),
 				TEXT_ALIGN_CENTER
 			)
 		end

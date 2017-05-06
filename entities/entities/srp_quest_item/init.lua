@@ -6,17 +6,11 @@ include('shared.lua')
 
 function ENT:Initialize()
 	self:SetModel( "models/monk.mdl" )
-	self:SetTrigger(true)
-	-- self:SetCollisionGroup(COLLISION_GROUP_WEAPON)
-	self:PhysicsInit( SOLID_VPHYSICS )
-	self:SetMoveType( MOVETYPE_VPHYSICS )
-	self:SetSolid( SOLID_VPHYSICS )
+	self:SetSolid( SOLID_BBOX )
+    self:SetTrigger( true )
+    self:PhysicsDestroy()
+    self:SetNotSolid( true )
 
-	local phys = self:GetPhysicsObject()
-	if (phys:IsValid()) then
-		phys:Wake()
-		phys:EnableMotion(false)
-	end
 	self.shouldShow = true
 end
 

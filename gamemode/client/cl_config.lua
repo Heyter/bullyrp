@@ -2,6 +2,19 @@
 local WHITE = Color(255,255,255)
 local GREY1 = Color(50,50,50, 150)
 local GREY2 = Color(33,33,33, 150)
+local GREEN1 = Color(39, 174, 96, 255)
+local RED1 = Color(192, 57, 43)
+local YELLOW1 = Color(243, 156, 18)
+local SEA1 = Color(22, 160, 133)
+local BLUE1 = Color(41, 128, 185)
+
+local CliqueColorMap = {
+	Nerd = GREEN1,
+	Bully = RED1,
+	Preppy = YELLOW1,
+	Greaser = BLUE1,
+	Jock = SEA1
+}
 
 ClientConfig = {
 	DeveloperMat = Material("icon16/application_osx_terminal.png"),
@@ -56,6 +69,23 @@ ClientConfig = {
 		return WHITE
 	end,
 
+	OverheadNameColor = function(ply, alpha)
+		return Color(WHITE.r, WHITE.g, WHITE.b, 255 * alpha)
+	end,
+	OverheadGradeColor = function(ply, alpha)
+		local clique = ply:GetNWInt("Clique")
+		local c = WHITE
+
+		if clique and CLIQUES[clique] then
+			clique = CLIQUES[clique]
+			if CliqueColorMap[clique.Name] then
+				c = CliqueColorMap[clique.Name]
+			end
+		end
+
+		return Color(c.r, c.g, c.b, 255 * alpha)
+	end,
+
 	-- Names
 	SteamName = function(ply)
 		return ply:GetName()
@@ -75,7 +105,15 @@ ClientConfig = {
 		return firstName .. " " .. lastName
 	end,
 	Grade = function(ply)
-		return ply:GetNWString("Grade") .. "th Grader"
+		local grade = ""
+
+		if ply:GetNWString("teacher") and ply:GetNWString("teacher") ~= "" then
+			grade = ply:GetNWString("Teacher")
+		elseif ply:GetNWInt("grade") then
+			grade = ply:GetNWInt("grade") .. "th Grader"
+		end
+
+		return grade
 	end,
 	Rank = function(ply)
 		local status = "Player"

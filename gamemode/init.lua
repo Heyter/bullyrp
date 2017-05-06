@@ -151,6 +151,7 @@ if #player.GetAll() > 0 then
 		v.IsTeacher = false
 		v.pvpenabled = false
 		v:SetNWBool("pvpenabled", false)
+		v:SetNWInt("Clique", 1)
 	end
 end
 
