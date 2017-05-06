@@ -13,6 +13,7 @@ AddCSLuaFile("shared/sh_points.lua")
 AddCSLuaFile("shared/sh_atmos.lua")
 AddCSLuaFile("shared/sh_classes.lua")
 AddCSLuaFile("shared/sh_questing.lua")
+AddCSLuaFile("shared/sh_cliques.lua")
 
 AddCSLuaFile("client/cl_database.lua")
 AddCSLuaFile("client/cl_fonts.lua")
@@ -37,6 +38,7 @@ include("shared/sh_points.lua")
 include("shared/sh_atmos.lua")
 include("shared/sh_classes.lua")
 include("shared/sh_questing.lua")
+include("shared/sh_cliques.lua")
 
 include("server/sv_database.lua")
 include("server/sv_player.lua")
@@ -101,6 +103,10 @@ function GM:PlayerSpawn(player)
 	player:SetAngles(p[2])
 
 	player:AddHands()
+
+	if player.pvpenabled then
+		player:Give("weapon_fists")
+	end
 end
 
 -- Choose the model for hands according to their player model.

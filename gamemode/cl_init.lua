@@ -5,6 +5,7 @@ include("shared/sh_points.lua")
 include("shared/sh_classes.lua")
 include("shared/sh_atmos.lua")
 include("shared/sh_questing.lua")
+include("shared/sh_cliques.lua")
 
 include("client/cl_database.lua")
 include("client/cl_fonts.lua")

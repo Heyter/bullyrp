@@ -282,6 +282,7 @@ timer.Simple(
 				["Title"] = grade .. "th Grader",
 				["Model"] = STUDENT_MODELS[gender][math.random(#STUDENT_MODELS[gender])],
 				["Schedule"] = sch,
+				["Clique"] = CLIQUES[math.random(#CLIQUES)],
 			}
 			s.ent = SpawnStudent(s)
 			s.ent:SetGender(gender)

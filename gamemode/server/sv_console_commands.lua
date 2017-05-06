@@ -58,4 +58,3 @@ concommand.Add("sp", function(ply, cmd, args)
 		ply:SetPos(Vector(args[1], args[2], args[3]))
 	end
 end)
-
