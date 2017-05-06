@@ -532,7 +532,7 @@ local function OverheadNames()
 				alphaStrength = 0
 			end
 
-			local zOffset = 100
+			local zOffset = 90
 
 			local x = v:GetPos().x
 			local y = v:GetPos().y
@@ -540,7 +540,7 @@ local function OverheadNames()
 
 			local pos = Vector(x, y, z + zOffset)
 			local pos2d = pos:ToScreen()
-			pos2d.y = pos2d.y - (dist / 50.0)
+			pos2d.y = pos2d.y - (dist / 10.0)
 
 			local firstName = "Barack"
 			local lastName = "Obama"
