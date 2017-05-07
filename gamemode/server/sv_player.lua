@@ -71,11 +71,13 @@ function player:GiveDetention(time)
 		timer.Simple(
 			time,
 			function()
-				self.inDetention = false
-				local g = math.random(1, 2)
-				local p = POINTS[DORM_POINTS[g][math.random(#DORM_POINTS[g])]]
-				self:SetPos(p[1])
-				self:SetAngles(p[2])
+				if IsValid(self) then
+					self.inDetention = false
+					local g = math.random(1, 2)
+					local p = POINTS[DORM_POINTS[g][math.random(#DORM_POINTS[g])]]
+					self:SetPos(p[1])
+					self:SetAngles(p[2])
+				end
 			end
 		)
 	end
