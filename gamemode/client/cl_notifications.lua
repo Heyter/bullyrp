@@ -35,6 +35,12 @@ local function AddNote(mtype, message, delay)
 			w,h-4,
 			c
 		)
+		draw.RoundedBox(
+			5,
+			4,6,
+			w-4,h-8,
+			c
+		)
 	end
 	DLabel:SetAlpha(0)
 	DLabel:AlphaTo(

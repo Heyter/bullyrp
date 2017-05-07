@@ -226,15 +226,23 @@ QUEST_TYPES = {
 
 			if e then
 				local c = e:GetClique()
-				local cname = CLIQUES[c].GroupName
+				print ("cliqueid: ")
+				print (c)
+				if c and CLIQUES[c] then
+					local cname = CLIQUES[c].GroupName
 
-				return {
-					"+" .. meta.Points,
-					ClientConfig.OverheadGradeColor(e, 1),
-					cname,
-					Color(255,255,255),
-					"XP"
-				}
+					return {
+						"+" .. meta.Points,
+						ClientConfig.OverheadGradeColor(e, 1),
+						cname,
+						Color(255,255,255),
+						"XP"
+					}
+				else
+					print("Nope.")
+					print(CLIQUES[c])
+					return {"None"}
+				end
 			else
 				print ("Entity was null, lol.")
 				return "None."

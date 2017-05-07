@@ -29,6 +29,8 @@ ClientConfig = {
 	VipMat = Material("materials/assets/won.png"),
 	RegularMat = Material("icon16/user.png"),
 
+	F4URL = "http://steamcommunity.com/groups/bullyrp",
+
 	CliqueMats = {
 		-- Nerds
 		[2] = Material("materials/assets/bullyrp/icons/spectacles.png"),

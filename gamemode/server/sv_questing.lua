@@ -178,7 +178,7 @@ timer.Remove("quest_generation")
 
 timer.Create(
 	"quest_generation",
-	CalcHour,
+	CalcHour / 4,
 	0,
 	function()
 		for k,v in pairs(PendingQuests) do
@@ -188,6 +188,11 @@ timer.Create(
 			end
 		end
 
+		GenerateNewQuest()
+		GenerateNewQuest()
+		GenerateNewQuest()
+		GenerateNewQuest()
+		GenerateNewQuest()
 		GenerateNewQuest()
 		GenerateNewQuest()
 		GenerateNewQuest()

@@ -95,5 +95,5 @@ function ENT:DrawTranslucent()
 end
 
 function ENT:GetClique()
-	return self:GetNWInt("Clique") or 1
+	return self:GetNWInt("Clique", 1)
 end
