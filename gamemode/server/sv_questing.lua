@@ -157,6 +157,7 @@ local function GenerateNewQuest()
 	if s then
 		local quest = GenerateQuest()
 		quest.ent = s.ent
+		quest.Meta.entID = s.ent:EntIndex()
 
 		local qid = table.insert(PendingQuests, quest)
 

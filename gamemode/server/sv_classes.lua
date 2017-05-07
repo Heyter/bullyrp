@@ -286,7 +286,6 @@ timer.Simple(
 			}
 			s.ent = SpawnStudent(s)
 			s.ent:SetGender(gender)
-			print (s.Clique)
 			if s.Clique ~= 1 then
 				s.ent:SetClique(s.Clique)
 			end

@@ -26,6 +26,10 @@ function ENT:SetClique(cliqueid)
 	self:SetNWInt("Clique", cliqueid)
 end
 
+function ENT:GetClique()
+	return self.Clique
+end
+
 function ENT:SetNWName(name)
 	self:SetNWString("Name", name)
 end

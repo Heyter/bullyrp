@@ -366,6 +366,9 @@ local function DrawQuest(ent, questType, l1, l2, l3, l4, l5, meta)
 
 	richtext:AppendText(QUEST_GREETINGS4[l5] .. " ")
 
+	richtext:AppendText("\n\nReward: ")
+	richtext:AppendText(QUEST_TYPES[questType].QuestReward(v, meta))
+
 	richtext:GotoTextStart()
 
 	local dButton1 = vgui.Create("DButton", dQuest)

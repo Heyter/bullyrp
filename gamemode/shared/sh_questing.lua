@@ -190,28 +190,36 @@ QUEST_GREETINGS3 = {
 }
 
 QUEST_TYPES = {
-	{Name = "FindItem", ID = 1,
-	Description = "Please find it!",
-	Lines = function(strs, meta) 
-		strs[2] = Color(39, 174, 96)
-		strs[3] = QUEST_ITEMS[meta.ItemID].Name
-		strs[4] = Color(255,255,255)
-		return strs
-	end,
-	GetMeta = function()
-		return {
-			ItemID = math.random(#QUEST_ITEMS)
-		}
-	end,
-	QuestAccepted = function(ply, meta)
-		return SpawnQuestItem(ply, meta.ItemID)
-	end,
-	QuestFailedCleanup = function(meta)
-		meta.qents:Remove()
-	end,
-	QuestCompleted = function(ply, meta)
-		ply:dbChangeValue("xp", 10)
-	end,
+	[1] = {
+		Name = "FindItem", ID = 1,
+		Description = "Please find it!",
+		Lines = function(strs, meta) 
+			strs[2] = Color(39, 174, 96)
+			strs[3] = QUEST_ITEMS[meta.ItemID].Name
+			strs[4] = Color(255,255,255)
+			return strs
+		end,
+		GetMeta = function()
+			return {
+				ItemID = math.random(#QUEST_ITEMS),
+				Points = math.random(10,20),
+			}
+		end,
+		QuestAccepted = function(ply, meta)
+			return SpawnQuestItem(ply, meta.ItemID)
+		end,
+		QuestFailedCleanup = function(meta)
+			meta.qents:Remove()
+		end,
+		QuestCompleted = function(ply, meta)
+			ply:dbChangeValue("xp", 10)
+		end,
+		QuestReward = function(ply, meta)
+			local c = ents.GetByIndex(meta.entID):GetClique()
+			local cname = CLIQUES[c].GroupName
+
+			return "+" .. meta.Points .. " " .. cname .. " XP"
+		end,
 	},
 }
 
