@@ -5,7 +5,7 @@ GM.Email = "NA"
 GM.Website = "NA"
 
 -- In seconds
-LengthOfDay = 2160.0 --2160.0
+LengthOfDay = 2160.0 / 3 --2160.0
 -- There are 5 periods.
 NumberOfPeriods = 5
 

@@ -215,10 +215,23 @@ QUEST_TYPES = {
 			ply:dbChangeValue("xp", 10)
 		end,
 		QuestReward = function(ply, meta)
-			local c = ents.GetByIndex(meta.entID):GetClique()
-			local cname = CLIQUES[c].GroupName
+			local e = Entity(meta.entID)
 
-			return "+" .. meta.Points .. " " .. cname .. " XP"
+			if e then
+				local c = e:GetClique()
+				local cname = CLIQUES[c].GroupName
+
+				return {
+					"+" .. meta.Points,
+					ClientConfig.OverheadGradeColor(e, 1),
+					cname,
+					Color(255,255,255),
+					"XP"
+				}
+			else
+				print ("Entity was null, lol.")
+				return "None."
+			end
 		end,
 	},
 }

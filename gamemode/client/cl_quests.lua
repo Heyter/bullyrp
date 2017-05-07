@@ -53,6 +53,15 @@ function DrawQuestFeedback(ent, feedbackType, questType, subDelay, outsideText)
 		self:MoveToFront()
 	end
 
+	local e = ent
+	local emat = nil
+	local ecolor = nil
+
+	if not outsideText then
+		emat = ClientConfig.CliqueMats[e:GetClique()]
+		ecolor = ClientConfig.OverheadGradeColor(e, 0.8)
+	end
+
 	dQuestFeedback.Paint = function(s,w,h)
 		draw.RoundedBox(
 			5,
@@ -79,6 +88,12 @@ function DrawQuestFeedback(ent, feedbackType, questType, subDelay, outsideText)
 				"quests_username",
 				175 + pd, pd * 2
 			)
+
+			if emat and IsValid(e) then
+				surface.SetDrawColor(ecolor)
+				surface.SetMaterial(emat)
+				surface.DrawTexturedRect(pd*6, pd*6, 175 - pd*12, h - pd*12)
+			end
 		else
 			draw.SimpleText(
 				"Narrator",
@@ -248,6 +263,16 @@ local function DrawQuestInfo(questType, l4, meta)
 
 	richtext:AppendText(QUEST_TYPES[questType].Description)
 
+	richtext:AppendText("\n\nReward: ")
+
+	for k,v in pairs(QUEST_TYPES[questType].QuestReward(v, meta)) do
+		if type(v) == "string" then
+			richtext:AppendText(v .. " ")
+		else
+			richtext:InsertColorChange(v.r,v.g,v.b,255)
+		end
+	end
+
 	richtext:GotoTextStart()
 
 	local icon = vgui.Create("DModelPanel", dQuestInfo)
@@ -293,6 +318,10 @@ local function DrawQuest(ent, questType, l1, l2, l3, l4, l5, meta)
 	dQuest:SetPos(x,y)
 	dQuest:MakePopup()
 
+	local e = Entity(meta.entID)
+	local emat = ClientConfig.CliqueMats[e:GetClique()]
+	local ecolor = ClientConfig.OverheadGradeColor(e, 0.8)
+
 	dQuest.Paint = function(s,w,h)
 		draw.RoundedBox(
 			5,
@@ -318,6 +347,12 @@ local function DrawQuest(ent, questType, l1, l2, l3, l4, l5, meta)
 			"quests_username",
 			175 + pd, pd * 2
 		)
+
+		if emat and IsValid(e) then
+			surface.SetDrawColor(ecolor)
+			surface.SetMaterial(emat)
+			surface.DrawTexturedRect(pd*6, pd*6, 175 - pd*12, h - pd*12)
+		end
 	end
 
 	local icon = vgui.Create("DModelPanel", dQuest)
@@ -367,7 +402,14 @@ local function DrawQuest(ent, questType, l1, l2, l3, l4, l5, meta)
 	richtext:AppendText(QUEST_GREETINGS4[l5] .. " ")
 
 	richtext:AppendText("\n\nReward: ")
-	richtext:AppendText(QUEST_TYPES[questType].QuestReward(v, meta))
+
+	for k,v in pairs(QUEST_TYPES[questType].QuestReward(v, meta)) do
+		if type(v) == "string" then
+			richtext:AppendText(v .. " ")
+		else
+			richtext:InsertColorChange(v.r,v.g,v.b,255)
+		end
+	end
 
 	richtext:GotoTextStart()
 

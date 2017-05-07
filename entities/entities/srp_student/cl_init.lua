@@ -93,3 +93,7 @@ end
 function ENT:DrawTranslucent()
     self:Post()
 end
+
+function ENT:GetClique()
+	return self:GetNWInt("Clique") or 1
+end
