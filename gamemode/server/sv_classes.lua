@@ -282,10 +282,11 @@ timer.Simple(
 				["Title"] = grade .. "th Grader",
 				["Model"] = STUDENT_MODELS[gender][math.random(#STUDENT_MODELS[gender])],
 				["Schedule"] = sch,
-				["Clique"] = math.random(#CLIQUES),
+				["Clique"] = (i % #CLIQUES) + 1,
 			}
 			s.ent = SpawnStudent(s)
 			s.ent:SetGender(gender)
+			print (s.Clique)
 			if s.Clique ~= 1 then
 				s.ent:SetClique(s.Clique)
 			end
