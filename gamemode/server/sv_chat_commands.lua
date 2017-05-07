@@ -319,10 +319,18 @@ hook.Add("PlayerSay", "textCommands", function(ply, text, isTeam)
 	else
 		print ("(Local) " .. ply:GetName() .. ": " .. text)
 
+		local plys = {}
+
+		for k,v in pairs(ents.FindInSphere(ply:GetPos(), 1000)) do
+			if v:IsPlayer() then
+				table.insert(plys, v)
+			end
+		end
+
 		MessageAll({
 			Color(255,255,255),
 			"(Local) " .. ply:GetRPName() .. ": " .. text,
-		})
+		}, plys)
 		return ""
 	end
 end)
