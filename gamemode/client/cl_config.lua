@@ -79,6 +79,7 @@ ClientConfig = {
 		return Color(WHITE.r, WHITE.g, WHITE.b, 255 * alpha)
 	end,
 	OverheadGradeColor = function(ply, alpha)
+		-- This may be an "srp_student" or player
 		local clique = ply:GetNWInt("Clique")
 		local c = WHITE
 

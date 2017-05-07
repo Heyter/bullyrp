@@ -199,6 +199,73 @@ POINTS = {
 	["c2_dorms23"] = {Vector(5003.196, 2349.089, 72.031), Angle(5.149, -141.529, 0.0)},
 	["c2_dorms24"] = {Vector(4343.826, 2302.485, 72.031), Angle(10.958, -39.113, 0.0)},
 
+	["g_preppies1"] = {Vector(570.993, -3449.581, 8.031), Angle(7.638, 122.886, 0.0)},
+	["g_preppies2"] = {Vector(-21.208, -3330.385, 8.031), Angle(2.905, 90.827, 0.0)},
+	["g_preppies3"] = {Vector(-607.81, -3228.62, 8.031), Angle(3.873, 64.901, 0.0)},
+	["g_preppies4"] = {Vector(-676.487, -2712.198, 8.031), Angle(4.841, 46.182, 0.0)},
+	["g_preppies5"] = {Vector(-667.542, -2177.163, 8.031), Angle(3.658, 1.966, 0.0)},
+	["g_preppies6"] = {Vector(-320.049, -1760.021, 8.031), Angle(7.961, -45.369, 0.0)},
+	["g_preppies7"] = {Vector(142.258, -1531.973, 8.031), Angle(3.335, -121.25, 0.0)},
+	["g_preppies8"] = {Vector(553.892, -1905.206, 8.031), Angle(1.721, -150.835, 0.0)},
+	["g_preppies9"] = {Vector(553.892, -1905.206, 8.031), Angle(1.721, -150.835, 0.0)},
+	["g_preppies10"] = {Vector(462.861, -2538.752, 8.031), Angle(1.506, 151.503, 0.0)},
+	["g_preppies11"] = {Vector(680.052, -3144.802, 8.031), Angle(2.582, 131.493, 0.0)},
+	["g_preppies12"] = {Vector(176.773, -2493.266, 8.031), Angle(0.108, 122.456, 0.0)},
+	["g_preppies13"] = {Vector(-311.268, -2376.357, 8.031), Angle(3.873, 51.776, 0.0)},
+	["g_preppies14"] = {Vector(-196.041, -1872.494, 8.031), Angle(1.506, -24.821, 0.0)},
+	["g_preppies15"] = {Vector(318.096, -1994.246, 8.031), Angle(5.379, -118.738, 0.0)},
+
+	["g_nerds1"] = {Vector(3441.077, 4232.891, 8.031), Angle(4.841, -179.613, 0.0)},
+	["g_nerds2"] = {Vector(2527.072, 3810.833, 8.031), Angle(5.487, 51.776, 0.0)},
+	["g_nerds3"] = {Vector(1879.992, 4361.041, 8.031), Angle(0.753, -25.037, 0.0)},
+	["g_nerds4"] = {Vector(2538.58, 4871.558, 72.031), Angle(-3.227, -70.688, 0.0)},
+	["g_nerds5"] = {Vector(2281.007, 4591.909, 72.031), Angle(1.399, 119.551, 0.0)},
+	["g_nerds6"] = {Vector(1626.07, 4677.086, 72.031), Angle(2.152, 39.727, 0.0)},
+	["g_nerds7"] = {Vector(1675.284, 5289.856, 72.031), Angle(5.164, -24.176, 0.0)},
+	["g_nerds8"] = {Vector(2332.203, 5484.511, 72.031), Angle(5.809, -76.675, 0.0)},
+	["g_nerds9"] = {Vector(3064.925, 5442.899, 72.031), Angle(5.379, -93.242, 0.0)},
+	["g_nerds10"] = {Vector(3854.986, 5439.05, 72.031), Angle(2.797, -103.462, 0.0)},
+	["g_nerds11"] = {Vector(3954.233, 4783.099, 72.031), Angle(4.196, 174.454, 0.0)},
+	["g_nerds12"] = {Vector(3409.157, 4576.319, 72.031), Angle(5.379, 96.136, 0.0)},
+	["g_nerds13"] = {Vector(3868.143, 5328.601, 248.031), Angle(3.98, -152.051, 0.0)},
+	["g_nerds14"] = {Vector(3992.714, 5440.499, 248.031), Angle(-3.012, -134.946, 0.0)},
+	["g_nerds15"] = {Vector(3946.668, 4544.289, 248.031), Angle(2.044, 133.827, 0.0)},
+	["g_nerds16"] = {Vector(3190.378, 4538.365, 320.031), Angle(4.518, 120.272, 0.0)},
+	["g_nerds17"] = {Vector(2689.799, 4915.767, 320.031), Angle(2.582, -101.703, 0.0)},
+	["g_nerds18"] = {Vector(2158.271, 4562.458, 248.031), Angle(6.455, 95.206, 0.0)},
+	["g_nerds19"] = {Vector(1624.366, 4632.53, 248.031), Angle(10.65, 34.315, 0.0)},
+	["g_nerds20"] = {Vector(1669.393, 5510.031, 248.031), Angle(7.208, -37.548, 0.0)},
+	["g_nerds21"] = {Vector(1782.362, 5339.711, 248.031), Angle(5.164, -13.988, 0.0)},
+	["g_nerds22"] = {Vector(3405.085, 4601.104, 72.031), Angle(-0.323, 118.443, 0.0)},
+	["g_nerds23"] = {Vector(3912.793, 4715.616, 72.031), Angle(3.98, 159.215, 0.0)},
+	["g_nerds24"] = {Vector(3137.999, 4903.196, 72.031), Angle(3.496, -116.334, 0.0)},
+
+	["g_jocks1"] = {Vector(293.418, 9556.157, -215.969), Angle(3.98, 113.602, 0.0)},
+	["g_jocks2"] = {Vector(534.759, 9699.888, -215.969), Angle(-3.227, 91.225, 0.0)},
+	["g_jocks3"] = {Vector(1075.785, 9770.02, -215.969), Angle(-3.873, 136.731, 0.0)},
+	["g_jocks4"] = {Vector(1424.036, 9669.337, -215.969), Angle(-2.905, 120.148, 0.0)},
+	["g_jocks5"] = {Vector(2215.179, 10109.495, -215.969), Angle(0, 161.942, 0.0)},
+	["g_jocks6"] = {Vector(2207.206, 11387.087, -215.969), Angle(-1.076, -159.329, 0.0)},
+	["g_jocks7"] = {Vector(1663.895, 11949.905, -215.969), Angle(-0.43, -128.669, 0.0)},
+	["g_jocks8"] = {Vector(200.517, 11891.566, -215.969), Angle(2.367, -88.326, 0.0)},
+	["g_jocks9"] = {Vector(-1114.768, 11956.563, -215.969), Angle(-2.582, -57.128, 0.0)},
+	["g_jocks10"] = {Vector(-2225.858, 11614.481, -215.969), Angle(0.215, -22.702, 0.0)},
+	["g_jocks11"] = {Vector(-2175.156, 10377.599, -215.969), Angle(4.088, 0.212, 0.0)},
+	["g_jocks12"] = {Vector(-1424.975, 9701.481, -215.969), Angle(-3.227, 59.381, 0.0)},
+	["g_jocks13"] = {Vector(-1023.02, 9739.599, -215.969), Angle(5.271, 58.305, 0.0)},
+	["g_jocks14"] = {Vector(-487.2, 9735.972, -215.969), Angle(-5.056, 84.34, 0.0)},
+	["g_jocks15"] = {Vector(-845.812, 10472.864, -215.969), Angle(7.961, 12.476, 0.0)},
+	["g_jocks16"] = {Vector(-72.791, 11205.648, -215.969), Angle(1.291, -67.025, 0.0)},
+	["g_jocks17"] = {Vector(794.38, 11051.066, -215.969), Angle(0.323, -126.625, 0.0)},
+
+	["g_burnouts1"] = {Vector(-4373.199, 31.261, 8.031), Angle(4.518, -115.544, 0.0)},
+	["g_burnouts2"] = {Vector(-4752.16, -51.759, 8.031), Angle(4.196, 179.693, 0.0)},
+	["g_burnouts3"] = {Vector(-5221.196, -65.185, 8.031), Angle(4.196, 179.693, 0.0)},
+	["g_burnouts4"] = {Vector(-5573.647, -63.294, 8.031), Angle(4.196, 179.693, 0.0)},
+	["g_burnouts5"] = {Vector(-1477.865, -3253.077, 8.031), Angle(3.012, 53.431, 0.0)},
+	["g_burnouts6"] = {Vector(1523.613, -3504.866, 8.031), Angle(15.276, 132.933, 0.0)},
+	["g_burnouts7"] = {Vector(1541.335, -3307.559, 8.031), Angle(8.499, 138.527, 0.0)},
+	["g_burnouts8"] = {Vector(1604.023, -3118.349, 8.031), Angle(7.638, 158.752, 0.0)},
 }
 
 ROAMING_POINTS = {}
@@ -206,6 +273,14 @@ DETENTION_POINTS = {}
 SCHOOL_POINTS = {}
 DORM_POINTS = {
 	{},{}
+}
+
+CLIQUES_POINTS = {
+	[2] = {},
+	[3] = {},
+	[4] = {},
+	[5] = {},
+	[6] = {},
 }
 
 function string.starts(String,Start)
@@ -219,6 +294,7 @@ for k,v in pairs(POINTS) do
 
 	if string.starts(k, "r_School") then
 		table.insert(SCHOOL_POINTS, k)
+		table.insert(CLIQUES_POINTS[3], k)
 	end
 
 	if string.starts(k, "a_") then
@@ -232,4 +308,25 @@ for k,v in pairs(POINTS) do
 	if string.starts(k, "c2_") then
 		table.insert(DORM_POINTS[2], k)
 	end
+
+	if string.starts(k, "g_nerds") then
+		table.insert(SCHOOL_POINTS, k)
+		table.insert(CLIQUES_POINTS[2], k)
+	end
+
+	if string.starts(k, "g_preppies") then
+		table.insert(SCHOOL_POINTS, k)
+		table.insert(CLIQUES_POINTS[4], k)
+	end
+
+	if string.starts(k, "g_burnouts") then
+		table.insert(SCHOOL_POINTS, k)
+		table.insert(CLIQUES_POINTS[5], k)
+	end
+
+	if string.starts(k, "g_jocks") then
+		table.insert(SCHOOL_POINTS, k)
+		table.insert(CLIQUES_POINTS[6], k)
+	end
+
 end

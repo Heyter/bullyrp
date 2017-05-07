@@ -282,10 +282,13 @@ timer.Simple(
 				["Title"] = grade .. "th Grader",
 				["Model"] = STUDENT_MODELS[gender][math.random(#STUDENT_MODELS[gender])],
 				["Schedule"] = sch,
-				["Clique"] = CLIQUES[math.random(#CLIQUES)],
+				["Clique"] = math.random(#CLIQUES),
 			}
 			s.ent = SpawnStudent(s)
 			s.ent:SetGender(gender)
+			if s.Clique ~= 1 then
+				s.ent:SetClique(s.Clique)
+			end
 			table.insert(Students, s)
 		end
 	end

@@ -4,16 +4,6 @@ AddCSLuaFile( "shared.lua" )
 
 include('shared.lua')
 
-local TravelPoints = {
-	Vector(-143.133133, -1456.099243, 72.031250),
-	Vector(1097.671387, -489.795532, 144.031250),
-}
-
--- models/Zombie/Fast.mdl
--- models/Humans/Group03m/male_03.mdl -- black health guy
--- models/Humans/Group03/male_06.mdl -- white guy
--- models/Humans/Group02/Male_05.mdl -- other white guy
-
 function ENT:GoToRespawn()
 	local p = POINTS[ROAMING_POINTS[math.random(#ROAMING_POINTS)]]
 	self:SetPos(p[1] + Vector(math.random(-50, 50), math.random(-50, 50), 0))
@@ -28,6 +18,12 @@ function ENT:Initialize()
 	self.Cancel = false
 	self:SetUseType( SIMPLE_USE )
 	self.followingCurfew = false
+	self.Clique = 1
+end
+
+function ENT:SetClique(cliqueid)
+	self.Clique = cliqueid
+	self:SetNWInt("Clique", cliqueid)
 end
 
 function ENT:SetNWName(name)
@@ -105,7 +101,11 @@ function ENT:GetRandom()
 	else
 		self.followingCurfew = false
 
-		points = ROAMING_POINTS
+		if self.Clique > 1 then
+			points = CLIQUES_POINTS[self.Clique]
+		else
+			points = ROAMING_POINTS
+		end
 
 		if self.RoamPoints then
 			points = self.RoamPoints
@@ -129,6 +129,7 @@ function ENT:RunBehaviour()
 		else
 			local d = self:GetRandom()
 			point = POINTS[d]
+			point[1] = point[1] + Vector(math.random(-20, 20), math.random(-20, 20), 0)
 			self.loco:SetDesiredSpeed( 75 )		-- Walk speed
 		end
 
