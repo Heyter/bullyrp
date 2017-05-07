@@ -7,9 +7,9 @@ local ClassChangeLast = false
 
 PvPEnabled = false
 
-local chalkboard = Material("materials/assets/vgui/scoreboard/chalkboard.png")
-local clock = Material("materials/assets/vgui/hud/clock.png")
-local cog = Material("materials/assets/vgui/hud/cog.png")
+local chalkboard = Material("materials/assets/bullyrp/vgui/scoreboard/chalkboard.png")
+local clock = Material("materials/assets/bullyrp/vgui/hud/clock.png")
+local cog = Material("materials/assets/bullyrp/vgui/hud/cog.png")
 
 local hudenabled = true
 

@@ -46,22 +46,32 @@ function ENT:Post()
 				"Mission Available",
 				"npcs_teacher_mission",
 				-0,
-				-470,
+				-485,
 				Color(155, 89, 182, 255 * alphaStrength),
 				1,
 				1
 			)
 		end
 
+		local xpos = 0
+		local clique = self:GetNWInt("Clique")
+		local cliqueColor = ClientConfig.OverheadGradeColor(self, alphaStrength)
+
+		if clique and ClientConfig.CliqueMats[clique] then
+			surface.SetDrawColor(cliqueColor)
+			surface.SetMaterial(ClientConfig.CliqueMats[clique])
+			surface.DrawTexturedRect(-16, -460, 32, 32)
+		end
+
 		draw.SimpleText(
-			self:GetNWString("Name"),
-			"npcs_teacher_name",
-			-0,
-			-410,
-			Color(255, 255, 255, 255 * alphaStrength),
-			1,
-			1
-		)
+				self:GetNWString("Name"),
+				"npcs_teacher_name",
+				xpos,
+				-410,
+				Color(255, 255, 255, 255 * alphaStrength),
+				TEXT_ALIGN_CENTER,
+				1
+			)
 
 		draw.SimpleText(
 			self:GetNWString("Title"),
@@ -69,7 +79,7 @@ function ENT:Post()
 			-0,
 			-375,
 			-- Color(142, 68, 173, 255 * alphaStrength),
-			ClientConfig.OverheadGradeColor(self, alphaStrength),
+			cliqueColor,
 			1,
 			1
 		)

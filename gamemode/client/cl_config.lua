@@ -29,8 +29,21 @@ ClientConfig = {
 	VipMat = Material("materials/assets/won.png"),
 	RegularMat = Material("icon16/user.png"),
 
+	CliqueMats = {
+		-- Nerds
+		[2] = Material("materials/assets/bullyrp/icons/spectacles.png"),
+		-- Bullies
+		[3] = Material("materials/assets/bullyrp/icons/muscle-up.png"),
+		-- Preppies
+		[4] = Material("materials/assets/bullyrp/icons/take-my-money.png"),
+		-- Burnouts
+		[5] = Material("materials/assets/bullyrp/icons/cigar.png"),
+		-- Jocks
+		[6] = Material("materials/assets/bullyrp/icons/american-football-helmet.png"),
+	},
+
 	-- Backgrounds
-	ScoreboardBackground = Material("materials/assets/vgui/scoreboard/chalkboard.png"),
+	ScoreboardBackground = Material("materials/assets/bullyrp/vgui/scoreboard/chalkboard.png"),
 	ScoreboardHeaderTopBackground = GREY1,
 	ScoreboardHeaderBottomBackground = GREY2,
 
