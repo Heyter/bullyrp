@@ -101,7 +101,7 @@ function ENT:GetRandom()
 	else
 		self.followingCurfew = false
 
-		if self.Clique > 1 then
+		if self.Clique > 1 and math.random(1, 100) > 30 then
 			points = CLIQUES_POINTS[self.Clique]
 		else
 			points = ROAMING_POINTS
