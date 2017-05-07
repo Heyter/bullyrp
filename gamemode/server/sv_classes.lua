@@ -241,37 +241,6 @@ timer.Simple(
 		detentionTeacher.ent:SetDestination('t_StudyingRoom1')
 		detentionTeacher.ent:SetMonitor(true)
 
-		local schs = {
-			[9] = {
-				[1] = {"AlgerbraI"},
-				[2] = {"BiologyI", "EarthScience"},
-				[3] = {"Lunch"},
-				[4] = {"English9"},
-				[5] = {"WorldHistory", "Government"},
-			},
-			[10] = {
-				[1] = {"PhysicsI", "ChemistryI"},
-				[2] = {"AlgerbraII"},
-				[3] = {"Lunch"},
-				[4] = {"AmericanHistory", "Sociology"},
-				[5] = {"English10"},
-			},
-			[11] = {
-				[1] = {"Geometry"},
-				[2] = {"BiologyI", "EarthScienceI"},
-				[3] = {"Lunch"},
-				[4] = {"English11"},
-				[5] = {"WorldHistory", "Government"},
-			},
-			[12] = {
-				[1] = {"PhysicsI", "ChemistryI"},
-				[2] = {"PreCalculus"},
-				[3] = {"Lunch"},
-				[4] = {"AmericanHistory", "Sociology"},
-				[5] = {"English12"},
-			},
-		}
-
 		for i=1,20 do
 			local gender = math.random(1,2)
 			local grade = math.random(9,12)

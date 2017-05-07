@@ -105,6 +105,19 @@ ClientConfig = {
 
 		return Color(c.r, c.g, c.b, 255 * alpha)
 	end,
+	GetCliqueColor = function(clique)
+		local clique = clique
+		local c = WHITE
+
+		if CLIQUES[clique] then
+			clique = CLIQUES[clique]
+			if CliqueColorMap[clique.Name] then
+				c = CliqueColorMap[clique.Name]
+			end
+		end
+
+		return Color(c.r, c.g, c.b)
+	end,
 
 	-- Names
 	SteamName = function(ply)

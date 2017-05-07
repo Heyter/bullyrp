@@ -528,7 +528,7 @@ CLASSES = {
 	},
 	["AmericanHistory"] = {
 		["Room"] = "C202",
-		["Subjwdct"] = "Social Studies",
+		["Subject"] = "Social Studies",
 		["Name"] = "American History",
 	},
 	["Government"] = {

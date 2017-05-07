@@ -27,17 +27,7 @@ AddCSLuaFile("client/cl_notifications.lua")
 AddCSLuaFile("client/cl_minimap.lua")
 AddCSLuaFile("client/cl_quests.lua")
 AddCSLuaFile("client/cl_intro.lua")
-
--- Resources
--- resource.AddFile("materials/assets/vgui/scoreboard/chalkboard.png")
--- resource.AddFile("materials/assets/vgui/schedule/notepad.png")
--- resource.AddFile("materials/assets/vgui/hud/clock.png")
--- resource.AddFile("materials/assets/vgui/hud/cog.png")
--- resource.AddFile("sound/voice/intro/background.mp3")
-
--- for i=1,23 do
--- 	resource.AddFile("sound/voice/intro/part" .. i .. ".mp3")
--- end
+AddCSLuaFile("client/cl_q_menu.lua")
 
 resource.AddWorkshop( "920348014" )
 

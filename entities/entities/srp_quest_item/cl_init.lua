@@ -90,10 +90,10 @@ end
 
 function ENT:Initialize()
 	self.spos = self:GetPos()
-	if LocalPlayer() ~= self:GetNWEntity("Player") then
-		self:SetMaterial("models/wireframe", true)
-		self:SetColor(Color(41, 128, 185))
-	end
+	-- if LocalPlayer() ~= self:GetNWEntity("Player") then
+	-- 	self:SetMaterial("models/wireframe", true)
+	-- 	self:SetColor(Color(41, 128, 185))
+	-- end
 end
 
 function ENT:GetPlayer()

@@ -19,6 +19,7 @@ include("client/cl_notifications.lua")
 include("client/cl_minimap.lua")
 include("client/cl_quests.lua")
 include("client/cl_intro.lua")
+include("client/cl_q_menu.lua")
 
 local poses = {}
 

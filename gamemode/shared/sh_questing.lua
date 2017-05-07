@@ -212,7 +212,14 @@ QUEST_TYPES = {
 			meta.qents:Remove()
 		end,
 		QuestCompleted = function(ply, meta)
-			ply:dbChangeValue("xp", 10)
+			local e = Entity(meta.entID)
+
+			if e then
+				local c = e:GetClique()
+				local curXP = ply:dbGetValue("cliques" .. c) or 0
+
+				ply:dbSetValue("cliques" .. c, curXP + meta.Points)
+			end
 		end,
 		QuestReward = function(ply, meta)
 			local e = Entity(meta.entID)

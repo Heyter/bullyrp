@@ -15,14 +15,14 @@ function GM:ScoreboardShow()
 				ScoreBoardMain:Update()
 				ScoreBoardMain:SetVisible(true)
 				ScoreBoardMain:SetAlpha(0)
-				ScoreBoardMain:AlphaTo(255, 0.5, 0, function()
+				ScoreBoardMain:AlphaTo(255, 0.25, 0, function()
 					movingOut = false
 					movedOut = true
 					movedIn = false
 				end)
 			else
 				movingIn = true
-				ScoreBoardMain:AlphaTo(0, 0.5, 0, function()
+				ScoreBoardMain:AlphaTo(0, 0.25, 0, function()
 					movingIn = false
 					movedOut = false
 					movedIn = true
@@ -36,10 +36,10 @@ function GM:ScoreboardShow()
 end
 
 function GM:ScoreboardHide()
-	if (ScoreBoardMain) then
+	if IsValid(ScoreBoardMain) then
 		if not movingOut and not movingIn and movedOut then
 			movingIn = true
-			ScoreBoardMain:AlphaTo(0, 0.5, 0, function()
+			ScoreBoardMain:AlphaTo(0, 0.25, 0, function()
 				movingIn = false
 				movedIn = true
 				movedOut = false
