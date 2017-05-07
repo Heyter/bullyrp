@@ -2,7 +2,7 @@
 "Gamemode"
 {
 	"base"			"base"
-	"title"			"SchoolRP"
+	"title"			"BullyRP"
 	"maps"			"^rp_blacklake"
 	"menusystem"	"1"
 	"workshopid"	""
