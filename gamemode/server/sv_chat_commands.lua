@@ -187,6 +187,28 @@ ChatCommands = {
 		}, plys)
 		return ""
 	end,
+	["/ad"] = function(ply, msg, isTeam)
+		msg[1] = nil
+		local s = join(msg)
+		print ("(Advert) " .. ply:GetName() .. ": " .. s)
+
+		MessageAll({
+			Color(231, 76, 60), "(Advert) " .. ply:GetRPName() .. ": ",
+			Color(255,255,255), s
+		})
+		return ""
+	end,
+	["/advert"] = function(ply, msg, isTeam)
+		msg[1] = nil
+		local s = join(msg)
+		print ("(Advert) " .. ply:GetName() .. ": " .. s)
+
+		MessageAll({
+			Color(231, 76, 60), "(Advert) " .. ply:GetRPName() .. ": ",
+			Color(255,255,255), s
+		})
+		return ""
+	end,
 	["/roll"] = function(ply, msg, isTeam)
 		local die = msg[2] or 10
 
