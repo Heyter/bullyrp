@@ -149,6 +149,44 @@ ChatCommands = {
 		}, plys)
 		return ""
 	end,
+	["/y"] = function(ply, msg, isTeam)
+		msg[1] = nil
+		local s = join(msg)
+		print ("(Yell) " .. ply:GetName() .. ": " .. s)
+
+		local plys = {}
+
+		for k,v in pairs(ents.FindInSphere(ply:GetPos(), 1000)) do
+			if v:IsPlayer() then
+				table.insert(plys, v)
+			end
+		end
+
+		MessageAll({
+			Color(56, 163, 234), "(Yell) " .. ply:GetRPName() .. ": ",
+			Color(255,255,255), s
+		}, plys)
+		return ""
+	end,
+	["/yell"] = function(ply, msg, isTeam)
+		msg[1] = nil
+		local s = join(msg)
+		print ("(Yell) " .. ply:GetName() .. ": " .. s)
+
+		local plys = {}
+
+		for k,v in pairs(ents.FindInSphere(ply:GetPos(), 1000)) do
+			if v:IsPlayer() then
+				table.insert(plys, v)
+			end
+		end
+
+		MessageAll({
+			Color(56, 163, 234), "(Yell) " .. ply:GetRPName() .. ": ",
+			Color(255,255,255), s
+		}, plys)
+		return ""
+	end,
 	["/roll"] = function(ply, msg, isTeam)
 		local die = msg[2] or 10
 
