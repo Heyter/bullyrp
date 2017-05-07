@@ -316,6 +316,14 @@ hook.Add("PlayerSay", "textCommands", function(ply, text, isTeam)
 		if x then
 			return x
 		end
+	else
+		print ("(Local) " .. ply:GetName() .. ": " .. text)
+
+		MessageAll({
+			Color(255,255,255),
+			"(Local) " .. ply:GetRPName() .. ": " .. text,
+		})
+		return ""
 	end
 end)
 
