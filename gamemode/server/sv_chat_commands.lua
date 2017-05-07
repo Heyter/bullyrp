@@ -87,7 +87,7 @@ ChatCommands = {
 		end
 
 		MessageAll({
-			Color(56, 163, 234), "(LOOC) " .. ply:GetRPName() .. ": ",
+			Color(39, 174, 96), "(LOOC) " .. ply:GetRPName() .. ": ",
 			Color(255,255,255), s
 		}, plys)
 		return ""
@@ -106,7 +106,7 @@ ChatCommands = {
 		end
 
 		MessageAll({
-			Color(56, 163, 234), "(LOOC) " .. ply:GetRPName() .. ": ",
+			Color(39, 174, 96), "(LOOC) " .. ply:GetRPName() .. ": ",
 			Color(255,255,255), join(msg)
 		}, plys)
 		return ""
@@ -125,7 +125,7 @@ ChatCommands = {
 		end
 
 		MessageAll({
-			Color(56, 163, 234), "(Whisper) " .. ply:GetRPName() .. ": ",
+			Color(22, 160, 133), "(Whisper) " .. ply:GetRPName() .. ": ",
 			Color(255,255,255), s
 		}, plys)
 		return ""
@@ -144,7 +144,7 @@ ChatCommands = {
 		end
 
 		MessageAll({
-			Color(56, 163, 234), "(Whisper) " .. ply:GetRPName() .. ": ",
+			Color(22, 160, 133), "(Whisper) " .. ply:GetRPName() .. ": ",
 			Color(255,255,255), s
 		}, plys)
 		return ""
@@ -163,7 +163,7 @@ ChatCommands = {
 		end
 
 		MessageAll({
-			Color(56, 163, 234), "(Yell) " .. ply:GetRPName() .. ": ",
+			Color(231, 76, 60), "(Yell) " .. ply:GetRPName() .. ": ",
 			Color(255,255,255), s
 		}, plys)
 		return ""
@@ -182,7 +182,7 @@ ChatCommands = {
 		end
 
 		MessageAll({
-			Color(56, 163, 234), "(Yell) " .. ply:GetRPName() .. ": ",
+			Color(231, 76, 60), "(Yell) " .. ply:GetRPName() .. ": ",
 			Color(255,255,255), s
 		}, plys)
 		return ""
