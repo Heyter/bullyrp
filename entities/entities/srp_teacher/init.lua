@@ -228,6 +228,8 @@ function ENT:Use( activator, caller, type, value )
 			net.WriteUInt(self.quest.questLine5, 16)
 			net.WriteTable(self.quest.Meta)
 		net.Send(caller)
+	elseif self.program then
+		self.program(caller)
 	end
 end
 
@@ -273,4 +275,8 @@ end
 function ENT:SetMonitor(bool)
 	self.IsNotMonitoring = bool
 	self:SetNWBool("IsNotMonitoring", bool)
+end
+
+function ENT:SetProgram(fun)
+	self.program = fun
 end

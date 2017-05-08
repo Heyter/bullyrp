@@ -161,6 +161,4 @@ function OpenCharacterCreation()
 	end 
 end
 
-usermessage.Hook("CreateCharacter", OpenCharacterCreation)
-
 -- DrawCharacterCreation()

@@ -290,6 +290,23 @@ timer.Simple(
 		detentionTeacher.ent:SetDestination('t_StudyingRoom1')
 		detentionTeacher.ent:SetMonitor(true)
 
+		local counselor = {
+			["Name"] = "Ms. " .. TEACHER_NAMES[math.random(#TEACHER_NAMES)],
+			["Title"] = "School Counselor (Press E on me)",
+			["Model"] = TEACHER_MODELS[2][math.random(#TEACHER_MODELS[1])]
+		}
+		counselor.ent = SpawnTeacher(counselor)
+		counselor.ent:SetPos(POINTS['t_SupervisorsOffices1'][1])
+		counselor.ent:SetDestination('t_SupervisorsOffices1')
+		counselor.ent:SetMonitor(true)
+		counselor.ent:SetProgram(function(ply)
+			net.Start("notification")
+				net.WriteTable({
+					["openchar"] = true
+				})
+			net.Send(ply)
+		end)
+
 		for i=1,20 do
 			table.insert(Students, NewStudent(i))
 		end
