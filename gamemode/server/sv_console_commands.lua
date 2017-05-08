@@ -43,7 +43,7 @@ concommand.Add("checkPoints", function(ply)
 end)
 
 concommand.Add("settime", function(ply, cmd, args)
-	if ply and IsValid(ply) and ply:IsAdmin() or ply:IsSuperAdmin() then
+	if ply and IsValid(ply) and (ply:IsAdmin() or ply:IsSuperAdmin()) then
 		local time = args[1]
 		if time and tonumber(time) then
 			time = tonumber(time)
@@ -60,13 +60,13 @@ concommand.Add("watchedcutscene", function(ply, cmd, args)
 end)
 
 concommand.Add("sp", function(ply, cmd, args)
-	if ply and IsValid(ply) and ply:IsAdmin() or ply:IsSuperAdmin() then
+	if ply and IsValid(ply) and (ply:IsAdmin() or ply:IsSuperAdmin()) then
 		ply:SetPos(Vector(args[1], args[2], args[3]))
 	end
 end)
 
 concommand.Add("reset", function(ply, cmd, args)
-	if ply and IsValid(ply) and ply:IsAdmin() or ply:IsSuperAdmin() then
+	if ply and IsValid(ply) then
 		ply:dbDefault(true)
 	end
 end)

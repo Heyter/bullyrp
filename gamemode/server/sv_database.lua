@@ -5,11 +5,11 @@ util.AddNetworkString("database")
 
 local defaultValues = {
 	["money"] = 100,
-	["grade"] = 9,
+	["grade"] = 8,
 	["firstName"] = "",
 	["lastName"] = "",
 	["model"] = "models/player/Group01/male_02.mdl",
-	["schedule"] = GenerateSchedule(9),
+	["schedule"] = {},
 	["watchedIntro"] = 0,
 
 	["cliques1"] = 10,

@@ -291,6 +291,7 @@ for k,v in pairs(scrolls) do
 end
 
 local backgroundChannel = nil
+local lastTalking = nil
 
 function PlaySound(track, level)
     sound.PlayFile(track, "", function(channel, error, errorName)
@@ -300,6 +301,8 @@ function PlaySound(track, level)
 
             if not backgroundChannel then
             	backgroundChannel = channel
+            else
+            	lastTalking = channel
             end
         end
     end)
@@ -471,7 +474,11 @@ function GM:CalcView( ply, pos, angles, fov )
 			if backgroundChannel then
 				backgroundChannel:Stop()
 			end
+			if lastTalking then
+				lastTalking:Stop()
+			end
 			backgroundChannel = nil
+			lastTalking = nil
 			if dProgressBar and IsValid(dProgressBar) then
 				dProgressBar:Remove()
 			end
