@@ -62,8 +62,8 @@ function ENT:Post()
 			if self:GetNWBool("IsLeader") then
 				surface.SetDrawColor(Color(241, 196, 15, 255 * alphaStrength))
 				surface.SetMaterial(ClientConfig.CliqueMats.Leader)
-				surface.DrawTexturedRect(-36, -460, 32, 32)
-				x = 8
+				surface.DrawTexturedRect(-46, -460, 32, 32)
+				x = 0
 			end
 			surface.SetDrawColor(cliqueColor)
 			surface.SetMaterial(ClientConfig.CliqueMats[clique])
