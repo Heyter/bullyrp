@@ -376,7 +376,7 @@ if SERVER then
 		"Garner",
 	}
 
-	MALE_NAMES {
+	MALE_NAMES = {
 		"Riley",
 		"Federico",
 		"Rhys",
@@ -672,8 +672,8 @@ if SERVER then
 		"Nydia",
 		"Makaeh",
 		"Fawn",
-		"Regan" --Yes, this is a real girl's name.
-		"Faye" -- :)
+		"Regan", --Yes, this is a real girl's name.
+		"Faye", -- :)
 		"Dillion",
 		"Remy",
 		"Miriama",

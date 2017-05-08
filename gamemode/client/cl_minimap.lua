@@ -1,7 +1,7 @@
 
 local W,H = ScrW(), ScrH()
-local w,h = W * 0.6, H * 0.6
-local x,y = W * 0.4 / 2, H * 0.4 / 2
+local w,h = W * 0.9, H * 0.9
+local x,y = W * 0.1 / 2, H * 0.1 / 2
 
 local dMiniMap = nil
 local dMenu = nil
@@ -38,48 +38,17 @@ local function DrawMiniMap()
 			p.z = 2200
 
 			render.RenderView( {
-				origin = p,
-				angles = Angle(90, a, 90),
+				origin = Vector(0, 4000, 1500),
+				angles = Angle(90, 270, 90),
 				x = x,
 				y = y+30,
 				w = w,
 				h = h,
-				fov = 100,
+				fov = 175,
 			 } )
 		end
 	end
 
 end
-
-local function DrawQMenu()
-	if not dMenu and not IsValid(dMenu) then
-		local W,H = ScrW(), ScrH()
-		local w,h = W * 0.6, H * 0.6
-		local x,y = W * 0.4 / 2, H * 0.4 / 2
-		local topHeight = 50
-
-		dMenu = vgui.Create("DFrame")
-		dMenu:SetPos(x, y)
-		dMenu:SetSize(w, h)
-		dMenu:SetTitle("")
-		dMenu:SetDraggable(false)
-		dMenu:MakePopup()
-		dMenu:ShowCloseButton(true)
-		dMenu:SetKeyboardInputEnabled(false)
-
-		dMenu.Paint = function(s,w,h)
-			draw.RoundedBox(
-				4,
-				0,0,
-				w,h,
-				Color(33,33,33,200)
-			)
-		end
-
-		DrawMiniMap()
-	end
-end
-
--- DrawQMenu()
 
 -- DrawMiniMap()
