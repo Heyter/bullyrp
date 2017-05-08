@@ -121,32 +121,38 @@ local function ClassHud()
 		TEXT_ALIGN_CENTER
 	)
 
-	local periodID = GetGlobalInt("ClassPeriod")
-	local periodName = "Free Time"
-	local schedule = databaseGetValue("schedule")
+	local grade = databaseGetValue("grade")
 
-	if periodID > 0 then
-		local curtime = GetGlobalInt("ClassPeriodEnds") - CurTime() 
-		local realtimec = curtime / LengthOfDay
-		local realtime =  realtimec * SecondsInDay / 60
+	if grade and grade ~= "8" then
+		local periodID = GetGlobalInt("ClassPeriod")
+		local periodName = "Free Time"
+		local schedule = databaseGetValue("schedule")
 
-		if realtime > LengthOfPeriodInGame then
-			periodName = "Class Change"
-			if not ClassChangeLast then
-				RingBell()
+		if periodID > 0 then
+			local curtime = GetGlobalInt("ClassPeriodEnds") - CurTime() 
+			local realtimec = curtime / LengthOfDay
+			local realtime =  realtimec * SecondsInDay / 60
+
+			if realtime > LengthOfPeriodInGame then
+				periodName = "Class Change"
+				if not ClassChangeLast then
+					RingBell()
+				end
+				ClassChangeLast = true
+			elseif periodID > 0 and schedule and schedule[periodID] and CLASSES[schedule[periodID]] then
+				periodName = CLASSES[schedule[periodID]].Name
+				if ClassChangeLast then
+					RingBell()
+				end
+				ClassChangeLast = false
+			else
+				periodName = "Invalid"
 			end
-			ClassChangeLast = true
-		elseif periodID > 0 and schedule and schedule[periodID] and CLASSES[schedule[periodID]] then
-			periodName = CLASSES[schedule[periodID]].Name
-			if ClassChangeLast then
-				RingBell()
-			end
-			ClassChangeLast = false
-		else
-			periodName = "Invalid"
+		elseif IsCurfew() then
+			periodName = "Bedtime"
 		end
-	elseif IsCurfew() then
-		periodName = "Bedtime"
+	else
+		periodName = "See Counselor!"
 	end
 
 	draw.SimpleText(
@@ -161,6 +167,10 @@ end
 
 local function ClassTimeHud()
 	local periodID = GetGlobalInt("ClassPeriod")
+
+	local grade = databaseGetValue("grade")
+
+	if grade and grade == "8" then return false end
 
 	local W, H = ScrW(), ScrH()
 	local cw,ch = 190, 60
@@ -249,11 +259,24 @@ end
 local function ClassRoom2D3D()
 	local periodID = GetGlobalInt("ClassPeriod")
 	local schedule = databaseGetValue("schedule")
+	local room = nil
+	local roomName = nil
 
-	if periodID > 0 and schedule and schedule[periodID] and CLASSES[schedule[periodID]] then
+	local grade = databaseGetValue("grade")
 
-		local r = CLASSES[schedule[periodID]].Room
-		local p = POINTS['d_' .. r][1]
+	if grade and grade == "8" then
+		room = "SupervisorsOffices"
+		roomName = "Counselor's Office"
+	elseif periodID > 0 and schedule and schedule[periodID] and CLASSES[schedule[periodID]] then
+		room = CLASSES[schedule[periodID]].Room
+	end
+
+	if room then
+		local p = POINTS['d_' .. room][1]
+		
+		if roomName then
+			room = roomName
+		end
 
 		local pos = p:ToScreen()
 
@@ -265,7 +288,7 @@ local function ClassRoom2D3D()
 		local padding = 7
 		local offset = 0
 
-		local w, h = surface.GetTextSize( r )
+		local w, h = surface.GetTextSize( room )
 		
 		x = pos.x - w 
 		y = pos.y - h 
@@ -282,7 +305,7 @@ local function ClassRoom2D3D()
 		)
 
 		draw.SimpleText(
-			r,
+			room,
 			"CustomFontA",
 			x + w/2,
 			y - 20,
