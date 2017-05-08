@@ -76,6 +76,8 @@ function CreatePeriods()
 	)
 end
 
+local last = 1
+
 function StartPeriod(period)
 	if period > NumberOfPeriods then
 		SetGlobalInt("ClassPeriod", 0)
@@ -87,14 +89,23 @@ function StartPeriod(period)
 
 		if SCHEDULE[period] then
 			if SCHEDULE[period][-1] then
+				local filled = 1
+				local ran = 1
+
 				for k,v in pairs(TEACHERS) do
-					if v.ent then
-						local d = 't_Cafe' .. math.random(1, 6)
+					if ran >= last and v.ent and filled <= 6 then
+						local d = 't_Cafe' .. filled
+						filled = filled + 1
 
 						v.ent:SetDestination(d)
 						v.ent:SetIsTeaching(false)
+					else
+						v.ent:Roam(SCHOOL_POINTS)
 					end
+					ran = ran + 1
 				end
+
+				last = ((last) % (#TEACHERS-6)) + 1
 
 				for k,v in pairs(Students) do
 					if v.ent then
