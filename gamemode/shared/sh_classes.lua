@@ -2,23 +2,23 @@
 STUDENT_MODELS = {
 	-- Male
 	[1] = {
-		"models/Humans/Group01/Male_01.mdl",
-		"models/Humans/Group01/male_02.mdl",
-		"models/Humans/Group01/male_03.mdl",
-		"models/Humans/Group01/Male_04.mdl",
-		"models/Humans/Group01/Male_05.mdl",
-		"models/Humans/Group01/male_06.mdl",
-		"models/Humans/Group01/male_07.mdl",
-		"models/Humans/Group01/male_09.mdl",
+		[1] = "models/Humans/Group01/Male_01.mdl",
+		[2] = "models/Humans/Group01/male_02.mdl",
+		[3] = "models/Humans/Group01/male_03.mdl",
+		[4] = "models/Humans/Group01/Male_04.mdl",
+		[5] = "models/Humans/Group01/Male_05.mdl",
+		[6] = "models/Humans/Group01/male_06.mdl",
+		[7] = "models/Humans/Group01/male_07.mdl",
+		[8] = "models/Humans/Group01/male_09.mdl",
 	},
 	-- Female
 	[2] = {
-		"models/Humans/Group01/Female_01.mdl",
-		"models/Humans/Group01/Female_02.mdl",
-		"models/Humans/Group01/Female_03.mdl",
-		"models/Humans/Group01/Female_04.mdl",
-		"models/Humans/Group01/Female_06.mdl",
-		"models/Humans/Group01/Female_07.mdl",
+		[1] = "models/Humans/Group01/Female_01.mdl",
+		[2] = "models/Humans/Group01/Female_02.mdl",
+		[3] = "models/Humans/Group01/Female_03.mdl",
+		[4] = "models/Humans/Group01/Female_04.mdl",
+		[5] = "models/Humans/Group01/Female_06.mdl",
+		[6] = "models/Humans/Group01/Female_07.mdl",
 	},
 }
 
@@ -883,7 +883,7 @@ SCHEDULE = {
 	},
 }
 
-local schs = {
+POSSIBLE_SCHEDULES = {
 	[9] = {
 		[1] = {"AlgerbraI", "PreAlgerbra"},
 		[2] = {"PhysicsI", "ChemistryI", "ComputerScienceIB"},
@@ -916,7 +916,7 @@ local schs = {
 
 function GenerateSchedule(grade)
 	local sch = {}
-	local possibleSchs = schs[grade]
+	local possibleSchs = POSSIBLE_SCHEDULES[grade]
 
 	for i=1,NumberOfPeriods do
 		sch[i] = possibleSchs[i][math.random(#possibleSchs[i])]

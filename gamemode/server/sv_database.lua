@@ -9,7 +9,7 @@ local defaultValues = {
 	["firstName"] = "",
 	["lastName"] = "",
 	["model"] = "models/player/Group01/male_02.mdl",
-	["schedule"] = {},
+	["schedule"] = GenerateSchedule(9),
 	["watchedIntro"] = 0,
 
 	["cliques1"] = 10,
@@ -92,6 +92,8 @@ function player:dbSend(name, v)
 end
 
 function player:dbSetValue(name, v)
+	self:dbSend(name, v)
+	
 	if type(v) == "table" then
 		v = util.TableToKeyValues(v)
 	end
@@ -100,7 +102,9 @@ function player:dbSetValue(name, v)
 		self:dbNW(name, v)
 	end
 
-	self:dbSend(name, v)
+	if name == "model" then
+		self:SetModel(v)
+	end
 
 	util.SetPData(self:SteamID(), 'srp_' .. name, v)
 end

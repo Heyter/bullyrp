@@ -31,6 +31,7 @@ function ENT:SetTitle(title)
 end
 
 function ENT:AltModel(model)
+	if not model then return end
 	self:SetModel(model)
 end
 

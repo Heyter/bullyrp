@@ -138,9 +138,11 @@ local function PickNewStudentForQuest()
 
 	local tries = 0
 
-	while s.ent:HasQuest() and tries < 20 do
-		s = Students[math.random(#Students)]
-		tries = tries + 1
+	if s then
+		while s.ent:HasQuest() and tries < 20 do
+			s = Students[math.random(#Students)]
+			tries = tries + 1
+		end
 	end
 
 	-- Failed to find a student.

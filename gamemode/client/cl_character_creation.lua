@@ -1,152 +1,348 @@
 
 local dCharacterCreation = nil
 
-local notepad = Material("materials/assets/vgui/schedule/notepad.png")
+local CurrentMenu = 1
+local dPanel = nil
 
-surface.CreateFont( "CharacterCreationTitle", {
-	font = "Arial",
-	size = 32
-})
-
-surface.CreateFont( "CharacterCreationInfo", {
-	font = "Arial",
-	size = 28
-})
+local firstName = nil
+local lastName = nil
+local model = nil
+local schedule = databaseGetValue("schedule") or {}
 
 local movingOut = false
 local movingIn = false
 local movedIn = true
 local movedOut = false
 
+local QMenuButtonFont = surface.CreateFont("QMenuButtonFont", {
+	font = "Arial",
+	size = 18,
+	weight = 500
+})
+
+local QMenuCliqueFont = surface.CreateFont("QMenuCliqueFont", {
+	font = "Arial",
+	size = 18,
+	weight = 750
+})
+
+local QMenuScheduleFont = surface.CreateFont("QMenuScheduleFont", {
+	font = "Arial",
+	size = 22,
+	weight = 750
+})
+
+local function SubmitChanges()
+	net.Start("update_character")
+		net.WriteTable({
+			firstName = firstName,
+			lastName = lastName,
+			model = model,
+			schedule = schedule,
+		})
+	net.SendToServer()
+end
+
+local Menus = {
+	[1] = {
+		Name = "Name",
+		Panel = function(panel, topbar)
+			dPanel = vgui.Create("DPanel", panel)
+			dPanel:SetPos(0,topbar)
+			dPanel:SetSize(panel:GetWide(), panel:GetTall() - topbar)
+			dPanel.Paint = function(s,w,h)
+				draw.SimpleText(
+					"First Name:",
+					"QMenuScheduleFont",
+					30,30
+				)
+
+				draw.SimpleText(
+					"First Name:",
+					"QMenuScheduleFont",
+					30,120
+				)
+			end
+
+			if not firstName then
+				firstName = LocalPlayer():GetNWString("firstName")
+			end
+
+			if not lastName then
+				lastName = LocalPlayer():GetNWString("lastName")
+			end
+
+			local dFirstName = vgui.Create( "DTextEntry", dPanel)
+			dFirstName:SetSize(300, 40)
+			dFirstName:SetPos(30, 60)
+			dFirstName:SetText(firstName)
+			dFirstName:SetFont("QMenuButtonFont")
+			dFirstName:SetUpdateOnType(true)
+			dFirstName.OnValueChange = function()
+				firstName = string.sub(dFirstName:GetValue(), 1, 15):gsub('%W.','')
+			end
+
+			local dLastName = vgui.Create( "DTextEntry", dPanel)
+			dLastName:SetSize(300, 40)
+			dLastName:SetPos(30, 150)
+			dLastName:SetText(lastName)
+			dLastName:SetFont("QMenuButtonFont")
+			dLastName:SetUpdateOnType(true)
+			dLastName.OnValueChange = function()
+				lastName = string.sub(dLastName:GetValue(), 1, 15):gsub('%W.','')
+			end
+
+			local dFinished = vgui.Create("DButton", dPanel)
+			dFinished:SetSize(140, 40)
+			dFinished:SetPos(dPanel:GetWide() - 145, dPanel:GetTall() - 45)
+			dFinished:SetText("Finished!")
+			dFinished:SetFont("QMenuCliqueFont")
+			dFinished.DoClick = function()
+				SubmitChanges()
+				CloseCharacterCreation()
+			end
+			dFinished:SetTextColor(Color(255,255,255))
+			dFinished.Paint = function(s,w,h)
+				draw.RoundedBox(
+					5,
+					0,0,
+					w,h,
+					Color(39, 174, 96)
+				)
+			end
+		end,
+	},
+	[2] = {
+		Name = "Player Model",
+		Panel = function(panel, topbar)
+			dPanel = vgui.Create("DPanel", panel)
+			dPanel:SetPos(0,topbar)
+			dPanel:SetSize(panel:GetWide(), panel:GetTall() - topbar)
+			dPanel.Paint = function(s,w,h) end
+
+			local dModels = vgui.Create("DScrollPanel", dPanel)
+			dModels:SetPos(0, 0)
+			dModels:SetSize(dPanel:GetWide()-0, dPanel:GetTall()-60)
+
+			local modelPanel = 1
+			local nameMode = databaseGetValue("model")
+			local perRow = 3
+
+			local panelWide = (dPanel:GetWide() - 10) / perRow
+
+			for i=1,#STUDENT_MODELS do
+				for k,v in pairs(STUDENT_MODELS[i]) do
+					if not model and nameMode == v then
+						model = i.."."..k
+					end
+
+					local p = (modelPanel - 1)
+					local dicon = vgui.Create("DPanel", dModels)
+					dicon:SetSize(panelWide, panelWide)
+					dicon:SetPos((p % perRow) * panelWide, math.floor(p / perRow) * panelWide)
+					dicon.Paint = function(s,w,h)
+						if model == i.."."..k then
+							draw.RoundedBox(
+								0,
+								20,15,
+								w-40,h,
+								Color(44, 62, 80,200)
+							)
+						else
+							draw.RoundedBox(
+								0,
+								20,15,
+								w-40,h,
+								Color(0,0,0,200)
+							)
+						end
+					end
+
+					local icon = vgui.Create( "DModelPanel", dicon )
+					icon:SetSize(dicon:GetWide(), dicon:GetTall())
+					icon:SetPos(0, 0)
+					timer.Simple(
+						modelPanel * 0.25,
+						function()
+							if IsValid(icon) then
+								icon:SetModel(v)
+							end
+						end
+					)
+					function icon:LayoutEntity( Entity ) return end
+					icon.DoClick = function()
+						if model ~= i.."."..k then
+							model = i.."."..k
+						end
+					end
+
+					modelPanel = modelPanel + 1
+				end
+			end
+
+			local dFinished = vgui.Create("DButton", dPanel)
+			dFinished:SetSize(140, 40)
+			dFinished:SetPos(dPanel:GetWide() - 145, dPanel:GetTall() - 45)
+			dFinished:SetText("Finished!")
+			dFinished:SetFont("QMenuCliqueFont")
+			dFinished.DoClick = function()
+				SubmitChanges()
+				CloseCharacterCreation()
+			end
+			dFinished:SetTextColor(Color(255,255,255))
+			dFinished.Paint = function(s,w,h)
+				draw.RoundedBox(
+					5,
+					0,0,
+					w,h,
+					Color(39, 174, 96)
+				)
+			end
+		end,
+	},
+	[3] = {
+		Name = "Schedule",
+		Panel = function(panel, topbar)
+			local psch = POSSIBLE_SCHEDULES[9]
+
+			dPanel = vgui.Create("DPanel", panel)
+			dPanel:SetPos(0,topbar)
+			dPanel:SetSize(panel:GetWide(), panel:GetTall() - topbar)
+			dPanel.Paint = function(s,w,h)
+				for i=1,#psch do
+					draw.SimpleText(
+						"Class " .. i .. ":",
+						"QMenuScheduleFont",
+						w/2-60, (i - 1) * 50 + 40,
+						Color(255,255,255),
+						TEXT_ALIGN_RIGHT,
+						TEXT_ALIGN_CENTER
+					)
+				end
+			end
+
+			for i=1,#psch do
+				local dDropDown = vgui.Create("DComboBox", dPanel)
+				dDropDown:SetSize(250, 40)
+				dDropDown:Center()
+				dDropDown:SetPos(dDropDown:GetPos() + dDropDown:GetWide()/3, (i - 1) * 50 + 20)
+				dDropDown:SetFont("QMenuScheduleFont")
+
+				print("HEREERERE")
+				print(schedule)
+				print(type(schedule))
+				PrintTable(schedule)
+				if schedule[i] then
+					print(schedule[i])
+					dDropDown:SetValue(CLASSES[schedule[i]].Name, schedule[i])
+				else
+					dDropDown:SetValue(CLASSES[psch[i][1]].Name, psch[i][1])
+				end
+
+				for j=1,#psch[i] do
+					dDropDown:AddChoice(CLASSES[psch[i][j]].Name, psch[i][j])
+				end
+
+				dDropDown.OnSelect = function(s, index, value, data)
+					schedule[i] = data
+				end
+			end
+
+			local dFinished = vgui.Create("DButton", dPanel)
+			dFinished:SetSize(140, 40)
+			dFinished:SetPos(dPanel:GetWide() - 145, dPanel:GetTall() - 45)
+			dFinished:SetText("Finished!")
+			dFinished:SetFont("QMenuCliqueFont")
+			dFinished.DoClick = function()
+				SubmitChanges()
+				CloseCharacterCreation()
+			end
+			dFinished:SetTextColor(Color(255,255,255))
+			dFinished.Paint = function(s,w,h)
+				draw.RoundedBox(
+					5,
+					0,0,
+					w,h,
+					Color(39, 174, 96)
+				)
+			end
+		end,
+	},
+}
+
+local topbar = 50
+
 local function DrawCharacterCreation()
 	local W,H = ScrW(), ScrH()
-	local w,h = 500, 500
-	local x,y = W / 2 - w / 2, H / 2 - h / 2
-	local topHeight = 50
+	local w,h = 700, 450
 
 	dCharacterCreation = vgui.Create("DFrame")
-	dCharacterCreation:SetPos(x, y)
 	dCharacterCreation:SetSize(w, h)
-	dCharacterCreation:SetTitle("")
-	dCharacterCreation:SetDraggable(false)
+	dCharacterCreation:Center()
 	dCharacterCreation:MakePopup()
-	dCharacterCreation:ShowCloseButton(true)
+	dCharacterCreation:SetTitle("")
+	dCharacterCreation:ShowCloseButton(false)
+
+	timer.Simple(
+		30,
+		function()
+			dCharacterCreation:Remove()
+		end
+	)
 
 	dCharacterCreation.Paint = function(s,w,h)
-		surface.SetDrawColor(255,255,255,255)
-		surface.SetMaterial(notepad)
-		surface.DrawTexturedRect(0, 0, w, h)
-
-		draw.SimpleText(
-			"Character Creation",
-			"CharacterCreationTitle",
-			w/2, topHeight/2 + 7,
-			Color(0,0,0),
-			TEXT_ALIGN_CENTER,
-			TEXT_ALIGN_CENTER
-		)
-
-		draw.SimpleText(
-			"First Name:",
-			"CharacterCreationInfo",
-			90, topHeight + (1 - 1) * 45 + 30,
-			Color(0,0,0),
-			TEXT_ALIGN_LEFT,
-			TEXT_ALIGN_CENTER
-		)
-
-		draw.SimpleText(
-			"Last Name:",
-			"CharacterCreationInfo",
-			90, topHeight + (3 - 1) * 45 + 30,
-			Color(0,0,0),
-			TEXT_ALIGN_LEFT,
-			TEXT_ALIGN_CENTER
-		)
-
-		draw.SimpleText(
-			"Model:",
-			"CharacterCreationInfo",
-			90, topHeight + (5 - 1) * 45 + 30,
-			Color(0,0,0),
-			TEXT_ALIGN_LEFT,
-			TEXT_ALIGN_CENTER
+		draw.RoundedBox(
+			1,
+			0,topbar,
+			w,h-topbar,
+			Color(33,33,33,250)
 		)
 	end
 
-	local dFirstName = vgui.Create( "DTextEntry", dCharacterCreation)
-	dFirstName:SetPos(90, topHeight + (2 - 1) * 45 + 16)
-	dFirstName:SetSize(250, 30)
-	dFirstName:SetText("")
-	dFirstName:SetFont("CharacterCreationInfo")
-	dFirstName:SetValue(LocalPlayer():GetNWString("firstName"))
+	local len = #Menus
+	local padding = 10
+	local bw, bh = math.ceil(dCharacterCreation:GetWide() / len), topbar
 
-	local dLastName = vgui.Create( "DTextEntry", dCharacterCreation)
-	dLastName:SetPos(90, topHeight + (4 - 1) * 45 + 14)
-	dLastName:SetSize(250, 30)
-	dLastName:SetText("")
-	dLastName:SetFont("CharacterCreationInfo")
-	dLastName:SetValue(LocalPlayer():GetNWString("lastName"))
-
-	local models = {
-		[1] = "models/player/Group01/male_02.mdl",
-		[2] = "models/player/Group01/male_01.mdl",
-		[3] = "models/player/Group01/female_06.mdl",
-		[4] = "models/player/Group01/female_05.mdl",
-	}
-
-	local selected = 1
-
-	for i=1,#models do
-		local dicon = vgui.Create("DPanel", dCharacterCreation)
-		dicon:SetSize((w - 90) / 4 + 40, 150)
-		dicon:SetPos(50 + (i - 1) * (dicon:GetWide() - 40), topHeight + (6 - 1) * 45 + 15)
-		dicon.Paint = function(s,w,h)
-			if selected == i then
+	for k,v in pairs(Menus) do
+		local dButton = vgui.Create("DButton", dCharacterCreation)
+		dButton:SetPos((k - 1) * bw, 0)
+		dButton:SetSize(bw, bh)
+		dButton:SetFont("QMenuButtonFont")
+		dButton:SetText(v.Name)
+		dButton.Paint = function(s,w,h)
+			if k == CurrentMenu or s:IsHovered() then
 				draw.RoundedBox(
-					0,
-					20,15,
-					w-40,h,
-					Color(33,33,33,200)
+					1,
+					0,0,
+					w,h,
+					Color(41, 128, 185, 230)
 				)
 			else
 				draw.RoundedBox(
-					0,
-					20,15,
-					w-40,h,
-					Color(33,33,33,66)
+					1,
+					0,0,
+					w,h,
+					Color(44, 62, 80, 230)
 				)
 			end
 		end
-
-		local icon = vgui.Create( "DModelPanel", dicon )
-		icon:SetSize(dicon:GetWide(), dicon:GetTall())
-		icon:SetPos(0, 0)
-		icon:SetModel(models[i])
-		function icon:LayoutEntity( Entity ) return end
-		icon.DoClick = function()
-			if selected ~= i then
-				RunConsoleCommand("changemodel", selected)
-				selected = i
+		dButton.DoClick = function()
+			if IsValid(dPanel) then
+				dPanel:Remove()
 			end
+			Menus[k].Panel(dCharacterCreation, topbar)
+			CurrentMenu = k
 		end
+		dButton:SetTextColor(Color(255,255,255))
 	end
 
-	local dButton = vgui.Create("DButton", dCharacterCreation)
-	dButton:SetPos(w-132, h-52)
-	dButton:SetSize(110, 40)
-	dButton:SetText("Submit!")
-	dButton:SetFont("CharacterCreationInfo")
-	dButton.DoClick = function()
-		RunConsoleCommand("changefirstname", dFirstName:GetValue())
-		RunConsoleCommand("changelastname", dLastName:GetValue())
-		dCharacterCreation:Remove()
-	end
+	schedule = databaseGetValue("schedule") or {}
+
+	Menus[CurrentMenu].Panel(dCharacterCreation, topbar)
 
 	movingOut = true
-				
+
 	dCharacterCreation:SetVisible(true)
-	dCharacterCreation:SetPos(x, y)
 	dCharacterCreation:SetAlpha(0)
 	dCharacterCreation:AlphaTo(255, 0.25, 0, function()
 		movingOut = false
@@ -155,10 +351,25 @@ local function DrawCharacterCreation()
 	end)
 end
 
-function OpenCharacterCreation()
-	if not IsValid(dCharacterCreation) then
-		DrawCharacterCreation()
-	end 
+function CloseCharacterCreation()
+	if IsValid(dCharacterCreation) then
+		if not movingOut and not movingIn and movedOut then
+			movingIn = true
+			dCharacterCreation:AlphaTo(0, 0.25, 0, function()
+				movingIn = false
+				movedIn = true
+				movedOut = false
+				dCharacterCreation:SetVisible(false)
+			end)
+		end
+	end
 end
 
--- DrawCharacterCreation()
+function OpenCharacterCreation()
+	if IsValid(dCharacterCreation) then
+		dCharacterCreation:Remove()
+	end
+	dCharacterCreation = nil
+
+	DrawCharacterCreation()
+end

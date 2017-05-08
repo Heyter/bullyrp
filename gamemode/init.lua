@@ -4,6 +4,7 @@ util.AddNetworkString("quest_request")
 util.AddNetworkString("quest_accept")
 util.AddNetworkString("quest_abort")
 util.AddNetworkString("quest_feedback")
+util.AddNetworkString("update_character")
 
 AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua")

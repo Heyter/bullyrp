@@ -146,6 +146,8 @@ function StartPeriod(period)
 end
 
 function SpawnTeacher(meta)
+	if not meta then return end
+
 	local entTable = nil
 
 	local SpawnableEntities = list.Get( "SpawnableEntities" )
@@ -175,6 +177,8 @@ function SpawnTeacher(meta)
 end
 
 function SpawnStudent(meta)
+	if not meta then return end
+
 	local entTable = nil
 
 	local SpawnableEntities = list.Get( "SpawnableEntities" )

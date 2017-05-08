@@ -136,7 +136,7 @@ local function ClassHud()
 				RingBell()
 			end
 			ClassChangeLast = true
-		elseif periodID > 0 and schedule and schedule[periodID] then
+		elseif periodID > 0 and schedule and schedule[periodID] and CLASSES[schedule[periodID]] then
 			periodName = CLASSES[schedule[periodID]].Name
 			if ClassChangeLast then
 				RingBell()
@@ -250,7 +250,7 @@ local function ClassRoom2D3D()
 	local periodID = GetGlobalInt("ClassPeriod")
 	local schedule = databaseGetValue("schedule")
 
-	if periodID > 0 and schedule and schedule[periodID] then
+	if periodID > 0 and schedule and schedule[periodID] and CLASSES[schedule[periodID]] then
 
 		local r = CLASSES[schedule[periodID]].Room
 		local p = POINTS['d_' .. r][1]
