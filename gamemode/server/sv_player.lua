@@ -117,11 +117,15 @@ end
 local function UpdatePlayer(ply, db)
 	print ("Updating a player's info!")
 	PrintTable(db)
-	ply:dbSetValue("grade", 8)
 
 	if IsValid(ply) and db then
 		if ply:dbGetValue("grade") == "8" then
 			ply:dbSetValue("grade", 9)
+			net.Start("notification")
+				net.WriteTable({
+					["GenericSuccess"] = "You have been successfully enrolled!"
+				})
+			net.Send(ply)
 		else
 			print("Grade is not 8")
 			return false

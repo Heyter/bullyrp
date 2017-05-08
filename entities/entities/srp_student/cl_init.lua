@@ -41,7 +41,9 @@ function ENT:Post()
 	local SpinAng = Angle( 0, eyeang, 90 )
 
 	cam.Start3D2D(position + aboveoffset, SpinAng, 0.2);
-		if not IsDoingQuest and self:GetNWBool("QuestOpen") then
+		local grade = databaseGetValue("grade")
+
+		if not IsDoingQuest and self:GetNWBool("QuestOpen") and grade ~= "8" then
 			draw.SimpleText(
 				"Mission Available",
 				"npcs_teacher_mission",

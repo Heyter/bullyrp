@@ -104,6 +104,7 @@ local function ClassHud()
 	local W, H = ScrW(), ScrH()
 	local w,h = 190, 60
 	local x,y = W - w - 30, H - h - 30
+	local periodName = "Invalid"
 
 	draw.RoundedBox(
 		3,
@@ -123,9 +124,11 @@ local function ClassHud()
 
 	local grade = databaseGetValue("grade")
 
-	if grade and grade ~= "8" then
+	if grade and grade == "8" then
+		periodName = "See Counselor!"
+	else
 		local periodID = GetGlobalInt("ClassPeriod")
-		local periodName = "Free Time"
+		periodName = "Free Time"
 		local schedule = databaseGetValue("schedule")
 
 		if periodID > 0 then
@@ -151,8 +154,6 @@ local function ClassHud()
 		elseif IsCurfew() then
 			periodName = "Bedtime"
 		end
-	else
-		periodName = "See Counselor!"
 	end
 
 	draw.SimpleText(

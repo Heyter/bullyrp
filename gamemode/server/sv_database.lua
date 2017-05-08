@@ -37,7 +37,7 @@ function player:dbNW(name, v)
 
 	if type(v) == "string" then
 		self:SetNWString(name, v)
-	elseif type(v) == "integer" then
+	elseif type(v) == "integer" or type(v) == "number" then
 		self:SetNWInt(name, v)
 	else
 		print ("Found none. Type: " .. type(v))
