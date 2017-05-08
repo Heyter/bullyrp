@@ -478,5 +478,100 @@ function GM:CalcView( ply, pos, angles, fov )
 			EnableHud()
 		end
 	end
+end
 
+local dCutScene = nil
+
+local CutSceneFontHeader = surface.CreateFont("CutSceneFontHeader", {
+	font = "Arial",
+	size = 70,
+	weight = 500
+})
+
+local CutSceneFontSubHeader = surface.CreateFont("CutSceneFontSubHeader", {
+	font = "Arial",
+	size = 30,
+	weight = 500
+})
+
+function PromptCutScene(cutscene)
+	dCutScene = vgui.Create("DPanel")
+	dCutScene:SetSize(ScrW(), ScrH())
+	dCutScene:Center()
+	dCutScene:MakePopup()
+	local hh = 450
+	local sh = ScrH() / 2 - hh/2
+	dCutScene.Paint = function(s,w,h)
+		draw.RoundedBox(
+			0,
+			0,0,
+			w,h,
+			Color(33,33,33,170)
+		)
+
+		draw.RoundedBox(
+			0,
+			0,sh,
+			w,hh,
+			Color(33,33,33,230)
+		)
+
+		draw.SimpleText(
+			"Watch The Introduction Cut Scene!",
+			"CutSceneFontHeader",
+			w/2,sh+15,
+			Color(255,255,255),
+			TEXT_ALIGN_CENTER
+		)
+
+		draw.SimpleText(
+			"No need to call for a trainer and wait 30 minutes!",
+			"CutSceneFontSubHeader",
+			w/2,sh+100,
+			Color(255,255,255),
+			TEXT_ALIGN_CENTER
+		)
+
+		draw.SimpleText(
+			"Language:",
+			"CutSceneFontSubHeader",
+			w/2-30,sh+160,
+			Color(255,255,255),
+			TEXT_ALIGN_RIGHT
+		)
+	end
+
+	local dDropDown = vgui.Create("DComboBox", dCutScene)
+	dDropDown:SetSize(100, 30)
+	dDropDown:Center()
+	dDropDown:SetPos(dDropDown:GetPos() + 30, sh+160)
+	dDropDown:SetValue("English")
+	dDropDown:AddChoice("English")
+
+	local dButton = vgui.Create("DButton", dCutScene)
+	dButton:SetSize(600, 200)
+	dButton:Center()
+	dButton:SetPos(dButton:GetPos(), sh+220)
+	dButton:SetFont("CutSceneFontHeader")
+	dButton:SetText("Play!")
+	dButton:SetTextColor(Color(255,255,255))
+	dButton.Paint = function(s,w,h)
+		draw.RoundedBox(
+			5,
+			0,0,
+			w,h,
+			Color(210,210,210,210)
+		)
+		draw.RoundedBox(
+			5,
+			5,5,
+			w-10,h-10,
+			Color(46, 204, 113)
+		)
+	end
+	dButton.DoClick = function()
+		RunConsoleCommand("watchedcutscene")
+		dCutScene:Remove()
+		RollCutscene()
+	end
 end

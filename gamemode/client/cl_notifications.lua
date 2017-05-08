@@ -83,8 +83,8 @@ local function notificationReceive(tab)
 			end
 		elseif k == "openschedule" then
 			OpenSchedule(nil, "gm_showhelp")
-		elseif k == "opencharactercreation" then
-			OpenCharacterCreation()
+		elseif k == "watchIntro" then
+			PromptCutScene(1)
 		elseif k == "specialchatmsg" then
 			chat.AddText(unpack(v))
 		elseif k == "QuestAbort" then

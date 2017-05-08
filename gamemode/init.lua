@@ -77,15 +77,13 @@ function GM:PlayerInitialSpawn(player)
 	player:SetPos(p[1])
 	player:SetAngles(p[2])
 
-	if player:dbGetValue("firstName") == "" or player:dbGetValue("lastName") == "" then
-		print ("-------->> YOu need to make character :)")
+	if not player:dbGetValue("watchedIntro") then
+		print ("-------->> You need to watch intro! :)")
 		net.Start("notification")
 			net.WriteTable({
-				["opencharactercreation"] = true
+				["playcutscene"] = 1
 			})
 		net.Send(player)
-	else
-		print ("-------->> character made! :)")
 	end
 
 	print("Player: " .. player:Nick() .. " has spawned.")
@@ -151,6 +149,15 @@ if #player.GetAll() > 0 then
 		v.pvpenabled = false
 		v:SetNWBool("pvpenabled", false)
 		v:SetNWInt("Clique", 1)
+
+		if not v:dbGetValue("watchedIntro") or v:dbGetValue("watchedIntro") == "false" then
+			print ("-------->> You need to watch intro! :)")
+			net.Start("notification")
+				net.WriteTable({
+					["watchIntro"] = 1
+				})
+			net.Send(v)
+		end
 	end
 end
 

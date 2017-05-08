@@ -10,6 +10,7 @@ local defaultValues = {
 	["lastName"] = "",
 	["model"] = "models/player/Group01/male_02.mdl",
 	["schedule"] = GenerateSchedule(9),
+	["watchedIntro"] = false,
 
 	["cliques1"] = 10,
 	["cliques2"] = 10,
@@ -45,7 +46,7 @@ end
 
 function player:dbDefault()
 	for k,v in pairs(defaultValues) do
-		if self:dbGetValue(k) == nil then
+		if true or self:dbGetValue(k) == nil then
 			if k == "firstName" then
 				self:dbSetValue(k, MALE_NAMES[math.random(#MALE_NAMES)])
 			elseif k == "lastName" then
@@ -91,8 +92,6 @@ function player:dbSend(name, v)
 end
 
 function player:dbSetValue(name, v)
-	if not v then return end
-
 	if type(v) == "table" then
 		v = util.TableToKeyValues(v)
 	end
