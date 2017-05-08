@@ -246,8 +246,14 @@ timer.Simple(
 			local grade = math.random(9,12)
 			local sch = GenerateSchedule(grade)
 
+			local names = MALE_NAMES
+
+			if gender == 2 then
+				names = FEMALE_NAMES
+			end
+
 			local s = {
-				["Name"] = TEACHER_NAMES[math.random(#TEACHER_NAMES)],
+				["Name"] = names[math.random(#names)] .. " " .. TEACHER_NAMES[math.random(#TEACHER_NAMES)],
 				["Title"] = grade .. "th Grader",
 				["Model"] = STUDENT_MODELS[gender][math.random(#STUDENT_MODELS[gender])],
 				["Schedule"] = sch,
