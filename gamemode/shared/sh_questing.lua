@@ -202,7 +202,7 @@ QUEST_TYPES = {
 		GetMeta = function()
 			return {
 				ItemID = math.random(#QUEST_ITEMS),
-				Points = math.random(10,15),
+				Points = math.random(5,10),
 			}
 		end,
 		QuestAccepted = function(ply, meta)
