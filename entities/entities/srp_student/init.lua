@@ -19,6 +19,7 @@ function ENT:Initialize()
 	self:SetUseType( SIMPLE_USE )
 	self.followingCurfew = false
 	self.Clique = 1
+	self.IsLeader = false
 end
 
 function ENT:SetClique(cliqueid)
@@ -245,3 +246,7 @@ function ENT:QuestFinished()
 	self:SetNWBool("QuestOpen", self.QuestOpen)
 end
 
+function ENT:SetLeader(bool)
+	self:SetNWBool("IsLeader", bool)
+	self.IsLeader = bool
+end

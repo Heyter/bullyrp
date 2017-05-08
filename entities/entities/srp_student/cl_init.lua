@@ -58,9 +58,16 @@ function ENT:Post()
 		local cliqueColor = ClientConfig.OverheadGradeColor(self, alphaStrength)
 
 		if clique and ClientConfig.CliqueMats[clique] then
+			local x = -16
+			if self:GetNWBool("IsLeader") then
+				surface.SetDrawColor(Color(241, 196, 15, 255 * alphaStrength))
+				surface.SetMaterial(ClientConfig.CliqueMats.Leader)
+				surface.DrawTexturedRect(-36, -460, 32, 32)
+				x = 8
+			end
 			surface.SetDrawColor(cliqueColor)
 			surface.SetMaterial(ClientConfig.CliqueMats[clique])
-			surface.DrawTexturedRect(-16, -460, 32, 32)
+			surface.DrawTexturedRect(x, -460, 32, 32)
 		end
 
 		draw.SimpleText(

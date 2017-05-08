@@ -42,6 +42,8 @@ ClientConfig = {
 		[5] = Material("materials/assets/bullyrp/icons/cigar.png"),
 		-- Jocks
 		[6] = Material("materials/assets/bullyrp/icons/american-football-helmet.png"),
+		-- Clique Leader
+		Leader = Material("materials/assets/bullyrp/icons/stars-stack.png"),
 	},
 
 	-- Backgrounds

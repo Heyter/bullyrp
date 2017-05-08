@@ -192,6 +192,44 @@ function SpawnStudent(meta)
 	end
 end
 
+function NewStudent(i, c)
+	local clique = 1
+
+	if i then
+		clique = (i % #CLIQUES) + 1
+	elseif not c then
+		clique = CLIQUES[math.random(#CLIQUES)]
+	elseif c then
+		clique = c
+	end
+
+	local gender = math.random(1,2)
+	local grade = math.random(9,12)
+	local sch = GenerateSchedule(grade)
+
+	local names = MALE_NAMES
+
+	if gender == 2 then
+		names = FEMALE_NAMES
+	end
+
+	local s = {
+		["Name"] = names[math.random(#names)] .. " " .. TEACHER_NAMES[math.random(#TEACHER_NAMES)],
+		["Title"] = grade .. "th Grader",
+		["Model"] = STUDENT_MODELS[gender][math.random(#STUDENT_MODELS[gender])],
+		["Schedule"] = sch,
+		["Clique"] = clique,
+	}
+	s.ent = SpawnStudent(s)
+	s.ent:SetGender(gender)
+
+	if s.Clique ~= 1 then
+		s.ent:SetClique(s.Clique)
+	end
+
+	return s
+end
+
 -- Clean up all teachers
 for k,v in pairs(ents.GetAll()) do
 	if v:GetClass() == "srp_teacher" or v:GetClass() == "srp_student" then
@@ -242,30 +280,19 @@ timer.Simple(
 		detentionTeacher.ent:SetMonitor(true)
 
 		for i=1,20 do
-			local gender = math.random(1,2)
-			local grade = math.random(9,12)
-			local sch = GenerateSchedule(grade)
-
-			local names = MALE_NAMES
-
-			if gender == 2 then
-				names = FEMALE_NAMES
-			end
-
-			local s = {
-				["Name"] = names[math.random(#names)] .. " " .. TEACHER_NAMES[math.random(#TEACHER_NAMES)],
-				["Title"] = grade .. "th Grader",
-				["Model"] = STUDENT_MODELS[gender][math.random(#STUDENT_MODELS[gender])],
-				["Schedule"] = sch,
-				["Clique"] = (i % #CLIQUES) + 1,
-			}
-			s.ent = SpawnStudent(s)
-			s.ent:SetGender(gender)
-			if s.Clique ~= 1 then
-				s.ent:SetClique(s.Clique)
-			end
-			table.insert(Students, s)
+			table.insert(Students, NewStudent(i))
 		end
+
+		local NerdLeader = NewStudent(nil, 2)
+		NerdLeader.ent:SetLeader(true)
+		local BullyLeader = NewStudent(nil, 3)
+		BullyLeader.ent:SetLeader(true)
+		local PreppyLeader = NewStudent(nil, 4)
+		PreppyLeader.ent:SetLeader(true)
+		local BurnoutLeader = NewStudent(nil, 5)
+		BurnoutLeader.ent:SetLeader(true)
+		local JockLeader = NewStudent(nil, 6)
+		JockLeader.ent:SetLeader(true)
 	end
 )
 
