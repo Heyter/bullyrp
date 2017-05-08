@@ -59,7 +59,7 @@ local Menus = {
 				local seg = #CLIQUES
 				local radius = w/5.5
 
-				local cxp = tonumber(databaseGetValue("cliques" .. 1)) or 10
+				local cxp = tonumber(databaseGetValue("cliques" .. seg)) or 10
 				local a = math.rad( ( (seg - 1) / seg ) * 360 )
 				local lastx, lasty = 
 							x + math.sin( a ) * (radius * norm(cxp) / maxXP),
@@ -229,6 +229,9 @@ local function DrawQMenu()
 			end
 		end
 		dButton.DoClick = function()
+			if k == 1 then
+				dQMenu:Remove()
+			end
 			if IsValid(dPanel) then
 				dPanel:Remove()
 			end
@@ -244,7 +247,7 @@ local function DrawQMenu()
 
 	dQMenu:SetVisible(true)
 	dQMenu:SetAlpha(0)
-	dQMenu:AlphaTo(255, 0.5, 0, function()
+	dQMenu:AlphaTo(255, 0.25, 0, function()
 		movingOut = false
 		movedOut = true
 		movedIn = false
