@@ -50,8 +50,6 @@ local Menus = {
 				[6] = maxXP,
 			}
 
-			local maxXP = 100
-
 			local norm = function(x) if x > 100 then return 100 else return x end end
 
 			dPanel.Paint = function(s,w,h)
