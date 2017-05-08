@@ -46,7 +46,13 @@ end
 function player:dbDefault()
 	for k,v in pairs(defaultValues) do
 		if self:dbGetValue(k) == nil then
-			self:dbSetValue(k, v)
+			if k == "firstName" then
+				self:dbSetValue(k, MALE_NAMES[math.random(#MALE_NAMES)])
+			elseif k == "lastName" then
+				self:dbSetValue(k, TEACHER_NAMES[math.random(#TEACHER_NAMES)])
+			else
+				self:dbSetValue(k, v)
+			end
 		end
 	end
 end
