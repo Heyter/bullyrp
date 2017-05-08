@@ -162,6 +162,7 @@ function DrawQuestFeedback(ent, feedbackType, questType, subDelay, outsideText)
 	local richtext = vgui.Create("RichText", dQuestFeedback)
 	richtext:SetPos(175 + pd, pd * 2 + 40)
 	richtext:SetSize(w - 175 - pd * 2, h - pd * 3 - 40)
+	richtext:DockPadding(10,10,10,10)
 	richtext.Paint = function(s,w,h)
 		draw.RoundedBox(
 			0,
@@ -370,6 +371,7 @@ local function DrawQuest(ent, questType, l1, l2, l3, l4, l5, meta)
 	local richtext = vgui.Create("RichText", dQuest)
 	richtext:SetPos(175 + pd, pd * 2 + 40)
 	richtext:SetSize(w - 175 - pd * 2 - 150, h - pd * 3 - 40)
+	richtext:DockPadding(10,10,10,10)
 	richtext.Paint = function(s,w,h)
 		draw.RoundedBox(
 			0,

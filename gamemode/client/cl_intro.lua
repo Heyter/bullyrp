@@ -498,7 +498,8 @@ function PromptCutScene(cutscene)
 	dCutScene = vgui.Create("DPanel")
 	dCutScene:SetSize(ScrW(), ScrH())
 	dCutScene:Center()
-	dCutScene:MakePopup()
+	gui.EnableScreenClicker(true)
+	dCutScene:SetKeyboardInputEnabled(true)
 	local hh = 450
 	local sh = ScrH() / 2 - hh/2
 	dCutScene.Paint = function(s,w,h)
@@ -572,6 +573,7 @@ function PromptCutScene(cutscene)
 	dButton.DoClick = function()
 		RunConsoleCommand("watchedcutscene")
 		dCutScene:Remove()
+		gui.EnableScreenClicker(false)
 		RollCutscene()
 	end
 end

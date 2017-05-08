@@ -77,13 +77,16 @@ function GM:PlayerInitialSpawn(player)
 	player:SetPos(p[1])
 	player:SetAngles(p[2])
 
-	if not player:dbGetValue("watchedIntro") then
+	if not player:dbGetValue("watchedIntro") or player:dbGetValue("watchedIntro") == "0" then
 		print ("-------->> You need to watch intro! :)")
 		net.Start("notification")
 			net.WriteTable({
-				["playcutscene"] = 1
+				["watchIntro"] = 1
 			})
 		net.Send(player)
+		player:SetPos(Vector(-10.647, -982.497, 100.031))
+		player:SetAngles(Angle(-10.198, 90.044+90, 0.0))
+		player.watchedIntro = CurTime()
 	end
 
 	print("Player: " .. player:Nick() .. " has spawned.")
@@ -150,13 +153,16 @@ if #player.GetAll() > 0 then
 		v:SetNWBool("pvpenabled", false)
 		v:SetNWInt("Clique", 1)
 
-		if not v:dbGetValue("watchedIntro") or v:dbGetValue("watchedIntro") == "false" then
+		if not v:dbGetValue("watchedIntro") or v:dbGetValue("watchedIntro") == "0" then
 			print ("-------->> You need to watch intro! :)")
 			net.Start("notification")
 				net.WriteTable({
 					["watchIntro"] = 1
 				})
 			net.Send(v)
+			v:SetPos(Vector(-10.647, -982.497, 100.031))
+			v:SetAngles(Angle(-10.198, 90.044, 0.0))
+			v.watchedIntro = CurTime()
 		end
 	end
 end

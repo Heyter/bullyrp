@@ -10,7 +10,7 @@ local defaultValues = {
 	["lastName"] = "",
 	["model"] = "models/player/Group01/male_02.mdl",
 	["schedule"] = GenerateSchedule(9),
-	["watchedIntro"] = false,
+	["watchedIntro"] = 0,
 
 	["cliques1"] = 10,
 	["cliques2"] = 10,

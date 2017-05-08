@@ -293,11 +293,6 @@ ChatCommands = {
 	end,
 	["!intro"] = function(ply, msg, isTeam)
 		print (ply:GetName() .. " played the intro.")
-		if not ply.inDetention then
-			ply:SetPos(Vector(-10.647, -982.497, 100.031))
-			ply:SetAngles(Angle(-10.198, 90.044, 0.0))
-		end
-
 		net.Start("notification")
 			net.WriteTable({
 				["playcutscene"] = 1

@@ -257,7 +257,6 @@ local movedIn = true
 local movedOut = false
 
 function GM:OnSpawnMenuOpen()
-	print ("pressing q") 
 	if IsValid(dQMenu) then
 		if not movingOut and not movingIn then
 			if movedIn then
@@ -286,7 +285,6 @@ function GM:OnSpawnMenuOpen()
 			end
 		end
 	else
-		print ("Drawing q...")
 		DrawQMenu()
 	end
 end
