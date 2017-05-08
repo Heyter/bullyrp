@@ -89,7 +89,10 @@ function ENT:Post()
 		)
 	cam.End3D2D();
 
-	if not self:GetNWBool("IsNotMonitoring") and IsCurfew() then
+	local grade = databaseGetValue("grade")
+
+	if grade and grade == "8" then
+	elseif not self:GetNWBool("IsNotMonitoring") and IsCurfew() then
 		cam.Start3D2D(position + Vector(0,0,2), Angle(0,0,0), 1);
 			surface.SetDrawColor(231, 76, 60, 20 * alphaStrength )
 			draw.NoTexture()

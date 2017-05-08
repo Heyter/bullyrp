@@ -42,7 +42,7 @@ end
 function ENT:Think()
 	if self.IsNotMonitoring and IsCurfew() then
 		for k,v in pairs(ents.FindInSphere(self:GetPos(), 200)) do
-			if v:IsPlayer() and not (v.watchedIntro and CurTime() - v.watchedIntro < 400) then
+			if v:IsPlayer() and not (v.watchedIntro and CurTime() - v.watchedIntro < 400) and tonumber(v:GetNWInt("grade")) > 8 then
 				v:GiveDetention(60)
 				v.watchedIntro = false
 			end

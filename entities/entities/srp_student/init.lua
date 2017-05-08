@@ -191,7 +191,7 @@ function ENT:Roam(points)
 end
 
 function ENT:Use( activator, caller, type, value )
-	if self.qid and self.quest and self.QuestOpen and caller and IsValid(caller) and caller:IsPlayer() and not caller.HasQuest then
+	if self.qid and self.quest and self.QuestOpen and caller and IsValid(caller) and caller:IsPlayer() and not caller.HasQuest and caller:GetNWInt("grade") > 8 then
 		net.Start("quest_request")
 			net.WriteUInt(self.qid, 32)
 			net.WriteEntity(self)
