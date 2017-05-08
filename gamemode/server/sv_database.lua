@@ -44,9 +44,9 @@ function player:dbNW(name, v)
 	end
 end
 
-function player:dbDefault()
+function player:dbDefault(override)
 	for k,v in pairs(defaultValues) do
-		if self:dbGetValue(k) == nil then
+		if override or self:dbGetValue(k) == nil then
 			if k == "firstName" then
 				self:dbSetValue(k, MALE_NAMES[math.random(#MALE_NAMES)])
 			elseif k == "lastName" then

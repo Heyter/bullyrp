@@ -64,3 +64,9 @@ concommand.Add("sp", function(ply, cmd, args)
 		ply:SetPos(Vector(args[1], args[2], args[3]))
 	end
 end)
+
+concommand.Add("reset", function(ply, cmd, args)
+	if ply and IsValid(ply) and ply:IsAdmin() or ply:IsSuperAdmin() then
+		ply:dbDefault(true)
+	end
+end)

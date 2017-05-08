@@ -4,6 +4,11 @@ local dQMenu = nil
 local CurrentMenu = 2
 local dPanel = nil
 
+local movingOut = false
+local movingIn = false
+local movedIn = true
+local movedOut = false
+
 local QMenuButtonFont = surface.CreateFont("QMenuButtonFont", {
 	font = "Arial",
 	size = 18,
@@ -227,9 +232,6 @@ local function DrawQMenu()
 			end
 		end
 		dButton.DoClick = function()
-			if k == 1 then
-				dQMenu:Remove()
-			end
 			if IsValid(dPanel) then
 				dPanel:Remove()
 			end
@@ -241,25 +243,25 @@ local function DrawQMenu()
 
 	Menus[CurrentMenu].Panel(dQMenu, topbar)
 
+	print ("here 6")
 	movingOut = true
 
 	dQMenu:SetVisible(true)
 	dQMenu:SetAlpha(0)
 	dQMenu:AlphaTo(255, 0.25, 0, function()
+		print("here 5")
 		movingOut = false
 		movedOut = true
 		movedIn = false
 	end)
 end
 
-local movingOut = false
-local movingIn = false
-local movedIn = true
-local movedOut = false
-
 function GM:OnSpawnMenuOpen()
+	print("Here 1")
 	if IsValid(dQMenu) then
+	print("Here 2")
 		if not movingOut and not movingIn then
+	print("Here 3")
 			if movedIn then
 				movingOut = true
 				
@@ -286,6 +288,7 @@ function GM:OnSpawnMenuOpen()
 			end
 		end
 	else
+	print("Here 4")
 		DrawQMenu()
 	end
 end
