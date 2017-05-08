@@ -39,10 +39,11 @@ function ENT:SetGender(gender)
 end
 
 function ENT:Think()
-	if false or self.IsNotMonitoring and IsCurfew() then
+	if self.IsNotMonitoring and IsCurfew() then
 		for k,v in pairs(ents.FindInSphere(self:GetPos(), 200)) do
-			if v:IsPlayer() then
+			if v:IsPlayer() and not (v.watchedIntro and CurTime() - v.watchedIntro < 300) then
 				v:GiveDetention(60)
+				v.watchedIntro = false
 			end
 		end
 	end
