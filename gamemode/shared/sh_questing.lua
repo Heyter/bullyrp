@@ -236,7 +236,7 @@ QUEST_TYPES = {
 						ClientConfig.OverheadGradeColor(e, 1),
 						cname,
 						Color(255,255,255),
-						"XP"
+						"Respect."
 					}
 				else
 					print("Nope.")
