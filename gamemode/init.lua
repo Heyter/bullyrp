@@ -84,9 +84,14 @@ function GM:PlayerInitialSpawn(player)
 				["watchIntro"] = 1
 			})
 		net.Send(player)
-		player:SetPos(Vector(-10.647, -982.497, 100.031))
-		player:SetAngles(Angle(-10.198, 90.044+90, 0.0))
-		player.watchedIntro = CurTime()
+
+		timer.Simple(1,
+			function()
+				player:SetPos(Vector(-10.647, -982.497, 100.031))
+				player:SetAngles(Angle(-10.198, 90.044+90, 0.0))
+				player.watchedIntro = CurTime()
+			end
+		)
 	end
 
 	print("Player: " .. player:Nick() .. " has spawned.")
