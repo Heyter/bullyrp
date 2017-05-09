@@ -94,6 +94,24 @@ local Menus = {
 
 			local dFinished = vgui.Create("DButton", dPanel)
 			dFinished:SetSize(140, 40)
+			dFinished:SetPos(dPanel:GetWide() - 145*2, dPanel:GetTall() - 45)
+			dFinished:SetText("Quit!")
+			dFinished:SetFont("QMenuCliqueFont")
+			dFinished.DoClick = function()
+				CloseCharacterCreation()
+			end
+			dFinished:SetTextColor(Color(255,255,255))
+			dFinished.Paint = function(s,w,h)
+				draw.RoundedBox(
+					5,
+					0,0,
+					w,h,
+					Color(192, 57, 43)
+				)
+			end
+
+			local dFinished = vgui.Create("DButton", dPanel)
+			dFinished:SetSize(140, 40)
 			dFinished:SetPos(dPanel:GetWide() - 145, dPanel:GetTall() - 45)
 			dFinished:SetText("Finished!")
 			dFinished:SetFont("QMenuCliqueFont")
@@ -182,6 +200,24 @@ local Menus = {
 
 			local dFinished = vgui.Create("DButton", dPanel)
 			dFinished:SetSize(140, 40)
+			dFinished:SetPos(dPanel:GetWide() - 145*2, dPanel:GetTall() - 45)
+			dFinished:SetText("Quit!")
+			dFinished:SetFont("QMenuCliqueFont")
+			dFinished.DoClick = function()
+				CloseCharacterCreation()
+			end
+			dFinished:SetTextColor(Color(255,255,255))
+			dFinished.Paint = function(s,w,h)
+				draw.RoundedBox(
+					5,
+					0,0,
+					w,h,
+					Color(192, 57, 43)
+				)
+			end
+
+			local dFinished = vgui.Create("DButton", dPanel)
+			dFinished:SetSize(140, 40)
 			dFinished:SetPos(dPanel:GetWide() - 145, dPanel:GetTall() - 45)
 			dFinished:SetText("Finished!")
 			dFinished:SetFont("QMenuCliqueFont")
@@ -242,6 +278,24 @@ local Menus = {
 				dDropDown.OnSelect = function(s, index, value, data)
 					schedule[i] = data
 				end
+			end
+
+			local dFinished = vgui.Create("DButton", dPanel)
+			dFinished:SetSize(140, 40)
+			dFinished:SetPos(dPanel:GetWide() - 145*2, dPanel:GetTall() - 45)
+			dFinished:SetText("Quit!")
+			dFinished:SetFont("QMenuCliqueFont")
+			dFinished.DoClick = function()
+				CloseCharacterCreation()
+			end
+			dFinished:SetTextColor(Color(255,255,255))
+			dFinished.Paint = function(s,w,h)
+				draw.RoundedBox(
+					5,
+					0,0,
+					w,h,
+					Color(192, 57, 43)
+				)
 			end
 
 			local dFinished = vgui.Create("DButton", dPanel)
