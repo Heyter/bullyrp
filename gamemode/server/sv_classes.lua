@@ -297,7 +297,7 @@ timer.Simple(
 		local counselor = {
 			["Name"] = "Ms. " .. TEACHER_NAMES[math.random(#TEACHER_NAMES)],
 			["Title"] = "School Counselor (Press E on me)",
-			["Model"] = TEACHER_MODELS[2][math.random(#TEACHER_MODELS[1])]
+			["Model"] = TEACHER_MODELS[2][math.random(#TEACHER_MODELS[2])]
 		}
 		counselor.ent = SpawnTeacher(counselor)
 		counselor.ent:SetPos(POINTS['t_SupervisorsOffices1'][1])
