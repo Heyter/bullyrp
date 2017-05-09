@@ -279,13 +279,6 @@ local function DrawCharacterCreation()
 	dCharacterCreation:SetTitle("")
 	dCharacterCreation:ShowCloseButton(false)
 
-	timer.Simple(
-		30,
-		function()
-			dCharacterCreation:Remove()
-		end
-	)
-
 	dCharacterCreation.Paint = function(s,w,h)
 		draw.RoundedBox(
 			1,
