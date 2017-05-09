@@ -292,7 +292,7 @@ timer.Simple(
 		detentionTeacher.ent = SpawnTeacher(detentionTeacher)
 		detentionTeacher.ent:SetPos(POINTS['t_StudyingRoom1'][1])
 		detentionTeacher.ent:SetDestination('t_StudyingRoom1')
-		detentionTeacher.ent:SetMonitor(true)
+		detentionTeacher.ent:SetMonitor(false)
 
 		local counselor = {
 			["Name"] = "Ms. " .. TEACHER_NAMES[math.random(#TEACHER_NAMES)],

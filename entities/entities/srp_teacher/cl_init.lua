@@ -91,7 +91,7 @@ function ENT:Post()
 
 	local grade = LocalPlayer():GetNWInt("grade")
 
-	if grade ~= 8 and not self:GetNWBool("IsNotMonitoring") and IsCurfew() then
+	if grade ~= 8 and self:GetNWBool("IsNotMonitoring", true) and IsCurfew() then
 		cam.Start3D2D(position + Vector(0,0,2), Angle(0,0,0), 1);
 			surface.SetDrawColor(231, 76, 60, 20 * alphaStrength )
 			draw.NoTexture()
