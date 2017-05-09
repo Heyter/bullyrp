@@ -122,9 +122,9 @@ local function ClassHud()
 		TEXT_ALIGN_CENTER
 	)
 
-	local grade = databaseGetValue("grade")
+	local grade = tonumber(LocalPlayer():GetNWInt("grade"))
 
-	if grade and grade == "8" then
+	if grade and grade == 8 then
 		periodName = "See Counselor!"
 	else
 		local periodID = GetGlobalInt("ClassPeriod")
@@ -169,9 +169,9 @@ end
 local function ClassTimeHud()
 	local periodID = GetGlobalInt("ClassPeriod")
 
-	local grade = databaseGetValue("grade")
+	local grade = tonumber(LocalPlayer():GetNWInt("grade"))
 
-	if grade and grade == "8" then return false end
+	if grade and grade == 8 then return false end
 
 	local W, H = ScrW(), ScrH()
 	local cw,ch = 190, 60
