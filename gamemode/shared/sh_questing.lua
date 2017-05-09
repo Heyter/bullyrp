@@ -212,6 +212,21 @@ QUEST_TYPES = {
 		QuestFailedCleanup = function(meta)
 			meta.qents:Remove()
 		end,
+		QuestAbort = function(ply, meta)
+			local e = Entity(meta.entID)
+
+			if e then
+				local c = e:GetClique()
+				local curXP = ply:dbGetValue("cliques" .. c) or 10
+				local endXP = curXP - math.floor(meta.Points / 2)
+
+				if endXP < 5 then
+					endXP = 5
+				end
+
+				ply:dbSetValue("cliques" .. c, endXP)
+			end
+		end,
 		QuestCompleted = function(ply, meta)
 			local e = Entity(meta.entID)
 

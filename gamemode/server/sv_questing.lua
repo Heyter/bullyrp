@@ -35,6 +35,7 @@ function ProcessQuestAbort(ply)
 		print("Aborting mission for " .. ply:GetName())
 
 		QUEST_TYPES[q.Type].QuestFailedCleanup(q.Meta)
+		QUEST_TYPES[q.Type].QuestAbort(ply, q.Meta)
 
 		q.ent:QuestFailed()
 		ply.HasQuest = false
@@ -180,7 +181,7 @@ timer.Remove("quest_generation")
 
 timer.Create(
 	"quest_generation",
-	CalcHour/6,
+	CalcHour,
 	0,
 	function()
 		for k,v in pairs(PendingQuests) do
@@ -190,11 +191,6 @@ timer.Create(
 			end
 		end
 
-		GenerateNewQuest()
-		GenerateNewQuest()
-		GenerateNewQuest()
-		GenerateNewQuest()
-		GenerateNewQuest()
 		GenerateNewQuest()
 		GenerateNewQuest()
 		GenerateNewQuest()
