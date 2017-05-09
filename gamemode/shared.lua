@@ -1,5 +1,5 @@
 
-GM.Name = "SchoolRP"
+GM.Name = "BullyRP"
 GM.Author = "Fifteen"
 GM.Email = "NA"
 GM.Website = "NA"
