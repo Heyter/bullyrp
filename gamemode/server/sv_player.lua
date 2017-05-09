@@ -140,9 +140,9 @@ local function UpdatePlayer(ply, db)
 			local i = tonumber(string.sub(db.model, 1, 1))
 			local k = tonumber(db.model.sub(db.model, 3))
 
-			if i and k and STUDENT_MODELS[i] and STUDENT_MODELS[i][k] then
-				ply:dbSetValue("model", STUDENT_MODELS[i][k])
-				print("Going with model: " .. STUDENT_MODELS[i][k])
+			if i and k and STUDENT_PLAYER_MODELS[i] and STUDENT_PLAYER_MODELS[i][k] then
+				ply:dbSetValue("model", STUDENT_PLAYER_MODELS[i][k])
+				print("Going with model: " .. STUDENT_PLAYER_MODELS[i][k])
 			else
 				print("Model not FOUND!")
 			end

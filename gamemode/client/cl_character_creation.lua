@@ -130,8 +130,8 @@ local Menus = {
 
 			local panelWide = (dPanel:GetWide() - 10) / perRow
 
-			for i=1,#STUDENT_MODELS do
-				for k,v in pairs(STUDENT_MODELS[i]) do
+			for i=1,#STUDENT_PLAYER_MODELS do
+				for k,v in pairs(STUDENT_PLAYER_MODELS[i]) do
 					if not model and nameMode == v then
 						model = i.."."..k
 					end
@@ -228,10 +228,6 @@ local Menus = {
 				dDropDown:SetPos(dDropDown:GetPos() + dDropDown:GetWide()/3, (i - 1) * 50 + 20)
 				dDropDown:SetFont("QMenuScheduleFont")
 
-				print("HEREERERE")
-				print(schedule)
-				print(type(schedule))
-				PrintTable(schedule)
 				if schedule[i] then
 					print(schedule[i])
 					dDropDown:SetValue(CLASSES[schedule[i]].Name, schedule[i])

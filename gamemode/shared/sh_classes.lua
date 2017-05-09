@@ -22,6 +22,29 @@ STUDENT_MODELS = {
 	},
 }
 
+STUDENT_PLAYER_MODELS = {
+	-- Male
+	[1] = {
+		[1] = "models/player/Group01/Male_01.mdl",
+		[2] = "models/player/Group01/male_02.mdl",
+		[3] = "models/player/Group01/male_03.mdl",
+		[4] = "models/player/Group01/Male_04.mdl",
+		[5] = "models/player/Group01/Male_05.mdl",
+		[6] = "models/player/Group01/male_06.mdl",
+		[7] = "models/player/Group01/male_07.mdl",
+		[8] = "models/player/Group01/male_09.mdl",
+	},
+	-- Female
+	[2] = {
+		[1] = "models/player/Group01/Female_01.mdl",
+		[2] = "models/player/Group01/Female_02.mdl",
+		[3] = "models/player/Group01/Female_03.mdl",
+		[4] = "models/player/Group01/Female_04.mdl",
+		[5] = "models/player/Group01/Female_06.mdl",
+		[6] = "models/player/Group01/Female_07.mdl",
+	},
+}
+
 if SERVER then
 	TEACHER_NAMES = {
 		"Smith",
