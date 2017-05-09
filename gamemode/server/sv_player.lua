@@ -128,7 +128,6 @@ local function UpdatePlayer(ply, db)
 			net.Send(ply)
 		else
 			print("Grade is not 8")
-			return false
 		end
 		if db.firstName and db.firstName ~= "" then
 			ply:dbSetValue("firstName", string.sub(db.firstName, 1, 15):gsub('%W.',''))

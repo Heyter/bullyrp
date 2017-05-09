@@ -41,7 +41,6 @@ STUDENT_PLAYER_MODELS = {
 		[3] = "models/player/Group01/Female_03.mdl",
 		[4] = "models/player/Group01/Female_04.mdl",
 		[5] = "models/player/Group01/Female_06.mdl",
-		[6] = "models/player/Group01/Female_07.mdl",
 	},
 }
 
