@@ -302,7 +302,7 @@ timer.Simple(
 		counselor.ent = SpawnTeacher(counselor)
 		counselor.ent:SetPos(POINTS['t_SupervisorsOffices1'][1])
 		counselor.ent:SetDestination('t_SupervisorsOffices1')
-		counselor.ent:SetMonitor(true)
+		counselor.ent:SetMonitor(false)
 		counselor.ent:SetProgram(function(ply)
 			net.Start("notification")
 				net.WriteTable({
