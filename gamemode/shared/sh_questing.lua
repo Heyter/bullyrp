@@ -203,6 +203,7 @@ QUEST_TYPES = {
 			return {
 				ItemID = math.random(#QUEST_ITEMS),
 				Points = math.random(5,10),
+				Other = math.random(1, #CLIQUES)
 			}
 		end,
 		QuestAccepted = function(ply, meta)
@@ -216,9 +217,24 @@ QUEST_TYPES = {
 
 			if e then
 				local c = e:GetClique()
-				local curXP = ply:dbGetValue("cliques" .. c) or 0
-
+				local curXP = ply:dbGetValue("cliques" .. c) or 10
 				ply:dbSetValue("cliques" .. c, curXP + meta.Points)
+
+				if c > 1 then
+					local other = meta.Other
+					if other == c then
+						other = (other % #CLIQUES) + 1
+					end
+					local curXP = ply:dbGetValue("cliques" .. other) or 10
+
+					local endXP = curXP - math.floor(meta.Points / 2)
+
+					if endXP < 5 then
+						endXP = 5
+					end
+
+					ply:dbSetValue("cliques" .. other, endXP)
+				end
 			end
 		end,
 		QuestReward = function(ply, meta)
@@ -226,18 +242,36 @@ QUEST_TYPES = {
 
 			if e then
 				local c = e:GetClique()
-				print ("cliqueid: ")
-				print (c)
 				if c and CLIQUES[c] then
 					local cname = CLIQUES[c].GroupName
+					if c > 1 then
+						local other = meta.Other
+						if other == c then
+							other = (other % #CLIQUES) + 1
+						end
+						local oname = CLIQUES[other].GroupName
 
-					return {
-						"+" .. meta.Points,
-						ClientConfig.OverheadGradeColor(e, 1),
-						cname,
-						Color(255,255,255),
-						"Respect."
-					}
+						return {
+							"+" .. meta.Points,
+								ClientConfig.OverheadGradeColor(e, 1),
+								cname,
+								Color(255,255,255),
+								"Respect.",
+								"\n-" .. math.floor(meta.Points / 2),
+								ClientConfig.GetCliqueColor(other, 1),
+								oname,
+								Color(255,255,255),
+								"Respect.",
+							}
+					else
+						return {
+							"+" .. meta.Points,
+								ClientConfig.OverheadGradeColor(e, 1),
+								cname,
+								Color(255,255,255),
+								"Respect."
+							}
+					end
 				else
 					print("Nope.")
 					print(CLIQUES[c])
