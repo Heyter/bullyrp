@@ -76,7 +76,7 @@ local function notificationReceive(tab)
 	for k,v in pairs(tab) do
 		if k == "detention" then
 			HUDTriggerFade()
-			AddNote(3, "You received detention!")
+			AddNote(3, GetTString("You received detention") .. "!")
 
 			if v > CurTime() then
 				IsInDetention = v
@@ -92,15 +92,15 @@ local function notificationReceive(tab)
 		elseif k == "QuestAbort" then
 			RemoveQuestInfo()
 			IsDoingQuest = false
-			AddNote(3, "The mission was aborted!")
+			AddNote(3, GetTString("The mission was aborted") .. "!")
 		elseif k == "QuestSuccess" then
 			RemoveQuestInfo()
 			IsDoingQuest = false
-			AddNote(2, "You completed the mission!")
+			AddNote(2, GetTString("You completed the mission") .. "!")
 		elseif k == "QuestAcceptFailed" then
 			RemoveQuestInfo()
 			IsDoingQuest = false
-			AddNote(3, "You failed the mission!")
+			AddNote(3, GetTString("You failed the mission") .. "!")
 		elseif k == "GenericSuccess" then
 			AddNote(2, v)
 		elseif k == "GenericFailure" then

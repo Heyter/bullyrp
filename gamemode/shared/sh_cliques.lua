@@ -3,27 +3,27 @@ POINTS_FOR_LEADER_MISSION = 50
 
 CLIQUES = {
 	[1] = {
-		GroupName = "Students",
-		Name = "Student",
+		GroupName = GetTString("Students"),
+		Name = GetTString("Student"),
 	},
 	[2] = {
-		GroupName = "Nerds",
-		Name = "Nerd",
+		GroupName = GetTString("Nerds"),
+		Name = GetTString("Nerd"),
 	},
 	[3] = {
-		GroupName = "Bullies",
-		Name = "Bully",
+		GroupName = GetTString("Bullies"),
+		Name = GetTString("Bully"),
 	},
 	[4] = {
-		GroupName = "Preppies",
-		Name = "Preppy",
+		GroupName = GetTString("Preppies"),
+		Name = GetTString("Preppy"),
 	},
 	[5] = {
-		GroupName = "Burnouts",
-		Name = "Burnout",
+		GroupName = GetTString("Burnouts"),
+		Name = GetTString("Burnout"),
 	},
 	[6] = {
-		GroupName = "Jocks",
-		Name = "Jock",
+		GroupName = GetTString("Jocks"),
+		Name = GetTString("Jock"),
 	},
 } 

@@ -269,7 +269,7 @@ function CreateScoreboard()
 						ClientConfig.ScoreboardHeaderBottomBackground
 					)
 					draw.SimpleText(
-						i .. "th Graders",
+						ClientConfig.GradeName(i),
 						"ScoreBoardPlayerNames",
 						w/2,
 						10,
@@ -278,7 +278,7 @@ function CreateScoreboard()
 						TEXT_ALIGN_TOP
 					)
 					draw.SimpleText(
-						"Name",
+						GetTString("Name"),
 						"ScoreBoardPlayerSub",
 						90,
 						h-10,
@@ -287,7 +287,7 @@ function CreateScoreboard()
 						TEXT_ALIGN_BOTTOM
 					)
 					draw.SimpleText(
-						"Grade",
+						GetTString("Grade"),
 						"ScoreBoardPlayerSub",
 						w - 275 - 16,
 						h-10,
@@ -296,7 +296,7 @@ function CreateScoreboard()
 						TEXT_ALIGN_BOTTOM
 					)
 					draw.SimpleText(
-						"Rank",
+						GetTString("Rank"),
 						"ScoreBoardPlayerSub",
 						w - 205 - 16,
 						h-10,
@@ -306,7 +306,7 @@ function CreateScoreboard()
 					)
 
 					draw.SimpleText(
-						"Ping",
+						GetTString("Ping"),
 						"ScoreBoardPlayerSub",
 						w - 80 - 16,
 						h-10,
@@ -315,7 +315,7 @@ function CreateScoreboard()
 						TEXT_ALIGN_BOTTOM
 					)
 					draw.SimpleText(
-						"Mute",
+						GetTString("Mute"),
 						"ScoreBoardPlayerSub",
 						w - 32 - 16,
 						h-10,

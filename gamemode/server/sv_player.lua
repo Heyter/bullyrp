@@ -128,7 +128,7 @@ local function UpdatePlayer(ply, db)
 			ply:dbSetValue("grade", 9)
 			net.Start("notification")
 				net.WriteTable({
-					["GenericSuccess"] = "You have been successfully enrolled!"
+					["GenericSuccess"] = GetTString("You have been successfully enrolled!")
 				})
 			net.Send(ply)
 		end

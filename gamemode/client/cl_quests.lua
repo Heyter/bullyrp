@@ -264,7 +264,7 @@ local function DrawQuestInfo(questType, l4, meta)
 
 	richtext:AppendText(QUEST_TYPES[questType].Description)
 
-	richtext:AppendText("\n\nReward: ")
+	richtext:AppendText("\n\n" .. GetTString("Reward") .. ": ")
 
 	for k,v in pairs(QUEST_TYPES[questType].QuestReward(v, meta)) do
 		if type(v) == "string" then
@@ -285,7 +285,7 @@ local function DrawQuestInfo(questType, l4, meta)
 	local dButton1 = vgui.Create("DButton", dQuestInfo)
 	dButton1:SetPos(pd, 300+pd)
 	dButton1:SetSize(w-pd*2, 50-pd*2)
-	dButton1:SetText("Abort")
+	dButton1:SetText(GetTString("Abort"))
 	dButton1:SetFont("quests_button")
 	dButton1.DoClick = function()
 		net.Start("quest_abort")
@@ -403,7 +403,7 @@ local function DrawQuest(ent, questType, l1, l2, l3, l4, l5, meta)
 
 	richtext:AppendText(QUEST_GREETINGS4[l5] .. " ")
 
-	richtext:AppendText("\n\nReward: ")
+	richtext:AppendText("\n\n" .. GetTString("Reward") .. ": ")
 
 	for k,v in pairs(QUEST_TYPES[questType].QuestReward(v, meta)) do
 		if type(v) == "string" then
@@ -418,7 +418,7 @@ local function DrawQuest(ent, questType, l1, l2, l3, l4, l5, meta)
 	local dButton1 = vgui.Create("DButton", dQuest)
 	dButton1:SetPos(w - 140 - pd, h - 100)
 	dButton1:SetSize(130, 45)
-	dButton1:SetText("Cancel")
+	dButton1:SetText(GetTString("Cancel"))
 	dButton1:SetFont("quests_button")
 	dButton1.DoClick = function()
 		dQuest:Remove()
@@ -437,7 +437,7 @@ local function DrawQuest(ent, questType, l1, l2, l3, l4, l5, meta)
 	dButton2:SetPos(w - 140 - pd, h - 50)
 	dButton2:SetSize(130, 45)
 	dButton2:SetFont("quests_button")
-	dButton2:SetText("Accept")
+	dButton2:SetText(GetTString("Accept"))
 	dButton2.DoClick = function()
 		net.Start("quest_accept")
 			net.WriteUInt(LastQID, 32)

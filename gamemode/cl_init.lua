@@ -1,5 +1,6 @@
 
 include("shared.lua")
+include("shared/sh_strings.lua")
 include("shared/sh_cliques.lua")
 include("shared/util.lua")
 include("shared/sh_points.lua")

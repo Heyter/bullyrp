@@ -58,7 +58,7 @@ function ENT:Post()
 	cam.Start3D2D(position + aboveoffset, SpinAng, 0.2);
 		if not IsDoingQuest and self:GetNWBool("QuestOpen") then
 			draw.SimpleText(
-				"Mission Available",
+				GetTString("Mission Available"),
 				"npcs_teacher_mission",
 				-0,
 				-470,

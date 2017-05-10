@@ -6,6 +6,10 @@ local function databaseReceive(tab)
 		for k,v in pairs(tab.database) do
 			database[k] = v
 			last = v
+
+			if k == "language" then
+				RepromptCutScene()
+			end
 		end
 	end
 end

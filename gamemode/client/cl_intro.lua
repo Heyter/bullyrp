@@ -9,6 +9,7 @@ local scrolls = {
 		EndVec = Vector(646.259338, -2257.489014, 494.649048),
 		EndAng = Angle(0.860590, 104.238182, 0.000000),
 		EndTime = 7,
+		Text = GetTString("Part1"),
 		Language = {
 			[1] = "Welcome to BullyRP here at Black Lake High. I'll be your tour guide today.",
 		},
@@ -20,6 +21,7 @@ local scrolls = {
 		EndVec = Vector(199.733078, -125.496880, 627.423401),
 		EndAng = Angle(-6.347269, -14.099856, 0.000000),
 		EndTime = 9,
+		Text = GetTString("Part2"),
 		Language = {
 			[1] = "This generous school has 12 spacious classrooms with knowledgeable teachers that will guide you in your journey of education.",
 		},
@@ -33,6 +35,7 @@ local scrolls = {
 		EndAng = Angle(2.797026, -160, 0.000000),
 		EndTime = 14,
 		NoEnding = true,
+		Text = GetTString("Part3"),
 		Language = {
 			[1] = "Here you'll find the detention room. This is where naughty boys and girls go. If you're caught breaking the rules, you'll be sent here for a time out. This is where you’ll end up too, if caught after lights out.",
 		},
@@ -46,6 +49,7 @@ local scrolls = {
 		EndAng = Angle(1.152, -111.413, 0.0),
 		EndTime = 13,
 		NoEnding = true,
+		Text = GetTString("Part4"),
 		Language = {
 			[1] = "Next door is the counselor's office. This is where you'll want to go next so you can officially enroll in Black Lake High. You'll also choose your preferred semester for this year.",
 		},
@@ -58,6 +62,7 @@ local scrolls = {
 		EndVec = Vector(-1556.096, 950.77, 162.254),
 		EndAng = Angle(5.24, -34.994, 0.0),
 		EndTime = 19,
+		Text = GetTString("Part5"),
 		Language = {
 			[1] = "On each sides of the first floor, you'll find the lockers. Each year, you are assigned a new locker. This is where you could keep your school books, materials, and love letters from all the girls - unless you turn out to be a nerd. Then you could keep all of your 'kick me' signs in there I guess.",
 		},
@@ -70,6 +75,7 @@ local scrolls = {
 		EndVec = Vector(-5135.938, 1484.186, 145.726),
 		EndAng = Angle(-4.119, 45.645+150, 0.0),
 		EndTime = 15,
+		Text = GetTString("Part6"),
 		Language = {
 			[1] = "Each day, there will be classes that you'll have to attend. Mid-day you’ll find yourself in the cafeteria. This is where everyone gathers around to eat. You'll want to come and eat here about once a day to keep from starving.",
 		},
@@ -82,6 +88,7 @@ local scrolls = {
 		EndVec = Vector(3754.309, 3671.178, 373.478),
 		EndAng = Angle(-1.753, 124.944, 0.0),
 		EndTime = 11,
+		Text = GetTString("Part7"),
 		Language = {
 			[1] = "Over here you'll find the library. Inside are these things with paper called books. If you're the studying type, you'll probably find yourself in here quite often.",
 		},
@@ -94,6 +101,7 @@ local scrolls = {
 		EndVec = Vector(1793.257, 5335.401, 271.205),
 		EndAng = Angle(-6.271, -34.92+180, 0.0),
 		EndTime = 10,
+		Text = GetTString("Part8"),
 		Language = {
 			[1] = "There are also computers in here to do things such as check your Facebook or play video games such as Minecraft. Maybe even do a little research for school.",
 		},
@@ -107,6 +115,7 @@ local scrolls = {
 		EndAng = Angle(2.604, -16.411, 0.0),
 		EndTime = 14,
 		NoEnding = true,
+		Text = GetTString("Part9"),
 		Language = {
 			[1] = "The next place on our tour is the media center. Sometimes a teacher may hold class in here so you can work online. There are also some computer classes to learn how basic programming and internet surfing skills.",
 		},
@@ -119,6 +128,7 @@ local scrolls = {
 		EndVec = Vector(-2242.9, 4489.154, 150.941),
 		EndAng = Angle(9.92, -176.813, 0.0),
 		EndTime = 17,
+		Text = GetTString("Part10"),
 		Language = {
 			[1] = "In the back of the media center is the nurse’s station. If you get into a fight and get knocked out by some chap, this is where you'll be taken to. Remember: Fights are for naughty students so you should try to avoid that so you don't get kicked out of your fifth school.",
 		},
@@ -132,6 +142,7 @@ local scrolls = {
 		EndAng = Angle(3.68, 91.029, 0.0),
 		EndTime = 14,
 		NoEnding = true,
+		Text = GetTString("Part11"),
 		Language = {
 			[1] = "Here is the gym. This is where you'll get all of your exercise - that is when you're not running from the bullies. Here is where you'll play classics such as basketball, kickball, and my personal favorite: dodge ball.",
 		},
@@ -144,6 +155,7 @@ local scrolls = {
 		EndVec = Vector(349.602, 8164.182, 56.614),
 		EndAng = Angle(-1.699, 270.336, 0.0),
 		EndTime = 8,
+		Text = GetTString("Part12"),
 		Language = {
 			[1] = "This is also where assemblies and school-wide presentations are held so be on the lookout for those on your schedule.",
 		},
@@ -156,6 +168,7 @@ local scrolls = {
 		EndVec = Vector(-1793.956, 11886.974, 83.036),
 		EndAng = Angle(6.692, -32.021, 0.0),
 		EndTime = 15,
+		Text = GetTString("Part13"),
 		Language = {
 			[1] = "Behind the gym, is the sports field. Every Friday night the school hosts a soccer game that you don't want to miss. Unless you're busy studying for class of course. School does come first here at Blake Lake High. ",
 		},
@@ -169,6 +182,7 @@ local scrolls = {
 		EndAng = Angle(-0.623, -3.566, 0.0),
 		EndTime = 13,
 		NoEnding = true,
+		Text = GetTString("Part14"),
 		Language = {
 			[1] = "The last stop on this tour is the dorms - the place where you'll be spending the next four years of your life. On the bottom floor you'll find the girl dorms. On the top floor you'll find the boys dorm.",
 		},
@@ -182,6 +196,7 @@ local scrolls = {
 		EndAng = Angle(0.991, 141.129, 0.0),
 		EndTime = 9,
 		NoEnding = true,
+		Text = GetTString("Part15"),
 		Language = {
 			[1] = "Make sure you stay within the dorms during the curfew hours at night. You'll know it's curfew because the clock at the top will turn red.",
 		},
@@ -194,6 +209,7 @@ local scrolls = {
 		EndVec = Vector(4969.066, 269.364, 397.825),
 		EndAng = Angle(2.604, 203.463, 0.0),
 		EndTime = 11,
+		Text = GetTString("Part16"),
 		Language = {
 			[1] = "If you happen to identify as an Apache Helicopter, there is a special dorm area just for you - on the roof of the dorms next to the school's swimming pool.",
 		},
@@ -206,6 +222,7 @@ local scrolls = {
 		EndVec = Vector(92.366, 2454.309, 160.231),
 		EndAng = Angle(-0.193, -132.339, 0.0),
 		EndTime = 32,
+		Text = GetTString("Part17"),
 		Language = {
 			[1] = "Now before we conclude our tour, there's one last thing you should know: Here at Black Lake High, there are 5 main cliques: the nerds, the bullies, the preppies, the burnouts and the jocks. Before you can join a clique, you must win their respect. To do this you'll have to help them out by doing things like completing missions for members of their groups. Once you have earned enough street cred, find their leader and complete the initiation quest. You can only be in one clique at a time. If you join another, you'll lose your current clique’s status.",
 		},
@@ -218,6 +235,7 @@ local scrolls = {
 		EndVec = Vector(3284.312, 5384.925, 180.487),
 		EndAng = Angle(4.11, -59.358, 0.0),
 		EndTime = 8,
+		Text = GetTString("Part18"),
 		Language = {
 			[1] = "The Nerds hang out in the library,",
 		},
@@ -230,6 +248,7 @@ local scrolls = {
 		EndVec = Vector(-541.257, 552.119, 420.838),
 		EndAng = Angle(-1.269, -53.763, 0.0),
 		EndTime = 8,
+		Text = GetTString("Part19"),
 		Language = {
 			[1] = "the bullies roam the inside of the school,",
 		},
@@ -242,6 +261,7 @@ local scrolls = {
 		EndVec = Vector(560.017, -2774.52, 339.573),
 		EndAng = Angle(19.064, 132.168, 0.0),
 		EndTime = 8,
+		Text = GetTString("Part20"),
 		Language = {
 			[1] = "the preppies kick rocks outside in front of the statue,",
 		},
@@ -254,6 +274,7 @@ local scrolls = {
 		EndVec = Vector(-5358.379, -245.003, 338.381),
 		EndAng = Angle(40.472, 120.34, 0.0),
 		EndTime = 8,
+		Text = GetTString("Part21"),
 		Language = {
 			[1] = "the burnouts blaze it up behind the cafeteria,",
 		},
@@ -266,6 +287,7 @@ local scrolls = {
 		EndVec = Vector(966.075, 11489.856, -111.222),
 		EndAng = Angle(10.673, -95.143, 0.0),
 		EndTime = 8,
+		Text = GetTString("Part22"),
 		Language = {
 			[1] = "and the jocks spend their time tearing up the soccer field.",
 		},
@@ -278,6 +300,7 @@ local scrolls = {
 		EndVec = Vector(-10.647, -982.497, 100.031),
 		EndAng = Angle(-10.198, 90.044, 0.0),
 		EndTime = 13,
+		Text = GetTString("Part23"),
 		Language = {
 			[1] = "Well, this concludes your tour of the campus! I hope you enjoy your time here at Black Lake High and remember: your parents only sent you here because they love deep down inside - they just don't know how to show it.",
 		},
@@ -356,7 +379,8 @@ function RollCutscene()
 			dSkipButton = vgui.Create("DButton", dProgressBar)
 			dSkipButton:SetPos(dProgressBar:GetWide() - 100, 0)
 			dSkipButton:SetSize(100-30, 25)
-			dSkipButton:SetText("Skip")
+			dSkipButton:SetText(GetTString("Skip"))
+			dSkipButton:SetTextColor(Color(255,255,255))
 
 			dSkipButton.DoClick = function()
 				start = #scrolls+1
@@ -418,7 +442,6 @@ function GM:CalcView( ply, pos, angles, fov )
 			local s = scrolls[math.ceil(start)]
 
 			if not s then
-				print("No cutscene frame found.")
 				start = start + 1
 			end
 
@@ -436,7 +459,7 @@ function GM:CalcView( ply, pos, angles, fov )
 				DrawQuestFeedback("models/props_lab/monitor01a.mdl",
 					-1, -1,
 					s.EndTime - 6,
-					s.Language[LANGUAGE])
+					s.Text)
 				
 			end
 
@@ -501,6 +524,13 @@ local CutSceneFontSubHeader = surface.CreateFont("CutSceneFontSubHeader", {
 	weight = 500
 })
 
+function RepromptCutScene()
+	if IsValid(dCutScene) then
+		dCutScene:Remove()
+		PromptCutScene(1)
+	end
+end
+
 function PromptCutScene(cutscene)
 	dCutScene = vgui.Create("DPanel")
 	dCutScene:SetSize(ScrW(), ScrH())
@@ -525,7 +555,7 @@ function PromptCutScene(cutscene)
 		)
 
 		draw.SimpleText(
-			"Watch The Introduction Cut Scene!",
+			GetTString("Watch The Introduction Cut Scene") .. "!",
 			"CutSceneFontHeader",
 			w/2,sh+15,
 			Color(255,255,255),
@@ -533,7 +563,7 @@ function PromptCutScene(cutscene)
 		)
 
 		draw.SimpleText(
-			"No need to call for a trainer and wait 30 minutes!",
+			GetTString("No need to call for a trainer and wait 30 minutes") .. "!",
 			"CutSceneFontSubHeader",
 			w/2,sh+100,
 			Color(255,255,255),
@@ -541,7 +571,7 @@ function PromptCutScene(cutscene)
 		)
 
 		draw.SimpleText(
-			"Language:",
+			GetTString("Language") .. ":",
 			"CutSceneFontSubHeader",
 			w/2-30,sh+160,
 			Color(255,255,255),
@@ -553,15 +583,18 @@ function PromptCutScene(cutscene)
 	dDropDown:SetSize(100, 30)
 	dDropDown:Center()
 	dDropDown:SetPos(dDropDown:GetPos() + 30, sh+160)
-	dDropDown:SetValue("English")
-	dDropDown:AddChoice("English")
+	dDropDown:SetValue(GetTString("English"), 1)
+	dDropDown:AddChoice(GetTString("English"), 1)
+	dDropDown.OnSelect = function(s, index, value, data)
+		RunConsoleCommand("changelanguage", data)
+	end
 
 	local dButton = vgui.Create("DButton", dCutScene)
 	dButton:SetSize(600, 200)
 	dButton:Center()
 	dButton:SetPos(dButton:GetPos(), sh+220)
 	dButton:SetFont("CutSceneFontHeader")
-	dButton:SetText("Play!")
+	dButton:SetText(GetTString("Play!"))
 	dButton:SetTextColor(Color(255,255,255))
 	dButton.Paint = function(s,w,h)
 		draw.RoundedBox(

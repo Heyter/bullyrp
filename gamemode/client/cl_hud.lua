@@ -53,7 +53,7 @@ local function TimeHud()
 	surface.DrawTexturedRect(x+10, y+10, h-20, h-20)
 
 	draw.SimpleText(
-		"Time of Day",
+		GetTString("Time of Day"),
 		"CustomFontB",
 		x + (w/2) + h - 5,
 		y + 5,
@@ -104,7 +104,7 @@ local function ClassHud()
 	local W, H = ScrW(), ScrH()
 	local w,h = 190, 60
 	local x,y = W - w - 30, H - h - 30
-	local periodName = "Invalid"
+	local periodName = GetTString("Invalid")
 
 	draw.RoundedBox(
 		3,
@@ -114,7 +114,7 @@ local function ClassHud()
 	)
 
 	draw.SimpleText(
-		"Current Period",
+		GetTString("Current Period"),
 		"CustomFontB",
 		x + (w/2),
 		y + 5,
@@ -125,10 +125,10 @@ local function ClassHud()
 	local grade = tonumber(LocalPlayer():GetNWInt("grade"))
 
 	if grade and grade == 8 then
-		periodName = "See Counselor!"
+		periodName = GetTString("See Counselor") .. "!"
 	else
 		local periodID = GetGlobalInt("ClassPeriod")
-		periodName = "Free Time"
+		periodName = GetTString("Free Time")
 		local schedule = databaseGetValue("schedule")
 
 		if periodID > 0 then
@@ -137,7 +137,7 @@ local function ClassHud()
 			local realtime =  realtimec * SecondsInDay / 60
 
 			if realtime > LengthOfPeriodInGame then
-				periodName = "Class Change"
+				periodName = GetTString("Class Change")
 				if not ClassChangeLast then
 					RingBell()
 				end
@@ -149,10 +149,10 @@ local function ClassHud()
 				end
 				ClassChangeLast = false
 			else
-				periodName = "Invalid"
+				periodName = GetTString("Invalid")
 			end
 		elseif IsCurfew() then
-			periodName = "Bedtime"
+			periodName = GetTString("Bedtime")
 		end
 	end
 
@@ -207,10 +207,10 @@ local function ClassTimeHud()
 
 		local time = math.ceil(finaltime)
 
-		local min = "seconds"
+		local min = GetTString("seconds")
 
 		if time == 1 then
-			min = "second"
+			min = GetTString("second")
 		elseif time < 0 then
 			time = 0
 		end
@@ -227,7 +227,7 @@ local function ClassTimeHud()
 		end
 
 		draw.SimpleText(
-			"Time Remaining",
+			GetTString("Time Remaining"),
 			"CustomFontB",
 			x + (w/2),
 			y + 5,
@@ -246,7 +246,7 @@ local function ClassTimeHud()
 	else
 		if not IsCurfew() then
 			draw.SimpleText(
-				"F1 to view schedule",
+				GetTString("F1 to view schedule"),
 				"CustomFontB",
 				x + w / 2 + 5, y + 50,
 				Color(255,255,255),
@@ -267,7 +267,7 @@ local function ClassRoom2D3D()
 
 	if grade and grade == "8" then
 		room = "SupervisorsOffices"
-		roomName = "Counselor's Office"
+		roomName = GetTString("Counselor's Office")
 	elseif periodID > 0 and schedule and schedule[periodID] and CLASSES[schedule[periodID]] then
 		room = CLASSES[schedule[periodID]].Room
 	end
@@ -464,7 +464,7 @@ local function DrawInDetention()
 		)
 
 		draw.SimpleText(
-			"Detention Ends in " .. math.Round(IsInDetention - CurTime()) .. " seconds.",
+			GetTString("Detention Ends in") .. " " .. math.Round(IsInDetention - CurTime()) .. " " .. GetTString("seconds") .. ".",
 			"CustomFontA",
 			x + (w/2), y + (h/2),
 			Color(255,255,255),
@@ -512,7 +512,6 @@ local function HUDFade()
 				4,
 				0,
 				function()
-					print("removing")
 					dHudFade:Remove()
 					dHudFade = nil
 					HUDTriggeredFade = false
@@ -550,8 +549,6 @@ function DisableHud()
 	hudenabled = false
 	if dAvatar then
 		dAvatar:SetVisible(false)
-	else
-		print ("Davatar not there??")
 	end
 end
 

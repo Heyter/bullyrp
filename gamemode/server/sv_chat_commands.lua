@@ -46,19 +46,19 @@ local function MessageAll(msg, playerList)
 end
 
 ChatCommands = {
-	["/me"] = function(ply, msg, isTeam)
+	["/" .. GetTString("me")] = function(ply, msg, isTeam)
 		msg[1] = ply:GetRPName()
 		local s = join(msg)
 		print ("(ME) " .. ply:GetName() .. ": " .. s)
 		MessageAll({Color(142, 68, 173), s})
 		return ""
 	end,
-	["/ooc"] = function(ply, msg, isTeam)
+	["/" .. GetTString("ooc")] = function(ply, msg, isTeam)
 		msg[1] = nil
 		local s = join(msg)
-		print ("(OOC) " .. ply:GetName() .. ": " .. s)
+		print ("(" .. GetTString("OOC") .. ") " .. ply:GetName() .. ": " .. s)
 		MessageAll({
-			Color(56, 163, 234), "(OOC) ",
+			Color(56, 163, 234), "(" .. GetTString("OOC") .. ") ",
 			GetCliqueColor(ply:GetClique()),
 			ply:GetRPName() .. ": ",
 			Color(255,255,255), s
@@ -68,19 +68,19 @@ ChatCommands = {
 	["//"] = function(ply, msg, isTeam)
 		msg[1] = nil
 		local s = join(msg)
-		print ("(OOC) " .. ply:GetName() .. ": " .. s)
+		print ("(" .. GetTString("OOC") .. ") " .. ply:GetName() .. ": " .. s)
 		MessageAll({
-			Color(56, 163, 234), "(OOC) ",
+			Color(56, 163, 234), "(" .. GetTString("OOC") .. ") ",
 			GetCliqueColor(ply:GetClique()),
 			ply:GetRPName() .. ": ",
 			Color(255,255,255), s
 		})
 		return ""
 	end,
-	["/looc"] = function(ply, msg, isTeam)
+	["/" .. GetTString("looc")] = function(ply, msg, isTeam)
 		msg[1] = nil
 		local s = join(msg)
-		print ("(LOOC) " .. ply:GetName() .. ": " .. s)
+		print ("(" .. GetTString("LOOC") .. ") " .. ply:GetName() .. ": " .. s)
 
 		local plys = {}
 
@@ -91,7 +91,7 @@ ChatCommands = {
 		end
 
 		MessageAll({
-			Color(39, 174, 96), "(LOOC) ",
+			Color(39, 174, 96), "(" .. GetTString("OOC") .. ") ",
 			GetCliqueColor(ply:GetClique()),
 			ply:GetRPName() .. ": ",
 			Color(255,255,255), s
@@ -101,7 +101,7 @@ ChatCommands = {
 	[".//"] = function(ply, msg, isTeam)
 		msg[1] = nil
 		local s = join(msg)
-		print ("(LOOC) " .. ply:GetName() .. ": " .. s)
+		print ("(" .. GetTString("OOC") .. ") " .. ply:GetName() .. ": " .. s)
 
 		local plys = {}
 
@@ -112,7 +112,7 @@ ChatCommands = {
 		end
 
 		MessageAll({
-			Color(39, 174, 96), "(LOOC) ",
+			Color(39, 174, 96), "(" .. GetTString("OOC") .. ") ",
 			GetCliqueColor(ply:GetClique()),
 			ply:GetRPName() .. ": ",
 			Color(255,255,255), join(msg)
@@ -122,7 +122,7 @@ ChatCommands = {
 	["/w"] = function(ply, msg, isTeam)
 		msg[1] = nil
 		local s = join(msg)
-		print ("(Whisper) " .. ply:GetName() .. ": " .. s)
+		print ("(" .. GetTString("Whisper") .. ") " .. ply:GetName() .. ": " .. s)
 		
 		local plys = {}
 
@@ -133,17 +133,17 @@ ChatCommands = {
 		end
 
 		MessageAll({
-			Color(22, 160, 133), "(Whisper) ",
+			Color(22, 160, 133), "(" .. GetTString("Whisper") .. ") ",
 			GetCliqueColor(ply:GetClique()),
 			ply:GetRPName() .. ": ",
 			Color(255,255,255), s
 		}, plys)
 		return ""
 	end,
-	["/whisper"] = function(ply, msg, isTeam)
+	["/".. GetTString("whisper")] = function(ply, msg, isTeam)
 		msg[1] = nil
 		local s = join(msg)
-		print ("(Whisper) " .. ply:GetName() .. ": " .. s)
+		print ("(" .. GetTString("Whisper") .. ") " .. ply:GetName() .. ": " .. s)
 
 		local plys = {}
 
@@ -154,7 +154,7 @@ ChatCommands = {
 		end
 
 		MessageAll({
-			Color(22, 160, 133), "(Whisper) ",
+			Color(22, 160, 133), "(" .. GetTString("Whisper") .. ") ",
 			GetCliqueColor(ply:GetClique()),
 			ply:GetRPName() .. ": ",
 			Color(255,255,255), s
@@ -164,7 +164,7 @@ ChatCommands = {
 	["/y"] = function(ply, msg, isTeam)
 		msg[1] = nil
 		local s = join(msg)
-		print ("(Yell) " .. ply:GetName() .. ": " .. s)
+		print ("(" .. GetTString("Yell") .. ") " .. ply:GetName() .. ": " .. s)
 
 		local plys = {}
 
@@ -175,17 +175,17 @@ ChatCommands = {
 		end
 
 		MessageAll({
-			Color(231, 76, 60), "(Yell) ",
+			Color(231, 76, 60), "(" .. GetTString("Yell") .. ") ",
 			GetCliqueColor(ply:GetClique()),
 			ply:GetRPName() .. ": ",
 			Color(255,255,255), s
 		}, plys)
 		return ""
 	end,
-	["/yell"] = function(ply, msg, isTeam)
+	["/" .. GetTString("yell")] = function(ply, msg, isTeam)
 		msg[1] = nil
 		local s = join(msg)
-		print ("(Yell) " .. ply:GetName() .. ": " .. s)
+		print ("(" .. GetTString("Yell") .. ") " .. ply:GetName() .. ": " .. s)
 
 		local plys = {}
 
@@ -196,46 +196,46 @@ ChatCommands = {
 		end
 
 		MessageAll({
-			Color(231, 76, 60), "(Yell) ",
+			Color(231, 76, 60), "(" .. GetTString("Yell") .. ") ",
 			GetCliqueColor(ply:GetClique()),
 			ply:GetRPName() .. ": ",
 			Color(255,255,255), s
 		}, plys)
 		return ""
 	end,
-	["/ad"] = function(ply, msg, isTeam)
+	["/" .. GetTString("ad")] = function(ply, msg, isTeam)
 		msg[1] = nil
 		local s = join(msg)
-		print ("(Advert) " .. ply:GetName() .. ": " .. s)
+		print ("(" .. GetTString("Advert") .. ") " .. ply:GetName() .. ": " .. s)
 
 		MessageAll({
-			Color(231, 76, 60), "(Advert) ",
+			Color(231, 76, 60), "(" .. GetTString("Advert") .. ") ",
 			GetCliqueColor(ply:GetClique()),
 			ply:GetRPName() .. ": ",
 			Color(255,255,255), s
 		})
 		return ""
 	end,
-	["/advert"] = function(ply, msg, isTeam)
+	["/" .. GetTString("advert")] = function(ply, msg, isTeam)
 		msg[1] = nil
 		local s = join(msg)
-		print ("(Advert) " .. ply:GetName() .. ": " .. s)
+		print ("(" .. GetTString("Advert") .. ") " .. ply:GetName() .. ": " .. s)
 
 		MessageAll({
-			Color(231, 76, 60), "(Advert) ",
+			Color(231, 76, 60), "(" .. GetTString("Advert") .. ") ",
 			GetCliqueColor(ply:GetClique()),
 			ply:GetRPName() .. ": ",
 			Color(255,255,255), s
 		})
 		return ""
 	end,
-	["/roll"] = function(ply, msg, isTeam)
+	["/" .. GetTString("roll")] = function(ply, msg, isTeam)
 		local die = msg[2] or 10
 
-		print ("(Roll) " .. ply:GetName())
+		print ("(" .. GetTString("Roll") .. ") " .. ply:GetName())
 
 		MessageAll({
-			Color(39, 174, 96), ply:GetRPName() .. " rolled a " .. math.random(1,die)
+			Color(39, 174, 96), ply:GetRPName() .. " " .. GetTString("Roll") .. " a " .. math.random(1,die)
 		})
 		return ""
 	end,
@@ -332,7 +332,7 @@ hook.Add("PlayerSay", "textCommands", function(ply, text, isTeam)
 			return x
 		end
 	else
-		print ("(Local) " .. ply:GetName() .. ": " .. text)
+		print ("(" .. GetTString("Local") .. ") " .. ply:GetName() .. ": " .. text)
 
 		local plys = {}
 
@@ -344,7 +344,7 @@ hook.Add("PlayerSay", "textCommands", function(ply, text, isTeam)
 
 		MessageAll({
 			Color(255,255,255),
-			"(Local) " .. ply:GetRPName() .. ": " .. text,
+			"(" .. GetTString("Local") .. ") " .. ply:GetRPName() .. ": " .. text,
 		}, plys)
 		return ""
 	end

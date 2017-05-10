@@ -1,12 +1,4 @@
 
-LANGUAGES = {
-	[1] = "English"	
-}
-
-LANGUAGE = 1
-
-
-
 ClientConfig = {
 	DeveloperMat = Material("icon16/application_osx_terminal.png"),
 	SuperadminMat = Material("icon16/color_wheel.png"),
@@ -118,28 +110,45 @@ ClientConfig = {
 
 		return firstName .. " " .. lastName
 	end,
+	GradeName = function(g)
+		local grade = g .. "th " .. GetTString("Grader")
+
+		if g == 9 then
+			grade = GetTString("Freshman")
+		elseif g == 10 then
+			grade = GetTString("Sophomore")
+		elseif g == 11 then
+			grade = GetTString("Junior")
+		elseif g == 12 then
+			grade = GetTString("Senior")
+		else
+			print("Not found!")
+		end
+
+		return grade
+	end,
 	Grade = function(ply)
 		local grade = ""
 
 		if ply:GetNWString("teacher") and ply:GetNWString("teacher") ~= "" then
 			grade = ply:GetNWString("Teacher")
 		elseif ply:GetNWInt("grade") then
-			grade = ply:GetNWInt("grade") .. "th Grader"
+			grade = ClientConfig.GradeName(tonumber(ply:GetNWInt("grade")))
 		end
 
 		return grade
 	end,
 	Rank = function(ply)
-		local status = "Player"
+		local status = GetTString("Player")
 
 		if ply.SteamID64 and ply:SteamID64() == "76561198079126590" then
-			status = "Developer"
+			status = GetTString("Developer")
 		elseif ply:IsSuperAdmin() then
-			status = "Owner"
+			status = GetTString("Owner")
 		elseif ply:IsAdmin() then
-			status = "Admin"
+			status = GetTString("Admin")
 		elseif ply.VIP then
-			status = "VIP"
+			status = GetTString("VIP")
 		end
 
 		return status

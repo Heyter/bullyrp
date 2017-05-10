@@ -9,6 +9,7 @@ util.AddNetworkString("update_character")
 AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua")
 
+AddCSLuaFile("shared/sh_strings.lua")
 AddCSLuaFile("shared/util.lua")
 AddCSLuaFile("shared/sh_cliques.lua")
 AddCSLuaFile("shared/sh_points.lua")
@@ -34,6 +35,7 @@ resource.AddWorkshop( "920348014" )
 
 include("shared.lua")
 
+include("shared/sh_strings.lua")
 include("shared/util.lua")
 include("shared/sh_cliques.lua")
 include("shared/sh_points.lua")

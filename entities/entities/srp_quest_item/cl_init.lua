@@ -33,17 +33,6 @@ function ENT:Post()
 
 	if not ply or not IsValid(ply) then return end
 
-	local firstName = "Barack"
-	local lastName = "Obama"
-
-	if ply:GetNWString("firstName") ~= "" then
-		firstName = ply:GetNWString("firstName")
-	end
-
-	if ply:GetNWString("lastName") ~= "" then
-		lastName = ply:GetNWString("lastName")
-	end
-
 	local angles = self:GetAngles();
 	local position = self:GetPos();
 	local aboveoffset = angles:Up() * -0 + angles:Forward() * 0 + angles:Right() * 0;
@@ -60,7 +49,7 @@ function ENT:Post()
 
 	cam.Start3D2D(position + aboveoffset, SpinAng, 0.2);
 		draw.SimpleText(
-			firstName .. " " .. lastName,
+			ClientConfig.RPName(ply),
 			"quest_item_name",
 			-0,
 			-200 + self.delta * 10,

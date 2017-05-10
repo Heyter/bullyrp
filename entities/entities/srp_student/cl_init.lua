@@ -50,7 +50,7 @@ function ENT:Post()
 			(self:GetNWBool("IsLeader") and cRespect >= POINTS_FOR_LEADER_MISSION and clique ~= self:GetNWInt("Clique"))) then
 			
 			draw.SimpleText(
-				"Mission Available",
+				GetTString("Mission Available"),
 				"npcs_teacher_mission",
 				-0,
 				-485,

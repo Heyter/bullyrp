@@ -261,32 +261,32 @@ timer.Simple(
 		end
 
 		local principal = {
-			["Name"] = "Principal Skinner",
-			["Title"] = "Principal",
-			["Model"] = "models/monk.mdl"
+			["Name"] = GetTString("Principal") .. " Skinner",
+			["Title"] = GetTString("Principal"),
+			["Model"] = "models/monk.mdl",
 		}
 		principal.ent = SpawnTeacher(principal)
 		principal.ent:Roam(SCHOOL_POINTS)
 
 		local securityGuard1 = {
-			["Name"] = "Officer " .. TEACHER_NAMES[math.random(#TEACHER_NAMES)],
-			["Title"] = "Security Guard",
-			["Model"] = "models/odessa.mdl"
+			["Name"] = GetTString("Officer") .. " " .. TEACHER_NAMES[math.random(#TEACHER_NAMES)],
+			["Title"] = GetTString("Security Guard"),
+			["Model"] = "models/odessa.mdl",
 		}
 		securityGuard1.ent = SpawnTeacher(securityGuard1)
 		securityGuard1.ent:Roam(ROAMING_POINTS)
 
 		local securityGuard2 = {
-			["Name"] = "Officer " .. TEACHER_NAMES[math.random(#TEACHER_NAMES)],
-			["Title"] = "Security Guard",
+			["Name"] = GetTString("Officer") .. " " .. TEACHER_NAMES[math.random(#TEACHER_NAMES)],
+			["Title"] = GetTString("Security Guard"),
 			["Model"] = "models/odessa.mdl"
 		}
 		securityGuard2.ent = SpawnTeacher(securityGuard2)
 		securityGuard2.ent:Roam(ROAMING_POINTS)
 
 		local detentionTeacher = {
-			["Name"] = "Mr. " .. TEACHER_NAMES[math.random(#TEACHER_NAMES)],
-			["Title"] = "Detention Teacher",
+			["Name"] = GetTString("Mr.") .. " " .. TEACHER_NAMES[math.random(#TEACHER_NAMES)],
+			["Title"] = GetTString("Detention") .. " " .. GetTString("Teacher"),
 			["Model"] = TEACHER_MODELS[1][math.random(#TEACHER_MODELS[1])]
 		}
 		detentionTeacher.ent = SpawnTeacher(detentionTeacher)
@@ -295,8 +295,8 @@ timer.Simple(
 		detentionTeacher.ent:SetMonitor(false)
 
 		local counselor = {
-			["Name"] = "Ms. " .. TEACHER_NAMES[math.random(#TEACHER_NAMES)],
-			["Title"] = "School Counselor (Press E on me)",
+			["Name"] = GetTString("Ms.") .. " " .. TEACHER_NAMES[math.random(#TEACHER_NAMES)],
+			["Title"] = GetTString("School Counselor") .. " (" .. GetTString("Press E on me") .. ")",
 			["Model"] = TEACHER_MODELS[2][math.random(#TEACHER_MODELS[2])]
 		}
 		counselor.ent = SpawnTeacher(counselor)

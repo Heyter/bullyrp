@@ -29,7 +29,7 @@ local QMenuScheduleFont = surface.CreateFont("QMenuScheduleFont", {
 
 local Menus = {
 	[1] = {
-		Name = "Grades",
+		Name = GetTString("Grades"),
 		Panel = function(panel, topbar)
 			dPanel = vgui.Create("DPanel", panel)
 			dPanel:SetPos(0,topbar)
@@ -38,7 +38,7 @@ local Menus = {
 		end,
 	},
 	[2] = {
-		Name = "Cliques",
+		Name = GetTString("Cliques"),
 		Panel = function(panel, topbar)
 			dPanel = vgui.Create("DPanel", panel)
 			dPanel:SetPos(0,topbar)
@@ -150,7 +150,7 @@ local Menus = {
 		end,
 	},
 	[3] = {
-		Name = "Homework",
+		Name = GetTString("Homework"),
 		Panel = function(panel, topbar)
 			dPanel = vgui.Create("DPanel", panel)
 			dPanel:SetPos(0,topbar)
@@ -159,7 +159,7 @@ local Menus = {
 		end,
 	},
 	[4] = {
-		Name = "Schedule",
+		Name = GetTString("Schedule"),
 		Panel = function(panel, topbar)
 			local padding = 20
 			dPanel = vgui.Create("RichText", panel)
@@ -170,12 +170,12 @@ local Menus = {
 			end
 			dPanel:DockPadding(10,10,10,10)
 			for k,v in pairs(databaseGetValue("schedule") or {}) do
-				dPanel:AppendText("Class " .. k .. ":\n")
+				dPanel:AppendText(GetTString("Class") .. " " .. k .. ":\n")
 
 				local c = CLASSES[v]
-				dPanel:AppendText(" - Name: " .. c.Name .. "\n")
-				dPanel:AppendText(" - Room: " .. c.Room .. "\n")
-				dPanel:AppendText(" - Subject: " .. c.Subject .. "\n")
+				dPanel:AppendText(" - " .. GetTString("Name") .. ": " .. c.Name .. "\n")
+				dPanel:AppendText(" - " .. GetTString("Room") .. ": " .. c.Room .. "\n")
+				dPanel:AppendText(" - " .. GetTString("Subject") .. ": " .. c.Subject .. "\n")
 
 				dPanel:AppendText("\n")
 			end

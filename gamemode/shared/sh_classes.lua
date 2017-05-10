@@ -730,34 +730,34 @@ if SERVER then
 
 	TEACHERS = {
 		[1] = {
-			["Title"] = "Math Teacher",
+			["Title"] = GetTString("Math") .. " " .. GetTString("Teacher"),
 		},
 		[2] = {
-			["Title"] = "Math Teacher",
+			["Title"] = GetTString("Math") .. " " .. GetTString("Teacher"),
 		},
 		[3] = {
-			["Title"] = "Science Teacher",
+			["Title"] = GetTString("Science") .. " " .. GetTString("Teacher"),
 		},
 		[4] = {
-			["Title"] = "Science Teacher",
+			["Title"] = GetTString("Science") .. " " .. GetTString("Teacher"),
 		},
 		[5] = {
-			["Title"] = "English Teacher",
+			["Title"] = GetTString("English") .. " " .. GetTString("Teacher"),
 		},
 		[6] = {
-			["Title"] = "English Teacher",
+			["Title"] = GetTString("English") .. " " .. GetTString("Teacher"),
 		},
 		[7] = {
-			["Title"] = "Social Studies Teacher",
+			["Title"] = GetTString("Social Studies") .. " " .. GetTString("Teacher"),
 		},
 		[8] = {
-			["Title"] = "Social Studies Teacher",
+			["Title"] = GetTString("Social Studies") .. " " .. GetTString("Teacher"),
 		},
 		[9] = {
-			["Title"] = "Math Teacher",
+			["Title"] = GetTString("Math") .. " " .. GetTString("Teacher"),
 		},
 		[10] = {
-			["Title"] = "CompSci Teacher",
+			["Title"] = GetTString("CompSci") .. " " .. GetTString("Teacher"),
 		},
 	}
 
@@ -768,9 +768,9 @@ if SERVER then
 		v.Model = TEACHER_MODELS[gender][math.random(#TEACHER_MODELS[gender])]
 
 		if gender == 1 then
-			v.Name = "Mr. " .. v.Name
+			v.Name = GetTString("Mr.") .. " " .. v.Name
 		else
-			v.Name = "Ms. " .. v.Name
+			v.Name = GetTString("Ms.") .. " " .. v.Name
 		end
 
 	end
@@ -779,107 +779,107 @@ end
 CLASSES = {
 	["Lunch"] = {
 		["Room"] = "Cafe",
-		["Subject"] = "Lunch",
-		["Name"] = "Lunch",
+		["Subject"] = GetTString("Lunch"),
+		["Name"] = GetTString("Lunch"),
 	},
 	["PreAlgerbra"] = {
 		["Room"] = "B107",
-		["Subject"] = "Math",
-		["Name"] = "Pre-Algerbra",
+		["Subject"] = GetTString("Math"),
+		["Name"] = GetTString("Pre-Algerbra"),
 	},
 	["AlgerbraI"] = {
 		["Room"] = "A01",
-		["Subject"] = "Math",
-		["Name"] = "Algerbra I",
+		["Subject"] = GetTString("Math"),
+		["Name"] = GetTString("Algerbra I"),
 	},
 	["AlgerbraII"] = {
 		["Room"] = "A01",
-		["Subject"] = "Math",
-		["Name"] = "Algerbra II",
+		["Subject"] = GetTString("Math"),
+		["Name"] = GetTString("Algerbra II"),
 	},
 	["Geometry"] = {
 		["Room"] = "A02",
-		["Subject"] = "Math",
-		["Name"] = "Geometry",
+		["Subject"] = GetTString("Math"),
+		["Name"] = GetTString("Geometry"),
 	},
 	["PreCalculus"] = {
 		["Room"] = "A02",
-		["Subject"] = "Math",
-		["Name"] = "PreCalculus",
+		["Subject"] = GetTString("Math"),
+		["Name"] = GetTString("PreCalculus"),
 	},
 
 	["BiologyI"] = {
 		["Room"] = "B101",
-		["Subject"] = "Science",
-		["Name"] = "Biology I",
+		["Subject"] = GetTString("Science"),
+		["Name"] = GetTString("Biology I"),
 	},
 	["ChemistryI"] = {
 		["Room"] = "B103",
-		["Subject"] = "Science",
-		["Name"] = "Chemistry I",
+		["Subject"] = GetTString("Science"),
+		["Name"] = GetTString("Chemistry I"),
 	},
 	["PhysicsI"] = {
 		["Room"] = "B101",
-		["Subject"] = "Science",
-		["Name"] = "Physics I",
+		["Subject"] = GetTString("Science"),
+		["Name"] = GetTString("Physics I"),
 	},
 	["EarthScienceI"] = {
 		["Room"] = "B103",
-		["Subject"] = "Science",
-		["Name"] = "Earth Science I",
+		["Subject"] = GetTString("Science"),
+		["Name"] = GetTString("Earth Science I"),
 	},
 
 	["English9"] = {
 		["Room"] = "B106",
-		["Subject"] = "English",
-		["Name"] = "English 9",
+		["Subject"] = GetTString("English"),
+		["Name"] = GetTString("English 9"),
 	},
 	["English10"] = {
 		["Room"] = "B106",
-		["Subject"] = "English",
-		["Name"] = "English 10",
+		["Subject"] = GetTString("English"),
+		["Name"] = GetTString("English 10"),
 	},
 	["English11"] = {
 		["Room"] = "B102",
-		["Subject"] = "English",
-		["Name"] = "English 11",
+		["Subject"] = GetTString("English"),
+		["Name"] = GetTString("English 11"),
 	},
 	["English12"] = {
 		["Room"] = "B102",
-		["Subject"] = "English",
-		["Name"] = "English 12",
+		["Subject"] = GetTString("English"),
+		["Name"] = GetTString("English 12"),
 	},
 
 	["WorldHistory"] = {
 		["Room"] = "C202",
-		["Subject"] = "Social Studies",
-		["Name"] = "World History",
+		["Subject"] = GetTString("Social Studies"),
+		["Name"] = GetTString("World History"),
 	},
 	["AmericanHistory"] = {
 		["Room"] = "C202",
-		["Subject"] = "Social Studies",
-		["Name"] = "American History",
+		["Subject"] = GetTString("Social Studies"),
+		["Name"] = GetTString("American History"),
 	},
 	["Government"] = {
 		["Room"] = "C204",
-		["Subject"] = "Social Studies",
-		["Name"] = "Government",
+		["Subject"] = GetTString("Social Studies"),
+		["Name"] = GetTString("Government"),
 	},
 	["Sociology"] = {
 		["Room"] = "C204",
-		["Subject"] = "Social Studies",
-		["Name"] = "Sociology",
+		["Subject"] = GetTString("Social Studies"),
+		["Name"] = GetTString("Sociology"),
 	},
 
 	["ComputerScienceIA"] = {
 		["Room"] = "ComputerLab1",
-		["Subject"] = "Science",
-		["Name"] = "Computer Science I",
+		["Subject"] = GetTString("Science"),
+		["Name"] = GetTString("Computer Science I"),
 	},
 	["ComputerScienceIB"] = {
 		["Room"] = "ComputerLab2",
-		["Subject"] = "Science",
-		["Name"] = "Computer Science I",
+		["Subject"] = GetTString("Science"),
+		["Name"] = GetTString("Computer Science I"),
 	},
 }
 

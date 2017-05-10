@@ -45,20 +45,20 @@ end
 
 local Menus = {
 	[1] = {
-		Name = "Name",
+		Name = GetTString("Name"),
 		Panel = function(panel, topbar)
 			dPanel = vgui.Create("DPanel", panel)
 			dPanel:SetPos(0,topbar)
 			dPanel:SetSize(panel:GetWide(), panel:GetTall() - topbar)
 			dPanel.Paint = function(s,w,h)
 				draw.SimpleText(
-					"First Name:",
+					GetTString("First Name") .. ":",
 					"QMenuScheduleFont",
 					30,30
 				)
 
 				draw.SimpleText(
-					"First Name:",
+					GetTString("Last Name") .. ":",
 					"QMenuScheduleFont",
 					30,120
 				)
@@ -95,7 +95,7 @@ local Menus = {
 			local dFinished = vgui.Create("DButton", dPanel)
 			dFinished:SetSize(140, 40)
 			dFinished:SetPos(dPanel:GetWide() - 145*2, dPanel:GetTall() - 45)
-			dFinished:SetText("Quit!")
+			dFinished:SetText(GetTString("Quit") .. "!")
 			dFinished:SetFont("QMenuCliqueFont")
 			dFinished.DoClick = function()
 				CloseCharacterCreation()
@@ -113,7 +113,7 @@ local Menus = {
 			local dFinished = vgui.Create("DButton", dPanel)
 			dFinished:SetSize(140, 40)
 			dFinished:SetPos(dPanel:GetWide() - 145, dPanel:GetTall() - 45)
-			dFinished:SetText("Finished!")
+			dFinished:SetText(GetTString("Finished")  .. "!")
 			dFinished:SetFont("QMenuCliqueFont")
 			dFinished.DoClick = function()
 				SubmitChanges()
@@ -131,7 +131,7 @@ local Menus = {
 		end,
 	},
 	[2] = {
-		Name = "Player Model",
+		Name = GetTString("Player Model"),
 		Panel = function(panel, topbar)
 			dPanel = vgui.Create("DPanel", panel)
 			dPanel:SetPos(0,topbar)
@@ -201,7 +201,7 @@ local Menus = {
 			local dFinished = vgui.Create("DButton", dPanel)
 			dFinished:SetSize(140, 40)
 			dFinished:SetPos(dPanel:GetWide() - 145*2, dPanel:GetTall() - 45)
-			dFinished:SetText("Quit!")
+			dFinished:SetText(GetTString("Quit") .. "!")
 			dFinished:SetFont("QMenuCliqueFont")
 			dFinished.DoClick = function()
 				CloseCharacterCreation()
@@ -219,7 +219,7 @@ local Menus = {
 			local dFinished = vgui.Create("DButton", dPanel)
 			dFinished:SetSize(140, 40)
 			dFinished:SetPos(dPanel:GetWide() - 145, dPanel:GetTall() - 45)
-			dFinished:SetText("Finished!")
+			dFinished:SetText(GetTString("Finished") .. "!")
 			dFinished:SetFont("QMenuCliqueFont")
 			dFinished.DoClick = function()
 				SubmitChanges()
@@ -237,7 +237,7 @@ local Menus = {
 		end,
 	},
 	[3] = {
-		Name = "Schedule",
+		Name = GetTString("Schedule"),
 		Panel = function(panel, topbar)
 			local psch = POSSIBLE_SCHEDULES[9]
 
@@ -247,7 +247,7 @@ local Menus = {
 			dPanel.Paint = function(s,w,h)
 				for i=1,#psch do
 					draw.SimpleText(
-						"Class " .. i .. ":",
+						GetTString("Class") .. " " .. i .. ":",
 						"QMenuScheduleFont",
 						w/2-60, (i - 1) * 50 + 40,
 						Color(255,255,255),
@@ -283,7 +283,7 @@ local Menus = {
 			local dFinished = vgui.Create("DButton", dPanel)
 			dFinished:SetSize(140, 40)
 			dFinished:SetPos(dPanel:GetWide() - 145*2, dPanel:GetTall() - 45)
-			dFinished:SetText("Quit!")
+			dFinished:SetText(GetTString("Quit") .. "!")
 			dFinished:SetFont("QMenuCliqueFont")
 			dFinished.DoClick = function()
 				CloseCharacterCreation()
@@ -301,7 +301,7 @@ local Menus = {
 			local dFinished = vgui.Create("DButton", dPanel)
 			dFinished:SetSize(140, 40)
 			dFinished:SetPos(dPanel:GetWide() - 145, dPanel:GetTall() - 45)
-			dFinished:SetText("Finished!")
+			dFinished:SetText(GetTString("Finished") .. "!")
 			dFinished:SetFont("QMenuCliqueFont")
 			dFinished.DoClick = function()
 				SubmitChanges()

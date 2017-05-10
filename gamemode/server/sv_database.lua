@@ -11,6 +11,7 @@ local defaultValues = {
 	["model"] = "models/player/Group01/male_02.mdl",
 	["schedule"] = GenerateSchedule(9),
 	["watchedIntro"] = 0,
+	["language"] = 1,
 
 	["clique"] = 1,
 
@@ -39,10 +40,8 @@ function player:dbNW(name, v)
 	end
 
 	if nws[name] == 1 then
-		print ("name: " .. name .. " v: " .. v)
 		self:SetNWString(name, v)
 	elseif nws[name] == 2 then
-		print ("name1: " .. name .. " v: " .. v)
 		self:SetNWInt(name, v)
 	else
 		print ("Found none. Type: " .. type(v))

@@ -77,6 +77,13 @@ concommand.Add("reset", function(ply, cmd, args)
 	end
 end)
 
+concommand.Add("changelanguage", function(ply, cmd, args)
+	if ply and IsValid(ply) and tonumber(args[1]) then
+		ply:dbSetValue("language", tonumber(args[1]))
+	end
+end)
+
+
 concommand.Add("renamefirst", function(ply, cmd, args)
 	if ply and IsValid(ply) and (ply:IsAdmin() or ply:IsSuperAdmin()) then
 		if not args[2] then
