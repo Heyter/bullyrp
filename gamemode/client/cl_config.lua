@@ -147,6 +147,8 @@ ClientConfig = {
 			status = GetTString("Admin")
 		elseif ply:GetUserGroup() then
 			status = ply:GetUserGroup()
+		else
+			status = "Player"
 		end
 
 		return status
@@ -161,7 +163,9 @@ ClientConfig = {
 		elseif ply:IsAdmin() then
 			icon = ClientConfig.AdminMat
 		elseif ClientConfig[ply:GetUserGroup() .. "Mat"] then
-			status = ClientConfig[ply:GetUserGroup() .. "Mat"]
+			icon = ClientConfig[ply:GetUserGroup() .. "Mat"]
+		else
+			icon = ClientConfig.RegularMat
 		end
 
 		return icon
