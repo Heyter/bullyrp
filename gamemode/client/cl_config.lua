@@ -145,8 +145,8 @@ ClientConfig = {
 			status = GetTString("Owner")
 		elseif ply:IsAdmin() then
 			status = GetTString("Admin")
-		elseif ply.VIP then
-			status = GetTString("VIP")
+		elseif ply:GetUserGroup() then
+			status = ply:GetUserGroup()
 		end
 
 		return status
@@ -160,8 +160,8 @@ ClientConfig = {
 			icon = ClientConfig.SuperadminMat
 		elseif ply:IsAdmin() then
 			icon = ClientConfig.AdminMat
-		elseif ply.VIP then
-			icon = ClientConfig.VipMat
+		elseif ClientConfig[ply:GetUserGroup() .. "Mat"] then
+			status = ClientConfig[ply:GetUserGroup() .. "Mat"]
 		end
 
 		return icon

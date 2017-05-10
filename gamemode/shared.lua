@@ -64,3 +64,19 @@ function GetCliqueColor(clique)
 
 	return Color(c.r, c.g, c.b)
 end
+
+function GetGrade(g)
+	local grade = g .. "th " .. GetTString("Grader")
+
+	if g == 9 then
+		grade = GetTString("Freshman")
+	elseif g == 10 then
+		grade = GetTString("Sophomore")
+	elseif g == 11 then
+		grade = GetTString("Junior")
+	elseif g == 12 then
+		grade = GetTString("Senior")
+	end
+
+	return grade
+end

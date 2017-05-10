@@ -230,7 +230,7 @@ function NewStudent(i, c)
 
 	local s = {
 		["Name"] = names[math.random(#names)] .. " " .. TEACHER_NAMES[math.random(#TEACHER_NAMES)],
-		["Title"] = grade .. "th Grader",
+		["Title"] = GetGrade(grade),
 		["Model"] = STUDENT_MODELS[gender][math.random(#STUDENT_MODELS[gender])],
 		["Schedule"] = sch,
 		["Clique"] = clique,
