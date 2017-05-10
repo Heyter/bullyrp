@@ -55,7 +55,7 @@ function GetCliqueColor(clique)
 	local clique = clique
 	local c = WHITE
 
-	if CLIQUES[clique] then
+	if CLIQUES and CLIQUES[clique] then
 		clique = CLIQUES[clique]
 		if CliqueColorMap[clique.Name] then
 			c = CliqueColorMap[clique.Name]

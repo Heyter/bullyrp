@@ -121,8 +121,6 @@ ClientConfig = {
 			grade = GetTString("Junior")
 		elseif g == 12 then
 			grade = GetTString("Senior")
-		else
-			print("Not found!")
 		end
 
 		return grade
