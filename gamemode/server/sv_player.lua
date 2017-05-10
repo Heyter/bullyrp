@@ -118,6 +118,10 @@ function player:SetClique(c)
 	self:dbSetValue("clique", tonumber(c))
 end
 
+function player:GetClique(c)
+	return tonumber(self:GetNWInt("clique", 1))
+end
+
 local function UpdatePlayer(ply, db)
 	print ("Updating a player's info!")
 	PrintTable(db)

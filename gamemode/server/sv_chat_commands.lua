@@ -58,7 +58,9 @@ ChatCommands = {
 		local s = join(msg)
 		print ("(OOC) " .. ply:GetName() .. ": " .. s)
 		MessageAll({
-			Color(56, 163, 234), "(OOC) " .. ply:GetRPName() .. ": ",
+			Color(56, 163, 234), "(OOC) ",
+			GetCliqueColor(ply:GetClique()),
+			ply:GetRPName() .. ": ",
 			Color(255,255,255), s
 		})
 		return ""
@@ -68,7 +70,9 @@ ChatCommands = {
 		local s = join(msg)
 		print ("(OOC) " .. ply:GetName() .. ": " .. s)
 		MessageAll({
-			Color(56, 163, 234), "(OOC) " .. ply:GetRPName() .. ": ",
+			Color(56, 163, 234), "(OOC) ",
+			GetCliqueColor(ply:GetClique()),
+			ply:GetRPName() .. ": ",
 			Color(255,255,255), s
 		})
 		return ""
@@ -87,7 +91,9 @@ ChatCommands = {
 		end
 
 		MessageAll({
-			Color(39, 174, 96), "(LOOC) " .. ply:GetRPName() .. ": ",
+			Color(39, 174, 96), "(LOOC) ",
+			GetCliqueColor(ply:GetClique()),
+			ply:GetRPName() .. ": ",
 			Color(255,255,255), s
 		}, plys)
 		return ""
@@ -106,7 +112,9 @@ ChatCommands = {
 		end
 
 		MessageAll({
-			Color(39, 174, 96), "(LOOC) " .. ply:GetRPName() .. ": ",
+			Color(39, 174, 96), "(LOOC) ",
+			GetCliqueColor(ply:GetClique()),
+			ply:GetRPName() .. ": ",
 			Color(255,255,255), join(msg)
 		}, plys)
 		return ""
@@ -125,7 +133,9 @@ ChatCommands = {
 		end
 
 		MessageAll({
-			Color(22, 160, 133), "(Whisper) " .. ply:GetRPName() .. ": ",
+			Color(22, 160, 133), "(Whisper) ",
+			GetCliqueColor(ply:GetClique()),
+			ply:GetRPName() .. ": ",
 			Color(255,255,255), s
 		}, plys)
 		return ""
@@ -144,7 +154,9 @@ ChatCommands = {
 		end
 
 		MessageAll({
-			Color(22, 160, 133), "(Whisper) " .. ply:GetRPName() .. ": ",
+			Color(22, 160, 133), "(Whisper) ",
+			GetCliqueColor(ply:GetClique()),
+			ply:GetRPName() .. ": ",
 			Color(255,255,255), s
 		}, plys)
 		return ""
@@ -163,7 +175,9 @@ ChatCommands = {
 		end
 
 		MessageAll({
-			Color(231, 76, 60), "(Yell) " .. ply:GetRPName() .. ": ",
+			Color(231, 76, 60), "(Yell) ",
+			GetCliqueColor(ply:GetClique()),
+			ply:GetRPName() .. ": ",
 			Color(255,255,255), s
 		}, plys)
 		return ""
@@ -182,7 +196,9 @@ ChatCommands = {
 		end
 
 		MessageAll({
-			Color(231, 76, 60), "(Yell) " .. ply:GetRPName() .. ": ",
+			Color(231, 76, 60), "(Yell) ",
+			GetCliqueColor(ply:GetClique()),
+			ply:GetRPName() .. ": ",
 			Color(255,255,255), s
 		}, plys)
 		return ""
@@ -193,7 +209,9 @@ ChatCommands = {
 		print ("(Advert) " .. ply:GetName() .. ": " .. s)
 
 		MessageAll({
-			Color(231, 76, 60), "(Advert) " .. ply:GetRPName() .. ": ",
+			Color(231, 76, 60), "(Advert) ",
+			GetCliqueColor(ply:GetClique()),
+			ply:GetRPName() .. ": ",
 			Color(255,255,255), s
 		})
 		return ""
@@ -204,7 +222,9 @@ ChatCommands = {
 		print ("(Advert) " .. ply:GetName() .. ": " .. s)
 
 		MessageAll({
-			Color(231, 76, 60), "(Advert) " .. ply:GetRPName() .. ": ",
+			Color(231, 76, 60), "(Advert) ",
+			GetCliqueColor(ply:GetClique()),
+			ply:GetRPName() .. ": ",
 			Color(255,255,255), s
 		})
 		return ""
