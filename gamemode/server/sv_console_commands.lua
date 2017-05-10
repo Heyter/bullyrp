@@ -84,7 +84,7 @@ concommand.Add("renamefirst", function(ply, cmd, args)
 		end
 
 		for k,v in pairs(player.GetAll()) do
-			if v:GetNWString("firstName") == args[1] then
+			if string.lower(v:GetNWString("firstName")) == args[1] then
 				v:dbSetValue("firstName", args[2])
 			end
 		end
@@ -98,7 +98,7 @@ concommand.Add("renamelast", function(ply, cmd, args)
 		end
 
 		for k,v in pairs(player.GetAll()) do
-			if v:GetNWString("lastName") == args[1] then
+			if string.lower(v:GetNWString("lastName")) == args[1] then
 				v:dbSetValue("lastName", args[2])
 			end
 		end
