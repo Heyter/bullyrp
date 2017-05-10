@@ -207,8 +207,6 @@ function ENT:Use( activator, caller, type, value )
 			net.WriteUInt(self.quest.questLine5, 16)
 			net.WriteTable(self.quest.Meta)
 		net.Send(caller)
-	else
-		print("not qualified")
 	end
 end
 

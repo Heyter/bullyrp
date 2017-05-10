@@ -123,9 +123,6 @@ function player:GetClique(c)
 end
 
 local function UpdatePlayer(ply, db)
-	print ("Updating a player's info!")
-	PrintTable(db)
-
 	if IsValid(ply) and db then
 		if ply:dbGetValue("grade") == "8" then
 			ply:dbSetValue("grade", 9)
@@ -134,8 +131,6 @@ local function UpdatePlayer(ply, db)
 					["GenericSuccess"] = "You have been successfully enrolled!"
 				})
 			net.Send(ply)
-		else
-			print("Grade is not 8")
 		end
 		if db.firstName and db.firstName ~= "" then
 			ply:dbSetValue("firstName", string.sub(db.firstName, 1, 15):gsub('%W.',''))
@@ -149,7 +144,6 @@ local function UpdatePlayer(ply, db)
 
 			if i and k and STUDENT_PLAYER_MODELS[i] and STUDENT_PLAYER_MODELS[i][k] then
 				ply:dbSetValue("model", STUDENT_PLAYER_MODELS[i][k])
-				print("Going with model: " .. STUDENT_PLAYER_MODELS[i][k])
 			else
 				print("Model not FOUND!")
 			end
@@ -164,14 +158,9 @@ local function UpdatePlayer(ply, db)
 					if CLASSES[c] and psch then
 						for k,v in pairs(psch) do
 							if c == v then
-								print ("matched v: " .. v)
 								CurSchedule[i] = c
-							else
-								print("Not a mach to " .. v)
 							end
 						end
-					else
-						print ("no go on " .. c)
 					end
 				end
 			end
