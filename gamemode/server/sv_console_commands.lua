@@ -76,3 +76,31 @@ concommand.Add("reset", function(ply, cmd, args)
 		ply:dbDefault(true)
 	end
 end)
+
+concommand.Add("renamefirst", function(ply, cmd, args)
+	if ply and IsValid(ply) and (ply:IsAdmin() or ply:IsSuperAdmin()) then
+		if not args[2] then
+			args[2] = MALE_NAMES[math.random(#MALE_NAMES)]
+		end
+
+		for k,v in pairs(player.GetAll()) do
+			if v:GetNWString("firstName") == args[1] then
+				v:dbSetValue("firstName", args[2])
+			end
+		end
+	end
+end)
+
+concommand.Add("renamelast", function(ply, cmd, args)
+	if ply and IsValid(ply) and (ply:IsAdmin() or ply:IsSuperAdmin()) then
+		if not args[2] then
+			args[2] = TEACHER_NAMES[math.random(#TEACHER_NAMES)]
+		end
+
+		for k,v in pairs(player.GetAll()) do
+			if v:GetNWString("lastName") == args[1] then
+				v:dbSetValue("lastName", args[2])
+			end
+		end
+	end
+end)
