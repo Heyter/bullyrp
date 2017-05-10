@@ -29,7 +29,7 @@ local QMenuScheduleFont = surface.CreateFont("QMenuScheduleFont", {
 
 local Menus = {
 	[1] = {
-		Name = "Minimap",
+		Name = "Grades",
 		Panel = function(panel, topbar)
 			dPanel = vgui.Create("DPanel", panel)
 			dPanel:SetPos(0,topbar)
