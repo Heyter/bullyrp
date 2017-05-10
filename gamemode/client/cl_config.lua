@@ -97,7 +97,7 @@ ClientConfig = {
 	end,
 	OverheadGradeColor = function(ply, alpha)
 		-- This may be an "srp_student" or player
-		local clique = ply:GetNWInt("Clique")
+		local clique = ply:GetNWInt("clique")
 		local c = WHITE
 
 		if clique and CLIQUES[clique] then

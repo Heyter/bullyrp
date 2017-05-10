@@ -619,6 +619,15 @@ local function OverheadNames()
 			local pos2d = pos:ToScreen()
 			pos2d.y = pos2d.y - (dist / 10.0)
 
+			local clique = v:GetNWInt("Clique")
+			local cliqueColor = ClientConfig.OverheadGradeColor(v, alphaStrength)
+
+			if clique and ClientConfig.CliqueMats[clique] then
+				surface.SetDrawColor(cliqueColor)
+				surface.SetMaterial(ClientConfig.CliqueMats[clique])
+				surface.DrawTexturedRect(pos2d.x-16, pos2d.y-40, 32, 32)
+			end
+
 			draw.DrawText(
 				ClientConfig.RPName(v),
 				"player_overhead_name",
