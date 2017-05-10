@@ -276,7 +276,7 @@ local Strings = {
 
 -- Get Translated String
 function GetTString(name)
-	if CLIENT then
+	if CLIENT and databaseGetValue then
 		LANGUAGE = tonumber(databaseGetValue("language")) or 1
 	end
 
