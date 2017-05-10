@@ -114,6 +114,10 @@ function player:AddHands()
 	end
 end
 
+function player:SetClique(c)
+	self:dbSetValue("clique", tonumber(c))
+end
+
 local function UpdatePlayer(ply, db)
 	print ("Updating a player's info!")
 	PrintTable(db)

@@ -12,6 +12,8 @@ local defaultValues = {
 	["schedule"] = GenerateSchedule(9),
 	["watchedIntro"] = 0,
 
+	["clique"] = 1,
+
 	["cliques1"] = 10,
 	["cliques2"] = 10,
 	["cliques3"] = 10,
@@ -25,9 +27,10 @@ local tables = {
 }
 
 local nws = {
-	['firstName'] = true,
-	['lastName'] = true,
-	['grade'] = true,
+	['firstName'] = 1,
+	['lastName'] = 1,
+	['grade'] = 2,
+	["clique"] = 2,
 }
 
 function player:dbNW(name, v)
@@ -35,9 +38,11 @@ function player:dbNW(name, v)
 		v = self:dbGetValue(name)
 	end
 
-	if type(v) == "string" then
+	if nws[name] == 1 then
+		print ("name: " .. name .. " v: " .. v)
 		self:SetNWString(name, v)
-	elseif type(v) == "integer" or type(v) == "number" then
+	elseif nws[name] == 2 then
+		print ("name1: " .. name .. " v: " .. v)
 		self:SetNWInt(name, v)
 	else
 		print ("Found none. Type: " .. type(v))

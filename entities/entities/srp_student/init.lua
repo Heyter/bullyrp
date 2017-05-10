@@ -191,7 +191,11 @@ function ENT:Roam(points)
 end
 
 function ENT:Use( activator, caller, type, value )
-	if self.qid and self.quest and self.QuestOpen and caller and IsValid(caller) and caller:IsPlayer() and not caller.HasQuest and tonumber(caller:GetNWInt("grade")) > 8 then
+	if self.qid and self.quest and self.QuestOpen and
+		IsValid(caller) and caller:IsPlayer() and
+		not caller.HasQuest and tonumber(caller:GetNWInt("grade")) > 8 and
+		(not self.IsLeader or
+			(self.IsLeader and tonumber(caller:dbGetValue("cliques" .. self.Clique)) >= POINTS_FOR_LEADER_MISSION and tonumber(caller:dbGetValue("clique")) ~= self.Clique)) then
 		net.Start("quest_request")
 			net.WriteUInt(self.qid, 32)
 			net.WriteEntity(self)
@@ -203,6 +207,8 @@ function ENT:Use( activator, caller, type, value )
 			net.WriteUInt(self.quest.questLine5, 16)
 			net.WriteTable(self.quest.Meta)
 		net.Send(caller)
+	else
+		print("not qualified")
 	end
 end
 
@@ -227,23 +233,29 @@ function ENT:SetQuest(qid, quest)
 end
 
 function ENT:QuestAccepted()
-	self.QuestOpen = false
+	if not self.quest.AlwaysOpen then
+		self.QuestOpen = false
 
-	self:SetNWBool("QuestOpen", self.QuestOpen)
+		self:SetNWBool("QuestOpen", self.QuestOpen)
+	end
 end
 
 function ENT:QuestFailed()
-	self.QuestOpen = true
+	if not self.quest.AlwaysOpen then
+		self.QuestOpen = true
 
-	self:SetNWBool("QuestOpen", self.QuestOpen)
+		self:SetNWBool("QuestOpen", self.QuestOpen)
+	end
 end
 
 function ENT:QuestFinished()
-	self.qid = nil
-	self.quest = nil
-	self.QuestOpen = false
+	if not self.quest.AlwaysOpen then
+		self.qid = nil
+		self.quest = nil
+		self.QuestOpen = false
 
-	self:SetNWBool("QuestOpen", self.QuestOpen)
+		self:SetNWBool("QuestOpen", self.QuestOpen)
+	end
 end
 
 function ENT:SetLeader(bool)

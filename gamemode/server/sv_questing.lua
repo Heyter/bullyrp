@@ -9,10 +9,13 @@ function ProcessQuestComplete(ply)
 
 		QUEST_TYPES[q.Type].QuestCompleted(ply, q.Meta)
 
+		if not q.AlwaysOpen then
+			PendingQuests[q.qid] = nil
+		end
+
 		q.ent:QuestFinished()
-		ply.HasQuest = false
 		CurrentQuests[ply:SteamID64()] = nil
-		PendingQuests[q.qid] = nil
+		ply.HasQuest = false
 
 		net.Start("notification")
 			net.WriteTable({
@@ -120,8 +123,10 @@ net.Receive("quest_abort", function(len, ply)
 	end
 end)
 
-function GenerateQuest()
-	local t = math.random(#QUEST_TYPES)
+function GenerateQuest(t)
+	if not t then
+		t = math.random(#RANDOM_QUESTS)
+	end
 
 	return {
 		Type = t,
@@ -154,11 +159,16 @@ local function PickNewStudentForQuest()
 	return s
 end
 
-local function GenerateNewQuest()
-	local s = PickNewStudentForQuest()
+function GenerateNewQuest(s, quest)
+	if not s then
+		s = PickNewStudentForQuest()
+	end
 
 	if s then
-		local quest = GenerateQuest()
+		if not quest then
+			quest = GenerateQuest()
+		end
+		
 		quest.ent = s.ent
 		quest.Meta.entID = s.ent:EntIndex()
 
@@ -185,7 +195,7 @@ timer.Create(
 	0,
 	function()
 		for k,v in pairs(PendingQuests) do
-			if v.ent:HasQuest() and v.ent:IsQuestOpen() then
+			if not v.AlwaysOpen and v.ent:HasQuest() and v.ent:IsQuestOpen() then
 				v.ent:QuestFinished()
 				PendingQuests[k] = nil
 			end

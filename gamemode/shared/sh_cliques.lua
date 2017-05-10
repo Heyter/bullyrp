@@ -1,4 +1,6 @@
 
+POINTS_FOR_LEADER_MISSION = 50
+
 CLIQUES = {
 	[1] = {
 		GroupName = "Students",

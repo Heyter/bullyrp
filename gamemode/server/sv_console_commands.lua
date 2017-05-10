@@ -65,6 +65,12 @@ concommand.Add("sp", function(ply, cmd, args)
 	end
 end)
 
+concommand.Add("point", function(ply, cmd, args)
+	if ply and IsValid(ply) and (ply:IsAdmin() or ply:IsSuperAdmin()) then
+		ply:SetPos(POINTS[args[1]][1])
+	end
+end)
+
 concommand.Add("reset", function(ply, cmd, args)
 	if ply and IsValid(ply) then
 		ply:dbDefault(true)

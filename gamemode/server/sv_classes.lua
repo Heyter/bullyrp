@@ -317,14 +317,34 @@ timer.Simple(
 
 		local NerdLeader = NewStudent(nil, 2)
 		NerdLeader.ent:SetLeader(true)
+		local quest = GenerateQuest(2)
+		quest.AlwaysOpen = true
+		GenerateNewQuest(NerdLeader, quest)
+
 		local BullyLeader = NewStudent(nil, 3)
 		BullyLeader.ent:SetLeader(true)
+		local quest = GenerateQuest(2)
+		quest.AlwaysOpen = true
+		GenerateNewQuest(BullyLeader, quest)
+
 		local PreppyLeader = NewStudent(nil, 4)
 		PreppyLeader.ent:SetLeader(true)
+		local quest = GenerateQuest(2)
+		quest.AlwaysOpen = true
+		GenerateNewQuest(PreppyLeader, quest)
+
 		local BurnoutLeader = NewStudent(nil, 5)
 		BurnoutLeader.ent:SetLeader(true)
+		local quest = GenerateQuest(2)
+		quest.AlwaysOpen = true
+		GenerateNewQuest(BurnoutLeader, quest)
+
 		local JockLeader = NewStudent(nil, 6)
 		JockLeader.ent:SetLeader(true)
+		local quest = GenerateQuest(2)
+		quest.AlwaysOpen = true
+		GenerateNewQuest(JockLeader, quest)
+		
 	end
 )
 

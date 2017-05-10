@@ -41,9 +41,14 @@ function ENT:Post()
 	local SpinAng = Angle( 0, eyeang, 90 )
 
 	cam.Start3D2D(position + aboveoffset, SpinAng, 0.2);
-		local grade = LocalPlayer():GetNWInt("grade")
+		local grade = tonumber(LocalPlayer():GetNWInt("grade"))
+		local clique = tonumber(LocalPlayer():GetNWInt("clique"))
+		local cRespect = tonumber(databaseGetValue("cliques"..self:GetNWInt("Clique"))) or 10
 
-		if not IsDoingQuest and self:GetNWBool("QuestOpen") and grade ~= 8 then
+		if not IsDoingQuest and grade ~= 8 and
+			((self:GetNWBool("QuestOpen") and not self:GetNWBool("IsLeader")) or
+			(self:GetNWBool("IsLeader") and cRespect >= POINTS_FOR_LEADER_MISSION and clique ~= self:GetNWInt("Clique"))) then
+			
 			draw.SimpleText(
 				"Mission Available",
 				"npcs_teacher_mission",

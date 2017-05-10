@@ -142,9 +142,7 @@ QUEST_ITEMS = {
 	},
 }
 
-QUEST_POINTS = {
-	
-}
+RANDOM_QUESTS = {1}
 
 QUEST_GREETINGS1 = {
 	"Hey!",
@@ -220,8 +218,8 @@ QUEST_TYPES = {
 				local curXP = ply:dbGetValue("cliques" .. c) or 10
 				local endXP = curXP - math.floor(meta.Points / 2)
 
-				if endXP < 5 then
-					endXP = 5
+				if endXP < 8 then
+					endXP = 8
 				end
 
 				ply:dbSetValue("cliques" .. c, endXP)
@@ -244,8 +242,8 @@ QUEST_TYPES = {
 
 					local endXP = curXP - math.floor(meta.Points / 2)
 
-					if endXP < 5 then
-						endXP = 5
+					if endXP < 8 then
+						endXP = 8
 					end
 
 					ply:dbSetValue("cliques" .. other, endXP)
@@ -298,6 +296,76 @@ QUEST_TYPES = {
 			end
 		end,
 	},
+	[2] = {
+		Name = "CliqueInitiation", ID = 2,
+		Description = "Please find it!",
+		Lines = function(strs, meta) 
+			strs[2] = Color(39, 174, 96)
+			strs[3] = QUEST_ITEMS[meta.ItemID].Name
+			strs[4] = Color(255,255,255)
+			return strs
+		end,
+		GetMeta = function()
+			return {
+				ItemID = math.random(#QUEST_ITEMS),
+			}
+		end,
+		QuestAccepted = function(ply, meta)
+			return SpawnQuestItem(ply, meta.ItemID)
+		end,
+		QuestFailedCleanup = function(meta)
+			meta.qents:Remove()
+		end,
+		QuestAbort = function(ply, meta)
+			local e = Entity(meta.entID)
+
+			if e then
+				local c = e:GetClique()
+				local curXP = ply:dbGetValue("cliques" .. c) or 10
+				local endXP = curXP - 5
+
+				if endXP < 8 then
+					endXP = 8
+				end
+
+				ply:dbSetValue("cliques" .. c, endXP)
+			end
+		end,
+		QuestCompleted = function(ply, meta)
+			local e = Entity(meta.entID)
+
+			if e then
+				local c = e:GetClique()
+				local curXP = ply:dbGetValue("cliques" .. c) or 10
+				ply:dbSetValue("cliques" .. c, curXP + 5)
+				ply:SetClique(c)
+			end
+		end,
+		QuestReward = function(ply, meta)
+			local e = Entity(meta.entID)
+
+			if e then
+				local c = e:GetClique()
+				if c and CLIQUES[c] then
+					local cname = CLIQUES[c].GroupName
+					return {
+						"Become a member of the",
+							ClientConfig.OverheadGradeColor(e, 1),
+							cname,
+							Color(255,255,255),
+							"clique."
+						}
+				else
+					print("Nope.")
+					print(CLIQUES[c])
+					return {"None"}
+				end
+			else
+				print ("Entity was null, lol.")
+				return "None."
+			end
+		end,
+	},
 }
 
 -- Quest type indexed
@@ -308,7 +376,14 @@ QUEST_CHOICES_DIALOGUE = {
 		{"On my way to school, I dropped my", nil, nil, nil, "on the ground!"},
 		{"I need a", nil, nil, nil, "to, ah, finish an assignment for school."},
 		{"There is an ingredient I'm missing for my love potion. It calls for a", nil, nil, nil, "but I can't find any anywhere."},
-	}
+	},
+	[2] = {
+		{"I lost my", nil, nil, nil, "and I need your help finding it!"},
+		{"Someone stole my", nil, nil, nil, "and I can't seem to find it anywhere!"},
+		{"On my way to school, I dropped my", nil, nil, nil, "on the ground!"},
+		{"I need a", nil, nil, nil, "to, ah, finish an assignment for school."},
+		{"There is an ingredient I'm missing for my love potion. It calls for a", nil, nil, nil, "but I can't find any anywhere."},
+	},
 }
 
 QUEST_GREETINGS4 = {
@@ -322,7 +397,11 @@ QUEST_CHOICES_DIALOGUE_FAILURE = {
 	[1] = {
 		"I can't believe you would let me down like that!",
 		"I'll remember not to ask you again next time!",
-	}
+	},
+	[2] = {
+		"I can't believe you would let me down like that!",
+		"I'll remember not to ask you again next time!",
+	},
 }
 
 QUEST_CHOICES_DIALOGUE_SUCCESS = {
@@ -330,5 +409,10 @@ QUEST_CHOICES_DIALOGUE_SUCCESS = {
 		"Thank you for your help! I'll never forget it!",
 		"You're a life-saver man!",
 		"I owe you big time for doing this for me!",
-	}
+	},
+	[2] = {
+		"Thank you for your help! I'll never forget it!",
+		"You're a life-saver man!",
+		"I owe you big time for doing this for me!",
+	},
 }

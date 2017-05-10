@@ -157,7 +157,6 @@ if #player.GetAll() > 0 then
 		v.IsTeacher = false
 		v.pvpenabled = false
 		v:SetNWBool("pvpenabled", false)
-		v:SetNWInt("Clique", 1)
 
 		if not v:dbGetValue("watchedIntro") or v:dbGetValue("watchedIntro") == "0" then
 			print ("-------->> You need to watch intro! :)")

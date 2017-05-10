@@ -377,35 +377,37 @@ local function DrawHud()
 		end
 	end
 
-	local firstName = "Barack"
-	local lastName = "Obama"
-
-	if LocalPlayer():GetNWString("firstName") ~= "" then
-		firstName = LocalPlayer():GetNWString("firstName")
-	end
-
-	if LocalPlayer():GetNWString("lastName") ~= "" then
-		lastName = LocalPlayer():GetNWString("lastName")
-	end
-
 	draw.SimpleText(
-		firstName .. " " .. lastName,
+		ClientConfig.RPName(LocalPlayer()),
 		"CustomFontA",
 		x + h + 5 - 10, y + 10
 	)
 
-	local title = "13th Grader"
+	draw.SimpleText(
+		ClientConfig.Grade(LocalPlayer()),
+		"CustomFontD",
+		x + h + 5 - 10, y + 35
+	)
 
-	if LocalPlayer():GetNWString("teacher") and LocalPlayer():GetNWString("teacher") ~= "" then
-		title = LocalPlayer():GetNWString("Teacher")
-	elseif LocalPlayer():GetNWInt("grade") then
-		title = LocalPlayer():GetNWInt("grade") .. "th Grader"
+	local cx, cy = x + h + 5 - 10, y + 65
+	local clique = tonumber(LocalPlayer():GetNWInt("clique"))
+	local ccolor = ClientConfig.GetCliqueColor(clique)
+
+	if clique > 1 then
+		surface.SetDrawColor(ccolor)
+		surface.SetMaterial(ClientConfig.CliqueMats[clique])
+		surface.DrawTexturedRect(cx, cy-5, 32, 32)
+
+		cx, cy = cx + 40, cy + 12
 	end
 
 	draw.SimpleText(
-		title,
+		CLIQUES[clique].Name,
 		"CustomFontD",
-		x + h + 5 - 10, y + 35
+		cx, cy,
+		ccolor,
+		TEXT_ALIGN_LEFT,
+		TEXT_ALIGN_CENTER
 	)
 
 	local health = LocalPlayer():Health()
