@@ -1,6 +1,11 @@
 
 LANGUAGE = 1
 
+LANGUAGES = {
+	[1] = "English",
+	[2] = "French",
+}
+
 -- 1 = English
 -- 2 = French
 

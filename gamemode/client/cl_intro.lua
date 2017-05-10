@@ -583,9 +583,12 @@ function PromptCutScene(cutscene)
 	dDropDown:SetSize(100, 30)
 	dDropDown:Center()
 	dDropDown:SetPos(dDropDown:GetPos() + 30, sh+160)
-	dDropDown:SetValue(GetTString("English"), 1)
-	dDropDown:AddChoice(GetTString("English"), 1)
-	dDropDown:AddChoice(GetTString("French"), 2)
+	dDropDown:SetValue(GetTString(LANGUAGES[LANGUAGE]), LANGUAGE)
+
+	for k,v in pairs(LANGUAGES) do
+		dDropDown:AddChoice(GetTString(v), k)
+	end
+
 	dDropDown.OnSelect = function(s, index, value, data)
 		RunConsoleCommand("changelanguage", data)
 	end
