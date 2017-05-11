@@ -150,7 +150,7 @@ local Menus = {
 		end,
 	},
 	[3] = {
-		Name = GetTString("Homework"),
+		Name = GetTString("Inventory"),
 		Panel = function(panel, topbar)
 			dPanel = vgui.Create("DPanel", panel)
 			dPanel:SetPos(0,topbar)
@@ -159,6 +159,15 @@ local Menus = {
 		end,
 	},
 	[4] = {
+		Name = GetTString("Homework"),
+		Panel = function(panel, topbar)
+			dPanel = vgui.Create("DPanel", panel)
+			dPanel:SetPos(0,topbar)
+			dPanel:SetSize(panel:GetWide(), panel:GetTall() - topbar)
+			dPanel.Paint = function(s,w,h) end
+		end,
+	},
+	[5] = {
 		Name = GetTString("Schedule"),
 		Panel = function(panel, topbar)
 			local padding = 20

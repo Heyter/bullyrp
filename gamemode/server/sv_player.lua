@@ -1,4 +1,16 @@
 
+timer.Remove("hunger")
+
+timer.Create("hunger",
+	CalcHour,
+	0,
+	function()
+		for k,v in pairs(player.GetAll()) do 
+			v:dbChangeValue("hunger", -math.random(2,4))
+		end
+	end)
+
+
 local player = FindMetaTable("Player")
 
 local teams = {

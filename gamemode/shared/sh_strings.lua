@@ -22,6 +22,7 @@ local Strings = {
 		["Class"] = "Class",
 		["Room"] = "Room",
 		["Subject"] = "Subject",
+		["Inventory"] = "Inventory",
 		["Player"] = "Player",
 		["Developer"] = "Developer",
 		["Owner"] = "Owner",

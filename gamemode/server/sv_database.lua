@@ -5,6 +5,7 @@ util.AddNetworkString("database")
 
 local defaultValues = {
 	["money"] = 100,
+	["hunger"] = 100,
 	["grade"] = 8,
 	["firstName"] = "",
 	["lastName"] = "",
