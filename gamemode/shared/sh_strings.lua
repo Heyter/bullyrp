@@ -57,6 +57,15 @@ local Strings = {
 		["You received detention"] = "You received detention",
 		["You have been successfully enrolled!"] = "You have been successfully enrolled!",
 
+		-- Days
+		["Sunday"] = "Sunday",
+		["Monday"] = "Monday",
+		["Tuesday"] = "Tuesday",
+		["Wednesday"] = "Wednesday",
+		["Thursday"] = "Thursday",
+		["Friday"] = "Friday",
+		["Saturday"] = "Saturday",
+
 		-- Teachers
 		["Principal"] = "Principal",
 		["Officer"] = "Officer",

@@ -1,6 +1,7 @@
 
 DayTime = 0
 CurPeriod = -1
+CurDay = #DAYS
 
 Students = {}
 
@@ -24,6 +25,7 @@ function StartNewDay(timeStart)
 	end
 
 	CurPeriod = 0
+	CurDay = (CurDay % #DAYS) + 1
 	-- Clean up if refreshing
 	timer.Remove("DayTimeTimer")
 	timer.Remove("StartClasses")
@@ -31,7 +33,9 @@ function StartNewDay(timeStart)
 	PutEveryoneRoam()
 
 	DayTime = CurTime() - timeStart * CalcMinute
+
 	SetGlobalInt("DayTime", DayTime)
+	SetGlobalInt("CurDay", CurDay)
 	SetGlobalInt("ClassPeriod", CurPeriod)
 	SetGlobalInt("ClassPeriodEnds", -1)
 
@@ -44,17 +48,20 @@ function StartNewDay(timeStart)
 		end
 	)
 
-	-- Start classes at 7:00 AM
-	-- CalcHour == 1 in-game hour
-	if CalcMinute * SchoolStarts - timeStart * CalcMinute > 0 then
-		timer.Create(
-			"StartClasses",
-			CalcMinute * SchoolStarts - timeStart * CalcMinute,
-			1,
-			function()
-				CreatePeriods()
-			end
-		)
+	-- Don't hold class on Weekends.
+	if CurDay > 1 and CurDay < #DAYS then
+		-- Start classes at 7:00 AM
+		-- CalcHour == 1 in-game hour
+		if CalcMinute * SchoolStarts - timeStart * CalcMinute > 0 then
+			timer.Create(
+				"StartClasses",
+				CalcMinute * SchoolStarts - timeStart * CalcMinute,
+				1,
+				function()
+					CreatePeriods()
+				end
+			)
+		end
 	end
 end
 

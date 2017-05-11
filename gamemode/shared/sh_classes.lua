@@ -776,6 +776,16 @@ if SERVER then
 	end
 end
 
+DAYS = {
+	[1] = GetTString("Sunday"),
+	[2] = GetTString("Monday"),
+	[3] = GetTString("Tuesday"),
+	[4] = GetTString("Wednesday"),
+	[5] = GetTString("Thursday"),
+	[6] = GetTString("Friday"),
+	[7] = GetTString("Saturday"),
+}
+
 CLASSES = {
 	["Lunch"] = {
 		["Room"] = "Cafe",

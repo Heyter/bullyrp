@@ -38,24 +38,31 @@ end
 
 local function TimeHud()
 	local W, H = ScrW(), ScrH()
-	local w,h = 120, 60
+	local dayH = 30
+	local w,h = 120, 60 + dayH
 	local x,y = 30, 30
 
 	draw.RoundedBox(
 		3,
 		x,y,
-		w + h,h,
+		w + h-dayH,h,
 		Color(33,33,33,200)
+	)
+	draw.RoundedBox(
+		3,
+		x,y + (h - dayH),
+		w + h - dayH, dayH,
+		Color(44, 62, 80, 100)
 	)
 
 	surface.SetDrawColor(240, 240, 240, 230)
 	surface.SetMaterial(clock)
-	surface.DrawTexturedRect(x+10, y+10, h-20, h-20)
+	surface.DrawTexturedRect(x+10, y+10, h-20-dayH, h-20-dayH)
 
 	draw.SimpleText(
 		GetTString("Time of Day"),
 		"CustomFontB",
-		x + (w/2) + h - 5,
+		x + (w/2) + h - 5-dayH,
 		y + 5,
 		Color(255, 255, 255),
 		TEXT_ALIGN_CENTER
@@ -93,9 +100,19 @@ local function TimeHud()
 	draw.SimpleText(
 		hour .. ":" .. min .. " " .. side,
 		"CustomFontA",
-		x + (w/2) + h - 5,
-		y + (h/2),
+		x + (w/2) + h - 5-dayH,
+		y + ((h-dayH)/2),
 		c,
+		TEXT_ALIGN_CENTER
+	)
+
+	draw.SimpleText(
+		DAYS[GetGlobalInt("CurDay")],
+		"CustomFontA",
+		x + (w - dayH),
+		y + (h - dayH) + 15,
+		Color(255, 255, 255),
+		TEXT_ALIGN_CENTER,
 		TEXT_ALIGN_CENTER
 	)
 end
