@@ -102,6 +102,12 @@ function player:dbSetValue(name, v)
 		v = util.TableToKeyValues(v)
 	end
 
+	if string.sub(name, 8) == tostring(self:dbGetValue("clique")) then
+		if v < POINTS_FOR_LEADER_MISSION and self:dbGetValue("clique") ~= defaultValues['clique'] then
+			self:dbSetValue("clique", defaultValues['clique'])
+		end
+	end 
+
 	if nws[name] then
 		self:dbNW(name, v)
 	end

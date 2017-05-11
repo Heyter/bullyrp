@@ -389,7 +389,7 @@ local function DrawHud()
 		x + h + 5 - 10, y + 35
 	)
 
-	local cx, cy = x + h + 5 - 10, y + 65
+	local cx, cy = x + h + 5 - 10, y + 67
 	local clique = tonumber(LocalPlayer():GetNWInt("clique"))
 	local ccolor = ClientConfig.GetCliqueColor(clique)
 
@@ -398,7 +398,7 @@ local function DrawHud()
 		surface.SetMaterial(ClientConfig.CliqueMats[clique])
 		surface.DrawTexturedRect(cx, cy-5, 32, 32)
 
-		cx, cy = cx + 40, cy + 12
+		cx, cy = cx + 40, cy + 9
 	end
 
 	draw.SimpleText(

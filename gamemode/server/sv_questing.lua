@@ -204,5 +204,6 @@ timer.Create(
 		GenerateNewQuest()
 		GenerateNewQuest()
 		GenerateNewQuest()
+		GenerateNewQuest()
 	end
 )

@@ -52,7 +52,6 @@ CliqueColorMap = {
 }
 
 function GetCliqueColor(clique)
-	local clique = clique
 	local c = WHITE
 
 	if CLIQUES and CLIQUES[clique] then
