@@ -1,7 +1,7 @@
 
 local dQMenu = nil
 
-local CurrentMenu = 3
+local CurrentMenu = 2
 local dPanel = nil
 
 local movingOut = false
@@ -155,181 +155,181 @@ local Menus = {
 			end
 		end,
 	},
+	-- [3] = {
+	-- 	Name = GetTString("Inventory"),
+	-- 	Panel = function(panel, topbar)
+	-- 		dPanel = vgui.Create("DPanel", panel)
+	-- 		dPanel:SetPos(0,topbar)
+	-- 		dPanel:SetSize(panel:GetWide(), panel:GetTall() - topbar)
+	-- 		dPanel.Paint = function(s,w,h) end
+
+	-- 		local dUse = vgui.Create("DButton", dPanel)
+	-- 		dUse:SetSize(140, 40)
+	-- 		dUse:SetPos(20, dPanel:GetTall() - 50)
+	-- 		dUse:SetText(GetTString("Use"))
+	-- 		dUse:SetFont("QMenuCliqueFont")
+	-- 		dUse.DoClick = function()
+	-- 		end
+	-- 		dUse:SetTextColor(Color(255,255,255))
+	-- 		dUse.Paint = function(s,w,h)
+	-- 			draw.RoundedBox(
+	-- 				5,
+	-- 				0,0,
+	-- 				w,h,
+	-- 				Color(39, 174, 96)
+	-- 			)
+	-- 		end
+	-- 		dUse:SetVisible(false)
+
+	-- 		local dDrop = vgui.Create("DButton", dPanel)
+	-- 		dDrop:SetSize(140, 40)
+	-- 		dDrop:SetPos(dPanel:GetWide() / 2 - dDrop:GetWide() / 2 - 25/2, dPanel:GetTall() - 50)
+	-- 		dDrop:SetText(GetTString("Drop"))
+	-- 		dDrop:SetFont("QMenuCliqueFont")
+	-- 		dDrop.DoClick = function()
+	-- 		end
+	-- 		dDrop:SetTextColor(Color(255,255,255))
+	-- 		dDrop.Paint = function(s,w,h)
+	-- 			draw.RoundedBox(
+	-- 				5,
+	-- 				0,0,
+	-- 				w,h,
+	-- 				Color(211, 84, 0)
+	-- 			)
+	-- 		end
+	-- 		dDrop:SetVisible(false)
+
+	-- 		local dDestroy = vgui.Create("DButton", dPanel)
+	-- 		dDestroy:SetSize(140, 40)
+	-- 		dDestroy:SetPos(dPanel:GetWide() - 170, dPanel:GetTall() - 50)
+	-- 		dDestroy:SetText(GetTString("Destroy"))
+	-- 		dDestroy:SetFont("QMenuCliqueFont")
+	-- 		dDestroy.DoClick = function()
+	-- 		end
+	-- 		dDestroy:SetTextColor(Color(255,255,255))
+	-- 		dDestroy.Paint = function(s,w,h)
+	-- 			draw.RoundedBox(
+	-- 				5,
+	-- 				0,0,
+	-- 				w,h,
+	-- 				Color(192, 57, 43)
+	-- 			)
+	-- 		end
+	-- 		dDestroy:SetVisible(false)
+
+	-- 		local inventoryLookup = {
+	-- 			[1] = {
+	-- 				Name = "Small Package",
+	-- 				Model = "models/props_interiors/Furniture_chair03a.mdl",
+	-- 				CamPos = Vector(0, 0, 15),
+	-- 				CanUse = true,
+	-- 				CanDrop = true,
+	-- 			}
+	-- 		}
+
+	-- 		local inventory = {
+	-- 			[1] = {[1] = 1, [2] = 1},
+	-- 			[3] = {[1] = 1, [2] = 500},
+	-- 			[6] = {[1] = 1, [2] = 85},
+	-- 		}
+
+	-- 		local maxInventory = 18
+
+	-- 		local dModels = vgui.Create("DScrollPanel", dPanel)
+	-- 		dModels:SetPos(0, 0)
+	-- 		dModels:SetSize(dPanel:GetWide()-0, dPanel:GetTall()-60)
+
+	-- 		local modelPanel = 1
+	-- 		local perRow = 5.0
+	-- 		local clicked = -1
+
+	-- 		local panelWide = (dPanel:GetWide() - 20.0) / perRow
+	-- 		local panelTall = 140
+
+	-- 		for i=1,maxInventory do
+	-- 			local p = (modelPanel - 1)
+	-- 			local icon = nil
+
+	-- 			local dicon = vgui.Create("DPanel", dModels)
+	-- 			dicon:SetSize(panelWide + 15	, panelTall)
+	-- 			dicon:SetPos((p % perRow) * panelWide, math.floor(p / perRow) * panelTall)
+	-- 			dicon.Paint = function(s,w,h)
+	-- 				if i == clicked or (icon and icon:IsHovered()) or s:IsHovered() then
+	-- 					draw.RoundedBox(
+	-- 						0,
+	-- 						20,15,
+	-- 						w-40,h,
+	-- 						Color(44, 62, 80,200)
+	-- 					)
+	-- 				else
+	-- 					draw.RoundedBox(
+	-- 						0,
+	-- 						20,15,
+	-- 						w-40,h,
+	-- 						Color(22,22,22,200)
+	-- 					)
+	-- 				end
+
+	-- 				if inventory[i] then
+	-- 					draw.SimpleText(
+	-- 						inventoryLookup[inventory[i][1]].Name,
+	-- 						"QMenuInventoryFont",
+	-- 						w/2, 20,
+	-- 						Color(255,255,255),
+	-- 						TEXT_ALIGN_CENTER,
+	-- 						TEXT_ALIGN_TOP
+	-- 					)
+
+	-- 					draw.SimpleText(
+	-- 						inventory[i][2],
+	-- 						"QMenuInventoryFont",
+	-- 						w-25, h-5,
+	-- 						Color(255,255,255),
+	-- 						TEXT_ALIGN_RIGHT,
+	-- 						TEXT_ALIGN_BOTTOM
+	-- 					)
+	-- 				end
+	-- 			end
+
+	-- 			if inventory[i] then
+	-- 				icon = vgui.Create( "DModelPanel", dicon )
+	-- 				icon:SetSize(dicon:GetWide(), dicon:GetTall())
+	-- 				icon:SetPos(0, 0)
+	-- 				if inventoryLookup[inventory[i][1]].CamPos then
+	-- 					icon:SetLookAt(inventoryLookup[inventory[i][1]].CamPos)
+	-- 				end
+	-- 				timer.Simple(
+	-- 					modelPanel * 0.1,
+	-- 					function()
+	-- 						if IsValid(icon) then
+	-- 							icon:SetModel(inventoryLookup[inventory[i][1]].Model)
+	-- 						end
+	-- 					end
+	-- 				)
+	-- 				function icon:LayoutEntity( Entity ) return end
+	-- 				icon.DoClick = function()
+	-- 					if clicked ~= i then
+	-- 						clicked = i
+	-- 						if inventoryLookup[inventory[i][1]].CanUse then
+	-- 							dUse:SetVisible(true)
+	-- 						else
+	-- 							dUse:SetVisible(false)
+	-- 						end
+	-- 						if inventoryLookup[inventory[i][1]].CanDrop then
+	-- 							dDrop:SetVisible(true)
+	-- 						else
+	-- 							dDrop:SetVisible(false)
+	-- 						end
+	-- 						dDestroy:SetVisible(true)
+	-- 					end
+	-- 				end
+	-- 			end
+
+	-- 			modelPanel = modelPanel + 1
+	-- 		end
+	-- 	end,
+	-- },
 	[3] = {
-		Name = GetTString("Inventory"),
-		Panel = function(panel, topbar)
-			dPanel = vgui.Create("DPanel", panel)
-			dPanel:SetPos(0,topbar)
-			dPanel:SetSize(panel:GetWide(), panel:GetTall() - topbar)
-			dPanel.Paint = function(s,w,h) end
-
-			local dUse = vgui.Create("DButton", dPanel)
-			dUse:SetSize(140, 40)
-			dUse:SetPos(20, dPanel:GetTall() - 50)
-			dUse:SetText(GetTString("Use"))
-			dUse:SetFont("QMenuCliqueFont")
-			dUse.DoClick = function()
-			end
-			dUse:SetTextColor(Color(255,255,255))
-			dUse.Paint = function(s,w,h)
-				draw.RoundedBox(
-					5,
-					0,0,
-					w,h,
-					Color(39, 174, 96)
-				)
-			end
-			dUse:SetVisible(false)
-
-			local dDrop = vgui.Create("DButton", dPanel)
-			dDrop:SetSize(140, 40)
-			dDrop:SetPos(dPanel:GetWide() / 2 - dDrop:GetWide() / 2 - 25/2, dPanel:GetTall() - 50)
-			dDrop:SetText(GetTString("Drop"))
-			dDrop:SetFont("QMenuCliqueFont")
-			dDrop.DoClick = function()
-			end
-			dDrop:SetTextColor(Color(255,255,255))
-			dDrop.Paint = function(s,w,h)
-				draw.RoundedBox(
-					5,
-					0,0,
-					w,h,
-					Color(211, 84, 0)
-				)
-			end
-			dDrop:SetVisible(false)
-
-			local dDestroy = vgui.Create("DButton", dPanel)
-			dDestroy:SetSize(140, 40)
-			dDestroy:SetPos(dPanel:GetWide() - 170, dPanel:GetTall() - 50)
-			dDestroy:SetText(GetTString("Destroy"))
-			dDestroy:SetFont("QMenuCliqueFont")
-			dDestroy.DoClick = function()
-			end
-			dDestroy:SetTextColor(Color(255,255,255))
-			dDestroy.Paint = function(s,w,h)
-				draw.RoundedBox(
-					5,
-					0,0,
-					w,h,
-					Color(192, 57, 43)
-				)
-			end
-			dDestroy:SetVisible(false)
-
-			local inventoryLookup = {
-				[1] = {
-					Name = "Small Package",
-					Model = "models/props_interiors/Furniture_chair03a.mdl",
-					CamPos = Vector(0, 0, 15),
-					CanUse = true,
-					CanDrop = true,
-				}
-			}
-
-			local inventory = {
-				[1] = {[1] = 1, [2] = 1},
-				[3] = {[1] = 1, [2] = 500},
-				[6] = {[1] = 1, [2] = 85},
-			}
-
-			local maxInventory = 18
-
-			local dModels = vgui.Create("DScrollPanel", dPanel)
-			dModels:SetPos(0, 0)
-			dModels:SetSize(dPanel:GetWide()-0, dPanel:GetTall()-60)
-
-			local modelPanel = 1
-			local perRow = 5.0
-			local clicked = -1
-
-			local panelWide = (dPanel:GetWide() - 20.0) / perRow
-			local panelTall = 140
-
-			for i=1,maxInventory do
-				local p = (modelPanel - 1)
-				local icon = nil
-
-				local dicon = vgui.Create("DPanel", dModels)
-				dicon:SetSize(panelWide + 15	, panelTall)
-				dicon:SetPos((p % perRow) * panelWide, math.floor(p / perRow) * panelTall)
-				dicon.Paint = function(s,w,h)
-					if i == clicked or (icon and icon:IsHovered()) or s:IsHovered() then
-						draw.RoundedBox(
-							0,
-							20,15,
-							w-40,h,
-							Color(44, 62, 80,200)
-						)
-					else
-						draw.RoundedBox(
-							0,
-							20,15,
-							w-40,h,
-							Color(22,22,22,200)
-						)
-					end
-
-					if inventory[i] then
-						draw.SimpleText(
-							inventoryLookup[inventory[i][1]].Name,
-							"QMenuInventoryFont",
-							w/2, 20,
-							Color(255,255,255),
-							TEXT_ALIGN_CENTER,
-							TEXT_ALIGN_TOP
-						)
-
-						draw.SimpleText(
-							inventory[i][2],
-							"QMenuInventoryFont",
-							w-25, h-5,
-							Color(255,255,255),
-							TEXT_ALIGN_RIGHT,
-							TEXT_ALIGN_BOTTOM
-						)
-					end
-				end
-
-				if inventory[i] then
-					icon = vgui.Create( "DModelPanel", dicon )
-					icon:SetSize(dicon:GetWide(), dicon:GetTall())
-					icon:SetPos(0, 0)
-					if inventoryLookup[inventory[i][1]].CamPos then
-						icon:SetLookAt(inventoryLookup[inventory[i][1]].CamPos)
-					end
-					timer.Simple(
-						modelPanel * 0.1,
-						function()
-							if IsValid(icon) then
-								icon:SetModel(inventoryLookup[inventory[i][1]].Model)
-							end
-						end
-					)
-					function icon:LayoutEntity( Entity ) return end
-					icon.DoClick = function()
-						if clicked ~= i then
-							clicked = i
-							if inventoryLookup[inventory[i][1]].CanUse then
-								dUse:SetVisible(true)
-							else
-								dUse:SetVisible(false)
-							end
-							if inventoryLookup[inventory[i][1]].CanDrop then
-								dDrop:SetVisible(true)
-							else
-								dDrop:SetVisible(false)
-							end
-							dDestroy:SetVisible(true)
-						end
-					end
-				end
-
-				modelPanel = modelPanel + 1
-			end
-		end,
-	},
-	[4] = {
 		Name = GetTString("Homework"),
 		Panel = function(panel, topbar)
 			dPanel = vgui.Create("DPanel", panel)
@@ -338,7 +338,7 @@ local Menus = {
 			dPanel.Paint = function(s,w,h) end
 		end,
 	},
-	[5] = {
+	[4] = {
 		Name = GetTString("Schedule"),
 		Panel = function(panel, topbar)
 			local padding = 20

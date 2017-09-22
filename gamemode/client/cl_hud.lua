@@ -198,7 +198,7 @@ local function ClassTimeHud()
 
 	if periodID > 0 then
 		draw.SimpleText(
-			"F1 to view schedule",
+			GetTString("F1 to view schedule"),
 			"CustomFontB",
 			x + w / 2 + 5, y - 20,
 			Color(255,255,255),
@@ -430,27 +430,27 @@ local function DrawHud()
 
 	local cx, cy = x + h + 5 - 10, y + 67
 
-	surface.SetDrawColor(Color(255,255,255))
-	surface.SetMaterial(stomach)
-	surface.DrawTexturedRect(cx + 130, cy-5, 32, 32)
-
-	surface.SetDrawColor(Color(243, 156, 18))
-	surface.SetMaterial(stomach)
+	-- surface.SetDrawColor(Color(255,255,255))
+	-- surface.SetMaterial(stomach)
 	-- surface.DrawTexturedRect(cx + 130, cy-5, 32, 32)
-	local hunger = databaseGetValue("hunger") or 100
-	local delta = (100 - hunger) / 100
-	render.SetScissorRect(cx + 130, cy-5 + 32 * delta, cx + 130 + 32, cy-5 + 32, true)
-		surface.DrawTexturedRect(cx + 130, cy-5, 32, 32)
-	render.SetScissorRect( 0, 0, 0, 0, false )
 
-	draw.SimpleText(
-		hunger .. "%",
-		"CustomFontD",
-		cx + 175, cy+9,
-		Color(255,255,255),
-		TEXT_ALIGN_LEFT,
-		TEXT_ALIGN_CENTER
-	)
+	-- surface.SetDrawColor(Color(243, 156, 18))
+	-- surface.SetMaterial(stomach)
+	-- -- surface.DrawTexturedRect(cx + 130, cy-5, 32, 32)
+	-- local hunger = databaseGetValue("hunger") or 100
+	-- local delta = (100 - hunger) / 100
+	-- render.SetScissorRect(cx + 130, cy-5 + 32 * delta, cx + 130 + 32, cy-5 + 32, true)
+	-- 	surface.DrawTexturedRect(cx + 130, cy-5, 32, 32)
+	-- render.SetScissorRect( 0, 0, 0, 0, false )
+
+	-- draw.SimpleText(
+	-- 	hunger .. "%",
+	-- 	"CustomFontD",
+	-- 	cx + 175, cy+9,
+	-- 	Color(255,255,255),
+	-- 	TEXT_ALIGN_LEFT,
+	-- 	TEXT_ALIGN_CENTER
+	-- )
 
 	local health = LocalPlayer():Health()
 	local healthLength = (health / 100.0) 
